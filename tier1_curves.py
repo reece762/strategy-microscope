@@ -160,16 +160,16 @@ def main():
     for k, v in kd.items():
         report.append(f"  KDJ  {k:16s} 年化 {v['cagr']*100:6.2f}%  回撤 {v['mdd']*100:7.2f}%")
 
-    # ---- 量比：SPY ----
+    # ---- 量比：不畫曲線 ----
+    # 評級是 NA（SPY 十年只有 6 次買訊、QQQ 12 次），這種樣本量畫出來的淨值曲線
+    # 會讓讀者以為那是一條可評估的策略。仍然計算，只是只用來對帳、不進卡片。
     v = vr_curves()
     ref = t1['vr']['SPY']['strategy']['cagr']
     got = v['SPY']['cagr']
     assert abs(got - ref) < 1e-6, f'量比年化對不上：重算 {got:.6f} vs tier1 {ref:.6f}'
-    cards['t1-vr'] = _card('t1-vr', '量比 2.5–5（SPY）',
-                           v['SPY']['eq'], v['SPY']['bh'], 252,
-                           '量比 2.5–5 買進／持有 2 日', '買進持有 SPY')
     for k, x in v.items():
-        report.append(f"  量比 {k:16s} 年化 {x['cagr']*100:6.2f}%  回撤 {x['mdd']*100:7.2f}%")
+        report.append(f"  量比 {k:16s} 年化 {x['cagr']*100:6.2f}%  "
+                      f"（樣本過少，不畫曲線）")
 
     json.dump(cards, open(os.path.join(OUT, 'tier1_curves.json'), 'w'))
     print('=== 重算結果（已與 tier1.json 對帳，全部相符）===')

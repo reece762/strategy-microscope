@@ -23,10 +23,10 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.10.2'
-VERSION_NOTES = ('補上 5 張卡片的淨值曲線：MACD 背離、KDJ、量比、槓鈴、永久投資組合。'
-                 '這些卡片正文早有年化數字，詳情頁卻顯示「無法誠實回測」；'
-                 '現以相同規則重算淨值（年化與既有數字對帳相符），並畫出對照曲線')
+VERSION = '1.10.3'
+VERSION_NOTES = ('修正統計數字：關於頁與 README 仍寫著 10 個講法／A1 B4 C1 D1 —3，'
+                 '實際已 28 張卡片；改為由卡片自動計算，不再手寫。'
+                 '另修正量比卡矛盾：評級「—」卻有淨值曲線，現改為只報統計量並說明樣本不足')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -266,6 +266,7 @@ def main():
         return len(_re.findall(pat, pages))
     n_cards = _cnt(r'<article class="card"')
     n_na = _cnt(r'data-grade="NA"')
+    n_grade = {g: _cnt(rf'data-grade="{g}"') for g in 'ABCD'}
     counts = {
         '__N_CARDS__': str(n_cards),
         '__N_RUN__': str(n_cards - n_na),
@@ -293,7 +294,7 @@ def main():
     print('written', len(details), 'detail pages:',
           ', '.join(sorted(details))[:200])
 
-    write_about()
+    write_about(n_cards, n_grade, n_na)
 
     snapshot_and_changelog(details.keys())
 
@@ -988,7 +989,8 @@ td.k{white-space:nowrap;color:var(--tx2)}
 """
 
 
-def write_about():
+def write_about(n_cards=0, n_grade=None, n_na=0):
+    n_grade = n_grade or {}
     """The About page is a build product so its version and figures stay in
     lockstep with the cards instead of drifting from hand-edited HTML."""
     page = (
@@ -1012,10 +1014,9 @@ def write_about():
         '<p>影片裡常有一些聽起來很有道理的規則，例如「每週四最弱，那就跳過週四」、'
         '「跌破均線就減碼」。這些規則在原本的市場（多半是中國 A 股）可能真的有效，'
         '但換一個市場、換一段時間，還有效嗎？</p>\n'
-        '<p>這裡挑出影片裡的 <b>10 個講法</b>，拆成 <b>4 套獨立規則</b>'
-        '（只做週一、跳過週四、均線×星期、日曆窗口），套用到不同市場與樣本後，'
-        '得到 <b>7 個可回測的組合</b>。另外 3 個講法因為美股沒有對應資料，'
-        '我不做假回測，只說明為什麼做不到。</p>\n'
+        f'<p>目前收錄 <b>{n_cards} 個講法</b>，其中 <b>{n_cards - n_na} 個</b>'
+        f'做了實際回測，<b>{n_na} 個</b>因資料不存在而無法回測——'
+        f'後者不做假回測，只說明缺什麼資料、為什麼做不到。</p>\n'
 
         '<h2>怎麼讀這些卡片</h2>\n'
         '<p>每張卡片都是獨立檢驗。看帳面績效之前，先問三個問題：</p>\n'
@@ -1032,11 +1033,11 @@ def write_about():
 
         '<h2>評級的意思</h2>\n'
         '<table><thead><tr><th>評級</th><th>條數</th><th>意思是什麼</th></tr></thead><tbody>'
-        '<tr><td class="v">A</td><td>1</td><td>通過雙重檢驗：55 年樣本與近 10 年樣本都勝過同曝險基準</td></tr>'
-        '<tr><td class="v">B</td><td>4</td><td>帳面有改善，但證據不足以支撐實盤採用</td></tr>'
-        '<tr><td class="v">C</td><td>1</td><td>效應曾經真實存在，但已衰減到無法交易</td></tr>'
-        '<tr><td class="v">D</td><td>1</td><td>不成立，甚至有害</td></tr>'
-        '<tr><td class="v">—</td><td>3</td><td>資料不存在，未回測</td></tr>'
+        f'<tr><td class="v">A</td><td>{n_grade.get("A", 0)}</td><td>通過雙重檢驗：55 年樣本與近 10 年樣本都勝過同曝險基準</td></tr>'
+        f'<tr><td class="v">B</td><td>{n_grade.get("B", 0)}</td><td>帳面有改善，但證據不足以支撐實盤採用</td></tr>'
+        f'<tr><td class="v">C</td><td>{n_grade.get("C", 0)}</td><td>效應曾經真實存在，但已衰減到無法交易</td></tr>'
+        f'<tr><td class="v">D</td><td>{n_grade.get("D", 0)}</td><td>不成立，甚至有害</td></tr>'
+        f'<tr><td class="v">—</td><td>{n_na}</td><td>資料不存在或樣本不足，無法有效檢驗</td></tr>'
         '</tbody></table>\n'
         '<p style="margin-top:14px"><b>評級只看證據強度，不看帳面報酬高低。</b>'
         '一個年化 55% 但 t 值 −1.17、剔掉 5 天就歸零的策略，拿不到高分。</p>\n'
