@@ -17,6 +17,9 @@ position:sticky;top:0;z-index:20;backdrop-filter:blur(8px)}
 .tbar{width:100%;max-width:none;margin:0;padding:14px clamp(20px,2.6vw,56px);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .logo{font-weight:700;font-size:16px;letter-spacing:.3px}
 .logo span{color:var(--acc)}
+.tnav{margin-left:auto;display:flex;gap:18px}
+.tnav a{color:var(--tx3);text-decoration:none;font-size:12.5px;transition:.15s}
+.tnav a:hover{color:var(--acc)}
 .sub{color:var(--tx3);font-size:12px}
 .hero{padding:34px 0 22px}
 .hero h1{margin:0 0 10px;font-size:26px;letter-spacing:.2px}
@@ -84,6 +87,8 @@ footer a:hover{color:var(--acc)}
 @media(max-width:760px){
   .wrap{padding:0 16px 56px}
   .tbar{padding:12px 16px}
+  .tnav{gap:14px}
+  .tnav a{font-size:12px}
   .grid{grid-template-columns:1fr;gap:14px}
   .hero{padding:24px 0 16px}
   .hero h1{font-size:20px;line-height:1.4}
@@ -102,6 +107,10 @@ footer a:hover{color:var(--acc)}
 <header class="top"><div class="tbar">
   <div class="logo">策略<span>顯微鏡</span></div>
   <div class="sub">策略回測庫</div>
+  <nav class="tnav">
+    <a href="about.html">關於這個站</a>
+    <a href="changelog.html">版本紀錄</a>
+  </nav>
 </div></header>
 
 <div class="wrap">
@@ -262,7 +271,7 @@ Binance 公開封存（BTC/USDT 2017–2026）。<br>
 成本假設：美股每趟 1 bp，加密每趟 5 bp。全部信號只用前一交易日收盤，無前視。
 比較基準含「同曝險、不擇時」的固定槓桿買進持有，以避免把「少持倉」誤讀成「會擇時」。<br>
 逐字稿經 BibiGPT 取得。本頁為歷史資料檢驗，不構成投資建議。<br>
-<span class="ver">版本 1.6.0 · 建置於 2026-10-22 21:56:03+0800 · <a href="changelog.html">版本紀錄</a></span>
+<span class="ver">版本 1.7.1 · 建置於 2026-10-22 22:30:07+0800 · <a href="changelog.html">版本紀錄</a></span>
 </footer>
 </div>
 

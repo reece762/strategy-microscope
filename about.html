@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>關於這個站 · 策略回測庫</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--tx:#e6edf3;--tx2:#9aa7b4;--tx3:#6e7681;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+font:15px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK TC",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 70px}
+a{color:var(--tx3);text-decoration:none;font-size:13px}
+a:hover{color:var(--acc)}
+h1{font-size:22px;margin:18px 0 6px}
+.sub{color:var(--tx2);font-size:13.5px;margin:0 0 22px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:var(--tx3);font-weight:500;font-size:11.5px;
+padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:11px 10px;border-bottom:1px solid #21262d;vertical-align:top;color:#c9d1d9}
+tr.cur td{background:#16202e}
+td.v{font-family:ui-monospace,monospace;color:var(--acc);white-space:nowrap}
+td.d{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--tx3);white-space:nowrap}
+td.f code{font-size:11px;color:var(--tx3)}
+.note{margin-top:24px;font-size:12px;color:var(--tx3);line-height:1.9;
+border-top:1px solid var(--line);padding-top:16px}
+code{background:#161b22;border:1px solid var(--line);border-radius:4px;padding:1px 5px;
+font-size:11.5px;color:#c9d1d9}
+
+/* header nav — CHANGELOG_CSS has no header, so the About page brings its own.
+   .wrap is overridden back to a top-aligned block so the sticky bar can sit above it. */
+header.top{border-bottom:1px solid var(--line);background:linear-gradient(180deg,#111823,#0d1117);
+position:sticky;top:0;z-index:20;backdrop-filter:blur(8px)}
+.tbar{padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{font-weight:700;font-size:16px;letter-spacing:.3px}
+.logo span{color:var(--acc)}
+.tbar .sub{color:var(--tx3);font-size:12px;margin:0}
+.tnav{margin-left:auto;display:flex;gap:18px}
+.tnav a{color:var(--tx3);text-decoration:none;font-size:12.5px;transition:.15s}
+.tnav a:hover{color:var(--acc)}
+.wrap{margin:0 auto}
+h2{font-size:16px;margin:32px 0 10px;padding-top:6px;color:#e6edf3;letter-spacing:.2px}
+h2:first-of-type{margin-top:26px}
+p{margin:0 0 14px;color:#c9d1d9;font-size:14px}
+ul{margin:0 0 14px;padding-left:20px;color:#c9d1d9;font-size:14px}
+li{margin:0 0 8px}
+b{color:#e6edf3}
+.lead{font-size:14.5px;color:var(--tx2);margin:0 0 26px}
+.callout{background:#161b22;border:1px solid var(--line);border-left:3px solid #d29922;
+border-radius:6px;padding:14px 16px;margin:0 0 18px;font-size:13.5px;color:#c9d1d9}
+.callout b{color:#f0b429}
+.foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);
+font-size:12px;color:var(--tx3);line-height:1.9}
+td.k{white-space:nowrap;color:var(--tx2)}
+</style></head>
+<body><header class="top"><div class="tbar"><div class="logo">策略<span>顯微鏡</span></div><div class="sub">策略回測庫</div><nav class="tnav"><a href="index.html">策略列表</a><a href="about.html">關於這個站</a><a href="changelog.html">版本紀錄</a></nav></div></header>
+<div class="wrap">
+<h1>關於這個站</h1>
+<p class="lead">把影片裡講的選股與擇時策略，用美股 55 年、加密貨幣 9 年的日線資料重新跑一次，看它們在今天的市場還站不站得住。</p>
+<h2>為什麼要做這件事</h2>
+<p>影片裡常有一些聽起來很有道理的規則，例如「每週四最弱，那就跳過週四」、「跌破均線就減碼」。這些規則在原本的市場（多半是中國 A 股）可能真的有效，但換一個市場、換一段時間，還有效嗎？</p>
+<p>這裡挑出影片裡的 <b>10 個講法</b>，拆成 <b>4 套獨立規則</b>（只做週一、跳過週四、均線×星期、日曆窗口），套用到不同市場與樣本後，得到 <b>7 個可回測的組合</b>。另外 3 個講法因為美股沒有對應資料，我不做假回測，只說明為什麼做不到。</p>
+<h2>怎麼讀這些卡片</h2>
+<p>每張卡片都是獨立檢驗。看帳面績效之前，先問三個問題：</p>
+<ul><li><b>是不是只是少持倉？</b>少買自然波動小、回撤淺，但那不叫會擇時。所以每一張都附一條「同曝險、不擇時」的基準：同樣的持倉比例，但完全不挑時間、每天固定槓桿買進持有。策略要贏過這條線，才算真的有擇時能力。</li><li><b>是不是靠少數幾天？</b>把最極端的幾天剔掉重算。如果剔掉 5 天後超額報酬就歸零，那這個策略賺的是運氣，不是規律。</li><li><b>統計上顯著嗎？</b>附 t 值（t-statistic，衡量平均報酬偏離零的程度，已考慮觀測數與波動）。絕對值超過 2 大約才稱得上顯著；小於 1.5 基本上跟零分不出來。</li></ul>
+<h2>評級的意思</h2>
+<table><thead><tr><th>評級</th><th>條數</th><th>意思是什麼</th></tr></thead><tbody><tr><td class="v">A</td><td>1</td><td>通過雙重檢驗：55 年樣本與近 10 年樣本都勝過同曝險基準</td></tr><tr><td class="v">B</td><td>4</td><td>帳面有改善，但證據不足以支撐實盤採用</td></tr><tr><td class="v">C</td><td>1</td><td>效應曾經真實存在，但已衰減到無法交易</td></tr><tr><td class="v">D</td><td>1</td><td>不成立，甚至有害</td></tr><tr><td class="v">—</td><td>3</td><td>資料不存在，未回測</td></tr></tbody></table>
+<p style="margin-top:14px"><b>評級只看證據強度，不看帳面報酬高低。</b>一個年化 55% 但 t 值 −1.17、剔掉 5 天就歸零的策略，拿不到高分。</p>
+<h2>資料與假設</h2>
+<table><thead><tr><th>項目</th><th>內容</th></tr></thead><tbody><tr><td class="k">納斯達克綜合指數</td><td>FRED 代碼 <code>NASDAQCOM</code>，1971-02-05 至 2026-10-21，共 14,046 個有效交易日（原始下載 14,533 列，其中 487 列當日無報價）</td></tr><tr><td class="k">SPY / QQQ / 道瓊斯</td><td>日線收盤價，2016-10-19 至 2026-10-19，各約 2,512 個交易日</td></tr><tr><td class="k">BTC / ETH</td><td>Binance 官方公開封存，2017-08 至 2026-09，各 3,332 天</td></tr><tr><td class="k">交易成本</td><td>美股每趟 1 bp（萬分之一）；加密貨幣每趟 5 bp</td></tr><tr><td class="k">股息</td><td>全部採價格報酬（不含股息）。策略與基準兩邊一致，因此不影響「策略對基準」的比較結論</td></tr><tr><td class="k">年化換算</td><td>美股以 252 個交易日、加密貨幣以 365 天計算</td></tr></tbody></table>
+<div class="callout"><b>不要直接比較兩邊的夏普比率。</b>美股用 252 天年化、加密貨幣用 365 天年化，兩者基準不同。表格裡各自都是正確的算法，但拿來互比大小會得到錯誤結論。</div>
+<h2>兩個最值得記住的否定結果</h2>
+<p><b>1. 跳過週四在 BTC 上是假陽性。</b>帳面上年化從 38.51% 變成 55.78%，是全部測試裡最漂亮的一組。但週四平均 −0.228% 的 t 值只有 <b>−1.17</b>（不顯著）；把 476 個週四裡最差的 <b>5 天</b>剔掉，平均立刻回到 <b>−0.020%</b>，等於零。它賺的不是「每個週四都跌」，而是「剛好躲過 2020 年 3 月與 2022 年那幾次崩盤，而那幾次剛好發生在週四」。</p>
+<p><b>2. 美股的「黑色星期一」已經結束了。</b>1971–1999 年，納斯達克週一平均 −0.127%（t = −4.47），完全符合傳說。但 2000 年之後變成 +0.005%（t = +0.12），效應歸零。同一條規則在 55 年樣本上是負貢獻，在近 10 年卻是正貢獻——這種「換一段時間就翻轉」正是它不可交易的理由。</p>
+<h2>一個刻意的設計</h2>
+<p>詳細頁底部的「顯示代碼」不是另外抄一份示範程式碼，而是建置時用 Python 的 <code>inspect.getsource</code> 從<b>實際跑出這些數字的函式</b>擷取原始碼。所以只要改了回測參數，重新建置後頁面上的程式碼就會跟著變，不可能出現「頁面寫的跟實際跑的不同」。程式碼區塊上方也固定標明執行環境、資料格式、無前視聲明與成本假設，因為光看函式本文會以為用的是預設值，但實際呼叫時成本參數是被覆寫過的。</p>
+<h2>已知限制</h2>
+<ul><li>股息未計入。若比較含股息的總報酬，絕對數值會更高，但策略與基準的相對結論不變。</li><li>SPY / QQQ 樣本只有 10 年，任何「近 10 年有效」的結論都可能是這段時期的運氣。</li><li>加密貨幣的歷史只有 9 年，且僅涵蓋一次完整的牛市與熊市循環。</li><li>日曆效應本質上是多重檢定問題：測了 16 個窗口組合，總會有幾個 t 值超過 2。已盡量標註哪些是多點同時顯著、哪些是單點雜訊。</li><li>未模擬滑價、借券成本、稅賦與資金費率。</li></ul>
+<h2>資料來源</h2>
+<ul><li>納斯達克綜合指數、道瓊斯、標普 500：FRED（美國聖路易聯邦準備銀行）</li><li>SPY / QQQ 日線：公開歷史行情</li><li>BTC / ETH 日線：Binance 官方公開封存（data.binance.vision）</li><li>原始影片逐字稿：經 BibiGPT 取得（逐字稿為第三方內容，未納入本專案）</li></ul>
+<div class="foot">本專案為歷史資料的統計檢驗，用於理解策略為何有效或無效，<b>不構成投資建議</b>。過去的統計結果不保證未來表現。<br>版本 1.7.1 · 建置於 2026-10-22 22:30:07+0800<br><a href="index.html">策略列表</a> · <a href="changelog.html">版本紀錄</a></div>
+</div></body></html>
