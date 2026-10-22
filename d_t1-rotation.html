@@ -136,7 +136,7 @@ background:#0d1219;line-height:1.7}
 <span class="grade" style="--gc:#f85149">D</span></div>
 <h1>大小盤輪動：六種參數全部輸給「只買 SPY」</h1>
 <p class="lead">他在 A 股用滬深 300 與創業板做輪動，20 天動能、年化 20%、回撤 50%。同一條規則搬到美股（SPY 為大盤、IWM 為小盤），N=20 年化 10.52%、回撤 34.1%，而**只買 SPY 不輪動是 13.60%**。</p>
-<a class="vsrc" href="https://www.bilibili.com/video/b_ERGIP8U1k" target="_blank" rel="noopener"><span class="vico">▶</span> 在 B 站觀看原視頻 <span class="vcode">b_ERGIP8U1k</span> ↗</a>
+<a class="vsrc" href="https://youtu.be/b_ERGIP8U1k" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">b_ERGIP8U1k</span> ↗</a>
 <div class="nochart">這支策略無法誠實回測，因此沒有績效曲線；原因見下方說明。</div>
 <div class="metrics"><div class="metric"><div class="mv">10.52%</div><div class="ml">N=20 輪動年化</div></div><div class="metric"><div class="mv">13.60%</div><div class="ml">只買 SPY</div></div><div class="metric"><div class="mv">34.1%</div><div class="ml">N=20 回撤</div></div></div>
 <div class="body"><p><b>規則照抄</b>：每天收盤算大盤與小盤過去 N 天漲跌幅，隔天持有漲得多的那一個。他說 N=20 在 A 股很有效，所以我測了 10、20、60 三個值。</p><p><b>結果是單調的失敗</b>：N=10 年化 7.65%、N=20 10.52%、N=60 11.75%。<b>三個都低於只買 SPY 的 13.60%，也遠低於 A 股版的 20%</b>。輪動沒有創造價值，只是把大盤的報酬換成了更差的組合。</p><p><b>他的改良版（兩邊都跌就空倉）也沒有救回來</b>：N=20 加空倉後年化 5.81%，比原版更低。空倉確實把回撤從 34.1% 降到 34.9%，但代價是錯過反彈——<b>這跟我們在其他卡片看到的一模一樣：降回撤靠的是少持倉，不是選得準</b>。</p><p><b>為什麼 A 股有效、美股沒效？</b> 他的策略建立在「大盤與小盤輪動」上，而滬深 300 與創業板的成分差異極大（市值、行業、成長性都不同），兩者輪動確實有空間。美股 SPY 與 IWM 的相關性長期在 0.8 以上，<b>兩個幾乎同步的東西之間輪動，本來就沒有資訊可挖</b>。這是跨市場移植時最容易忽略的前提差異。</p></div>
@@ -144,6 +144,6 @@ background:#0d1219;line-height:1.7}
 <div class="verdict"><b>判定</b>：不成立。不是參數問題，是前提問題：美股大小盤高度相關，輪動空間本來就比 A 股小。</div>
 <div class="evid">依據：SPY/IWM 各 2,512 日（2016-10 至 2026-10）。訊號以收盤計算、次日生效，成本每趟 1 bp。他原版用 0.61‱ 且免印花稅。</div>
 
-<div class="build">版本 1.9.3 · 建置於 2026-10-23 01:13:44+0800</div>
+<div class="build">版本 1.10.0 · 建置於 2026-10-23 05:12:38+0800</div>
 <a class="back bottom" href="index.html">← 回到策略列表</a>
 </div></div></body></html>

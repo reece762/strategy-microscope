@@ -44,6 +44,7 @@ def build(t1):
         id='t1-macd', author='邢不行', grade='D', topic='技術指標', market='us',
         title='MACD 頂底背離：55 年來，頂背離之後反而漲更多',
         video='NO5JOVjDO_I',
+        videos=['NO5JOVjDO_I', 'DJ7nzs9k5hM', 'HcYaHSqCQAY'],
         lead='他把「頂背離」翻成精確規則：局部高點要創 30 日新高、要高於前一個高點，且 DIFF 低於前一個高點。用同一套規則跑納斯達克 55 年，頂背離後 20 日平均上漲 1.24%，比什麼都不做的 0.98% 還高。',
         metrics=[('頂背離後 20 日', _pct(nas['top']['r20_mean'])),
                  ('同期無條件', _pct(nas['base']['20']['mean'])),

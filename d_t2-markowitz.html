@@ -136,7 +136,7 @@ background:#0d1219;line-height:1.7}
 <span class="grade" style="--gc:#d29922">C</span></div>
 <h1>馬克維茨月配置：波動降了 3 個百分點，代價是每年少賺 3.8%</h1>
 <p class="lead">他用五個大類資產做每月再平衡，A 股 2007–2021 年化 7.28%、回撤 14.38%，說「跑贏 A 股也跑贏美股」。同一套方法搬到美股十年：年化 9.81%、回撤 22.4%，而**只買 SPY** 是年化 13.60%。</p>
-<a class="vsrc" href="https://www.bilibili.com/video/axLvMf4qBBk" target="_blank" rel="noopener"><span class="vico">▶</span> 在 B 站觀看原視頻 <span class="vcode">axLvMf4qBBk</span> ↗</a>
+<a class="vsrc" href="https://youtu.be/axLvMf4qBBk" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">axLvMf4qBBk</span> ↗</a>
 <div class="nochart">這支策略無法誠實回測，因此沒有績效曲線；原因見下方說明。</div>
 <div class="metrics"><div class="metric"><div class="mv">9.81%</div><div class="ml">最大夏普年化</div></div><div class="metric"><div class="mv">13.60%</div><div class="ml">只買 SPY</div></div><div class="metric"><div class="mv">14.7% / 18.0%</div><div class="ml">波動（夏普／SPY）</div></div></div>
 <div class="body"><p><b>他的方法我完整重現</b>：每月最後一個交易日，用過去 6 個月的日報酬算出各資產的年化期望報酬與共變異數矩陣，求最大夏普權重（不允許放空），持有到下個月。共 116 次再平衡。</p><p><b>結果是「有效但沒用」</b>：最大夏普組合年化 9.81%、波動 14.7%、回撤 22.4%。跟<b>等權</b>（7.79%）比，多賺 2 個百分點；跟<b>股六債四</b>（6.54%）比，多賺 3.3 個百分點。<b>但三者都輸給只買 SPY 的 13.60%。</b></p><p><b>它真正買到的是「降波動」</b>：波動從 SPY 的 18.0% 降到 14.7%，回撤從 34.1% 降到 22.4%。用夏普比率看（每單位風險換到多少報酬），最大夏普組合 0.74、等權 0.72——<b>最佳化確實比隨便配好一點，這點成立</b>。但它沒能在風險調整後打敗單一美股大盤。</p><p><b>他的方法有一個結構性問題，我這裡看得很清楚</b>：用「過去 6 個月已實現報酬」當「未來期望報酬」，等於<b>追高</b>。權重圖上可以看到，SPY 平均權重只有 29.3%，而黃金 26.0%、大宗商品 19.7%——因為 2016–2026 這段期間黃金的風險調整後表現一度很好，模型就把錢搬過去了。這不是模型的錯，是<b>用歷史平均當期望報酬的必然結果</b>：它會系統性地 overweight 最近漲得好的資產。</p><p><b>他最強的一句話反而洩漏了問題</b>：「年化 7.28% 不算太高，但是跑贏了長年三千點的 A 股」。<b>用一個橫盤 15 年的指數當基準，任何分散配置都會贏。</b> 換到長期上漲的美股，這個策略就打不過了——這正是基準選擇決定結論的例子。</p></div>
@@ -144,6 +144,6 @@ background:#0d1219;line-height:1.7}
 <div class="verdict"><b>判定</b>：部分成立：最佳化確實比等權好，且成功降低波動與回撤；但風險調整後沒有打敗單一大盤，「跑贏美股」的結論建立在 A 股這個弱基準上。</div>
 <div class="evid">依據：六個標的（SPY、EEM、TLT、GLD、DBC、IWM）各 2,512 日。每月再平衡、換手成本 1 bp。最佳化用固定種子的隨機搜尋 + 局部精修（維度僅 6，可重現）。他的中債全債以 TLT 替代，原油以 DBC 為主。</div>
 
-<div class="build">版本 1.9.3 · 建置於 2026-10-23 01:13:44+0800</div>
+<div class="build">版本 1.10.0 · 建置於 2026-10-23 05:12:38+0800</div>
 <a class="back bottom" href="index.html">← 回到策略列表</a>
 </div></div></body></html>

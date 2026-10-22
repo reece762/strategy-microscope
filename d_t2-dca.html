@@ -136,7 +136,7 @@ background:#0d1219;line-height:1.7}
 <span class="grade" style="--gc:#58a6ff">B</span></div>
 <h1>比特幣均線定投：確實贏過機械定投，但他說的「翻四倍」不是報酬率</h1>
 <p class="lead">他說從 2017 年末兩萬美金開始每週投一千，普通定投翻 3.64 倍、均線定投翻 4 倍、改參數後翻 6 倍。我從 2017-12 起跑：普通定投 IRR 36.52%、均線定投 39.59%——**方向對，但幅度小得多，而且「倍數」這個數字會騙人**。</p>
-<a class="vsrc" href="https://www.bilibili.com/video/5RzvGxU_2Ak" target="_blank" rel="noopener"><span class="vico">▶</span> 在 B 站觀看原視頻 <span class="vcode">5RzvGxU_2Ak</span> ↗</a>
+<a class="vsrc" href="https://youtu.be/5RzvGxU_2Ak" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">5RzvGxU_2Ak</span> ↗</a><a class="vsrc" href="https://youtu.be/9QERjmLYLFw" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">9QERjmLYLFw</span> ↗</a>
 <div class="nochart">這支策略無法誠實回測，因此沒有績效曲線；原因見下方說明。</div>
 <div class="metrics"><div class="metric"><div class="mv">36.5%</div><div class="ml">普通定投 IRR</div></div><div class="metric"><div class="mv">39.6%</div><div class="ml">均線定投 IRR</div></div><div class="metric"><div class="mv">+3.07pp</div><div class="ml">差距</div></div></div>
 <div class="body"><p><b>先講最重要的一件事：他的「翻四倍」不是年化報酬，也不是總報酬。</b> 那是「期末持幣市值 ÷ 累計投入金額」。這個比率天生會膨脹：越早投入的錢複利越久，而分母是全部投入的錢。所以<b>同樣的策略，你只要把定投期間拉長，這個倍數一定會變大，跟策略好不好無關</b>。我用 IRR（內部報酬率，把每筆投入的時間價值都算進去）才是可比的數字。</p><p><b>普通定投</b>：每週四投 1000 美金，至今投入 458k、市值 2,401k，IRR <b>36.52%</b>。這是比特幣本身的功勞，不是定投法的功勞。</p><p><b>均線定投（MA250、每 10% 一級、每級 0.1）</b>：投入 408k、市值 2,363k，IRR <b>39.59%</b>。<b>只比普通定投高 3.07 個百分點</b>。他宣稱的優勢（投得更少、賺得更多）在數字上成立——投入少 50k、市值只少 38k——但換成年化只差 3 個百分點，不是他給人印象中的「明顯更好」。</p><p><b>他改的那組參數（MA600、3%、0.45）問題比較大</b>：IRR 雖然到 44.01%，但<b>有 244 次定投日完全不投</b>（因為偏離太大、定投率被壓到零），累計投入 394k、市值只有 1,503k——<b>倍數 3.82，比他原本的均線定投還低</b>。他展示這組參數時說「翻了六倍」，那是 2021 年的結果；把期間拉到 2026 年，這組參數反而輸給預設參數。<b>這是參數過度最佳化的典型下場。</b></p><p><b>允許賣出的版本</b>：投入 154k、市值 797k，買 146 次、賣 244 次。<b>我沒有給它 IRR，因為買賣交錯時現金流正負號會翻轉多次，內部報酬率有多重解</b>——我實際算出的其中一個根是 755%，數學上成立、經濟上毫無意義。這種情況下唯一誠實的說法是：他確實做到了「不用自己出錢還留下幣」，但這不代表高報酬，只代表<b>賣得太早、賣得太頻繁</b>。</p></div>
@@ -144,6 +144,6 @@ background:#0d1219;line-height:1.7}
 <div class="verdict"><b>判定</b>：方法本身有效（均線定投確實略勝機械定投），但影片用「市值÷投入」的倍數誇大了效果；他精選的改參數版本在更長期間內反而變差。</div>
 <div class="evid">依據：BTC/USDT 日線 458 週（2017-12-21 起）。定投率＝1 ∓ k×Y，k＝ceil(|偏離|/X) 上限 6（依他原文「最多一加六倍 Y」）。成本未計入（他的版本也未計）。</div>
 
-<div class="build">版本 1.9.3 · 建置於 2026-10-23 01:13:44+0800</div>
+<div class="build">版本 1.10.0 · 建置於 2026-10-23 05:12:38+0800</div>
 <a class="back bottom" href="index.html">← 回到策略列表</a>
 </div></div></body></html>

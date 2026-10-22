@@ -23,8 +23,10 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.9.3'
-VERSION_NOTES = '能回測的卡片一律排在前，不能回測（NA）者不論評分一律排到最後'
+VERSION = '1.10.0'
+VERSION_NOTES = ('新增第四梯 8 張卡片：燭型形態、均線用法、槓鈴策略、放量、永久投資組合（可回測），'
+                 '以及匯率擇時、A股vs美股、貸款餘額擇時（缺 A 股資料，標記不可回測）；'
+                 '修正影片連結來源判定（YouTube ID 誤拼成 B 站網址）；支援一張卡片掛多支影片')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -223,6 +225,11 @@ def main():
     if os.path.exists(_t2_path):
         for key, fname in json.load(open(_t2_path)).items():
             imgs['t2_' + key] = png_uri(fname)
+    # 第四梯（本輪新轉錄的 13 支）圖表，key 本身已帶 n4_ 前綴
+    _n4_path = os.path.join(OUT, 'n4_charts.json')
+    if os.path.exists(_n4_path):
+        for key, fname in json.load(open(_n4_path)).items():
+            imgs[key if key.startswith('n4_') else 'n4_' + key] = png_uri(fname)
 
     # --- comparison charts: one strategy + the same three benchmarks ---
     # spec comes from prep_series.py, already aligned and rebased to 1.0
@@ -280,6 +287,27 @@ def main():
     write_about()
 
     snapshot_and_changelog(details.keys())
+
+
+def video_url(vid):
+    """B 站 BV 號給 bilibili，YouTube 11 碼 ID 給 youtu.be。
+
+    這批影片有兩種來源：早期批次是 B 站（BV 開頭），新轉錄的是 YouTube（11 碼）。
+    之前一律拼 bilibili，導致 YouTube ID 變成壞連結。
+    """
+    if vid.startswith('BV'):
+        return 'https://www.bilibili.com/video/' + vid
+    return 'https://youtu.be/' + vid
+
+
+def video_links(c):
+    """回傳 [(vid, url)]；支援單一 video 與多支 videos。"""
+    vids = c.get('videos') or ([c['video']] if c.get('video') else [])
+    out = []
+    for v in vids:
+        if v and v not in [x[0] for x in out]:
+            out.append((v, video_url(v)))
+    return out
 
 
 def build_cards(res, em, yr, CARDS_SERIES):
@@ -470,6 +498,13 @@ def build_cards(res, em, yr, CARDS_SERIES):
         import tier2_cards
         _new.extend(tier2_cards.build(json.load(open(_t2_json))))
 
+    # 第四梯：本輪新轉錄的 13 支（含 5 支真正新分析 + 3 支缺 A 股資料）
+    try:
+        import new4_cards
+        _new.extend(new4_cards.build())
+    except Exception as e:
+        print(f'new4_cards 載入失敗：{type(e).__name__}: {e}')
+
     cards = _new + cards
 
     # ---- 排序：能回測的在前，不能回測的（NA）一律排到最後 ----
@@ -494,10 +529,14 @@ def build_cards(res, em, yr, CARDS_SERIES):
                      if mini else '')
         href = f"d_{c['id']}.html"
 
+        # 影片識別碼標籤：一支影片一個；重複主題的卡片會有兩個
+        vid_tags = ''.join(
+            f'<span class="tag vid">{vid}</span>' for vid, _ in video_links(c))
+
         out.append(f'''
 <article class="card" data-market="{c['market']}" data-grade="{c['grade']}" data-author="{c['author']}" id="{c['id']}">
   <header class="chead">
-    <div class="ctags"><span class="tag author">{c['author']}</span><span class="tag">{c['topic']}</span><span class="tag vid">{c['video']}</span></div>
+    <div class="ctags"><span class="tag author">{c['author']}</span><span class="tag">{c['topic']}</span>{vid_tags}</div>
     <span class="grade" style="--gc:{col}">{letter}</span>
   </header>
   <h2 class="ctitle">{c['title']}</h2>
@@ -517,10 +556,15 @@ def build_cards(res, em, yr, CARDS_SERIES):
 
 
 def detail_page(c, col, letter, mets, card, paras, imgs):
-    vlink = ('<a class="vsrc" href="https://www.bilibili.com/video/' + c['video'] +
-             '" target="_blank" rel="noopener">'
-             '<span class="vico">▶</span> 在 B 站觀看原視頻 '
-             '<span class="vcode">' + c['video'] + '</span> ↗</a>')
+    links = video_links(c)
+    parts = []
+    for vid, url in links:
+        site = 'B 站' if vid.startswith('BV') else 'YouTube'
+        parts.append(
+            '<a class="vsrc" href="' + url + '" target="_blank" rel="noopener">'
+            '<span class="vico">▶</span> 在 ' + site + ' 觀看原視頻 '
+            '<span class="vcode">' + vid + '</span> ↗</a>')
+    vlink = ''.join(parts)
 
     got = code_snippet(c['id'])
     if got:

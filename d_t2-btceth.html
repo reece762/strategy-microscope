@@ -136,7 +136,7 @@ background:#0d1219;line-height:1.7}
 <span class="grade" style="--gc:#58a6ff">B</span></div>
 <h1>BTC/ETH 輪動：這是唯一「輪動真的有效」的案例，但回撤八成</h1>
 <p class="lead">同一條 20 日動能輪動規則，在美股大小盤上完全失效（見上一張卡），在 BTC/ETH 上卻明顯有效：N=20 年化 47.30%、34.2 倍，而單獨持有 BTC 是 19.5 倍。差別在於——**BTC 與 ETH 的相關性遠低於 SPY 與 IWM**。</p>
-<a class="vsrc" href="https://www.bilibili.com/video/YhEz95Vmm14" target="_blank" rel="noopener"><span class="vico">▶</span> 在 B 站觀看原視頻 <span class="vcode">YhEz95Vmm14</span> ↗</a>
+<a class="vsrc" href="https://youtu.be/YhEz95Vmm14" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">YhEz95Vmm14</span> ↗</a><a class="vsrc" href="https://youtu.be/26FDkdaT8fo" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">26FDkdaT8fo</span> ↗</a>
 <div class="nochart">這支策略無法誠實回測，因此沒有績效曲線；原因見下方說明。</div>
 <div class="metrics"><div class="metric"><div class="mv">34.2x</div><div class="ml">N=20 輪動</div></div><div class="metric"><div class="mv">19.5x</div><div class="ml">只持 BTC</div></div><div class="metric"><div class="mv">80.9%</div><div class="ml">N=20 回撤</div></div></div>
 <div class="body"><p><b>規則照抄</b>：以 UTC 00:00（北京時間 08:00）為日界線，每天算 BTC 與 ETH 過去 20 天漲跌幅，隔天持有漲得多的那個。手續費雙邊各 0.25%——<b>這是他自己設的，而且他說「實際會更低」</b>，我照用，所以這是一份偏保守的結果。</p><p><b>結果明確有效</b>：N=20 輪動 34.2 倍（年化 47.30%），單獨持有 BTC 19.5 倍（38.51%）、ETH 8.9 倍（27.08%）。<b>輪動打贏兩邊</b>，而且不是靠單一參數：N=10 是 11.3 倍、N=60 是 14.4 倍，三個都贏過只持 BTC。這比美股那張卡可靠得多。</p><p><b>他的改良版（雙跌空倉）在這裡也有效</b>：N=20 加空倉後 48.8 倍、年化 53.16%，<b>比原版更高</b>；回撤從 80.9% 變成 85.2%。這跟美股版完全相反（美股版加空倉後變差）——原因是幣圈熊市更長更深，空手避開的跌幅遠大於錯過的反彈。</p><p><b>但倍數不能跟他的 765 倍 / 1103 倍直接比。</b> 他從 2017-01 起算，我的資料從 2017-08 起——<b>少了 2017 年那波 20 倍漲幅</b>。同樣的道理，他的 1103 倍裡有很大一部分是「起始點選在牛市前」。要比就得看同期間：<b>同期只持 BTC 是 19.5 倍，輪動是 34.2 倍，超額 +75%</b>。這個超額是真的，但遠不是「四年 1000 倍」那種量級。</p><p><b>回撤必須說清楚</b>：80.9%。他自己的版本是 76%，我算出來更高。<b>這代表十萬進去、最低點剩不到兩萬</b>。他自己也承認「最大回撤還是很大，腰斬」，並建議「只投一半的錢」。這個建議是對的，但它同時說明：<b>這個策略的實際可用性受制於你能不能承受八成回撤，不是受制於報酬。</b></p><p><b>為什麼幣圈有效、股市沒效？</b> 這是這批回測裡最有價值的一個對照。SPY 與 IWM 的相關性長期在 0.8 以上，兩者幾乎同步，輪動沒有資訊可挖。BTC 與 ETH 雖然同向，但<b>相對強弱的持續性明顯更強</b>（ETH 的 beta 更高、板塊敘事輪動更頻繁）。<b>同一條規則的成敗，取決於標的之間的相關性結構，不是規則本身。</b></p></div>
@@ -144,6 +144,6 @@ background:#0d1219;line-height:1.7}
 <div class="verdict"><b>判定</b>：成立，且是這批唯一通過的輪動策略。但需注意：回撤達八成、倍數受起始日影響極大、且與美股版結果相反，說明它依賴幣圈特有的相關性結構。</div>
 <div class="evid">依據：BTC/ETH 日線各 3331 日（2017-08-17 至 2026-09-30），已對齊共同交易日。成本雙邊各 0.25%（他自設，實際更低）。未測：多幣種輪動、做多做空對沖（他在影片末尾提出的延伸）。</div>
 
-<div class="build">版本 1.9.3 · 建置於 2026-10-23 01:13:44+0800</div>
+<div class="build">版本 1.10.0 · 建置於 2026-10-23 05:12:38+0800</div>
 <a class="back bottom" href="index.html">← 回到策略列表</a>
 </div></div></body></html>
