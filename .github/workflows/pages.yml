@@ -36,6 +36,10 @@ jobs:
           du -sh _site
 
       - uses: actions/configure-pages@v5
+        with:
+          # 首次部署時自動啟用 Pages（Source = GitHub Actions），
+          # 免去手動到 Settings → Pages 設定的步驟
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
