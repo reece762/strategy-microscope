@@ -35,11 +35,9 @@ jobs:
           echo "files: $(ls _site | wc -l)"
           du -sh _site
 
+      # 不在這裡自動啟用 Pages：GitHub 不允許 workflow 令牌自行建立站點，
+      # 需要 repo 管理員在 Settings → Pages 手動把 Source 設為 GitHub Actions（只需一次）。
       - uses: actions/configure-pages@v5
-        with:
-          # 首次部署時自動啟用 Pages（Source = GitHub Actions），
-          # 免去手動到 Settings → Pages 設定的步驟
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
