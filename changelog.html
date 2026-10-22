@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>版本紀錄 · 策略回測庫</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--tx:#e6edf3;--tx2:#9aa7b4;--tx3:#6e7681;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+font:15px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK TC",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 70px}
+a{color:var(--tx3);text-decoration:none;font-size:13px}
+a:hover{color:var(--acc)}
+h1{font-size:22px;margin:18px 0 6px}
+.sub{color:var(--tx2);font-size:13.5px;margin:0 0 22px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:var(--tx3);font-weight:500;font-size:11.5px;
+padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:11px 10px;border-bottom:1px solid #21262d;vertical-align:top;color:#c9d1d9}
+tr.cur td{background:#16202e}
+td.v{font-family:ui-monospace,monospace;color:var(--acc);white-space:nowrap}
+td.d{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--tx3);white-space:nowrap}
+td.f code{font-size:11px;color:var(--tx3)}
+.note{margin-top:24px;font-size:12px;color:var(--tx3);line-height:1.9;
+border-top:1px solid var(--line);padding-top:16px}
+code{background:#161b22;border:1px solid var(--line);border-radius:4px;padding:1px 5px;
+font-size:11.5px;color:#c9d1d9}
+</style></head>
+<body><div class="wrap">
+<a href="index.html">← 回到策略列表</a>
+<h1>版本紀錄</h1>
+<p class="sub">每次建置都保留完整快照。回滾時把對應的 <code>versions/vX.Y.Z/</code> 複製回根目錄即可。</p>
+<table><thead><tr><th>版本</th><th>建置時間</th><th>變更內容</th><th>快照位置</th></tr></thead><tbody><tr class="cur"><td class="v">v1.6.0</td><td class="d">2026-10-22 21:56:03+0800</td><td>代碼提示列右側加複製圖示（含行動瀏覽器後備方案）；卡片改為頁面跳轉不再開新分頁</td><td class="f"><code>versions/v1.6.0/</code></td></tr><tr><td class="v">v1.5.0</td><td class="d">2026-10-22 21:48:57+0800</td><td>加密卡片改用 BTC／ETH 對比；詳細頁底部加「顯示代碼」可展開原始策略程式碼</td><td class="f"><code>versions/v1.5.0/</code></td></tr><tr><td class="v">v1.4.0</td><td class="d">2026-10-22 21:38:46+0800</td><td>站名改為「策略顯微鏡」；卡片加來源標籤並支援多選篩選；對比曲線統一為納斯達克／SPY／道瓊斯；詳細頁加日期區間互動圖表與績效對照表</td><td class="f"><code>versions/v1.4.0/</code></td></tr><tr><td class="v">v1.3.1</td><td class="d">2026-10-22 21:05:51+0800</td><td>桌機流體全寬並把卡片欄寬定為 420px（2560 五欄／1920 四欄／1440 三欄）；手機獨立斷點；詳細頁寬版高解析圖表</td><td class="f"><code>versions/v1.3.1/</code></td></tr><tr><td class="v">v1.3.0</td><td class="d">2026-10-22 21:05:27+0800</td><td>桌機改流體全寬（移除 1180px 固定容器）；手機獨立斷點；詳細頁閱讀欄加寬、圖表改寬版高解析</td><td class="f"><code>versions/v1.3.0/</code></td></tr><tr><td class="v">v1.2.0</td><td class="d">2026-10-22 21:01:30+0800</td><td>卡片放大、圖表標題與座標軸加大；詳細頁改用獨立高解析圖；詳細頁加原視頻連結</td><td class="f"><code>versions/v1.2.0/</code></td></tr></tbody></table>
+<div class="note">回滾範例：<br><code>cp versions/v1.1.0/*.html .</code><br><br>目前建置：v1.6.0 · 2026-10-22 21:56:03+0800</div>
+</div></body></html>
