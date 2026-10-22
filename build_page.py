@@ -23,8 +23,8 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.8.0'
-VERSION_NOTES = '第一梯七支新影片上線：MACD 背離、量比、跳空回補、KDJ、月份效應、幣圈日內時段、大小盤輪動'
+VERSION = '1.9.0'
+VERSION_NOTES = '新增馬克維茨月配置、比特幣均線定投、BTC/ETH 輪動三張卡片'
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -219,6 +219,10 @@ def main():
     if os.path.exists(_t1_path):
         for key, fname in json.load(open(_t1_path)).items():
             imgs['t1_' + key] = png_uri(fname)
+    _t2_path = os.path.join(OUT, 't2_charts.json')
+    if os.path.exists(_t2_path):
+        for key, fname in json.load(open(_t2_path)).items():
+            imgs['t2_' + key] = png_uri(fname)
 
     # --- comparison charts: one strategy + the same three benchmarks ---
     # spec comes from prep_series.py, already aligned and rebased to 1.0
@@ -437,6 +441,11 @@ def build_cards(res, em, yr, CARDS_SERIES):
     if os.path.exists(_t1_json):
         import tier1_cards
         cards.extend(tier1_cards.build(json.load(open(_t1_json))))
+
+    _t2_json = os.path.join(OUT, 'tier2.json')
+    if os.path.exists(_t2_json):
+        import tier2_cards
+        cards.extend(tier2_cards.build(json.load(open(_t2_json))))
 
     # ---- render ----
     GR = {'S': ('#f0b429', 'S'), 'A': ('#3fb950', 'A'), 'B': ('#58a6ff', 'B'),
