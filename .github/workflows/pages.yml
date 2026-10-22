@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+# 只發布 13 個 HTML 檔，不把 data/ 的原始資料與 Python 腳本一起送上網站。
+# 這樣對外流量只算實際被瀏覽的頁面，也避免原始資料被直接下載。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Collect static pages
+        run: |
+          mkdir -p _site
+          cp *.html _site/
+          # GitHub Pages 需要 .nojekyll，否則底線開頭的資源會被略過
+          touch _site/.nojekyll
+          echo "files: $(ls _site | wc -l)"
+          du -sh _site
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
