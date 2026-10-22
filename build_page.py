@@ -23,10 +23,12 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.10.3'
-VERSION_NOTES = ('修正統計數字：關於頁與 README 仍寫著 10 個講法／A1 B4 C1 D1 —3，'
-                 '實際已 28 張卡片；改為由卡片自動計算，不再手寫。'
-                 '另修正量比卡矛盾：評級「—」卻有淨值曲線，現改為只報統計量並說明樣本不足')
+VERSION = '1.11.0'
+VERSION_NOTES = ('新增三張卡片，驗證 B 站 UP 主「阿尔法量化价格行为」的開源碼：'
+                 '(1) 五票制引擎的票數 bug——一票永遠不可能投多，十年只進場 15 次；'
+                 '(2) 支撐阻力守住率——控制波動後無穩定優勢，與他自報的零區分度一致；'
+                 '(3) 六策略一鍵對比——18 個組合僅 2 個顯著，且都為負。'
+                 '另修正：站內統計改由卡片自動計算')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -230,6 +232,11 @@ def main():
     if os.path.exists(_n4_path):
         for key, fname in json.load(open(_n4_path)).items():
             imgs[key if key.startswith('n4_') else 'n4_' + key] = png_uri(fname)
+    # 阿尔法量化（GitHub 開源碼驗證）的圖表，key 沒有前綴，統一加 al_
+    _al_path = os.path.join(OUT, 'alpha_charts.json')
+    if os.path.exists(_al_path):
+        for key, fname in json.load(open(_al_path)).items():
+            imgs[key if key.startswith('al_') else 'al_' + key] = png_uri(fname)
 
     # --- comparison charts: one strategy + the same three benchmarks ---
     # spec comes from prep_series.py, already aligned and rebased to 1.0
@@ -238,7 +245,8 @@ def main():
 
     # 追加：先前沒有進 series.json、但確實做過機械策略回測的卡片。
     # tier1_curves.py 用與 tier1.py 完全相同的規則重算，並斷言年化與 tier1.json 一致。
-    for fname in ('tier1_curves.json', 'new4_curves.json', 'tier2_curves.json'):
+    for fname in ('tier1_curves.json', 'new4_curves.json', 'tier2_curves.json',
+                  'alpha_curves.json'):
         p = os.path.join(OUT, fname)
         if os.path.exists(p):
             extra_cards = json.load(open(p))
@@ -515,6 +523,14 @@ def build_cards(res, em, yr, CARDS_SERIES):
     except Exception as e:
         print(f'new4_cards 載入失敗：{type(e).__name__}: {e}')
 
+    # 阿尔法量化：B 站被風控擋住、改用他開源的程式碼驗證（三張）
+    # 這一輪最新，所以插在 _new 最前面——首頁第一屏應該是最新的分析。
+    try:
+        import alpha_cards
+        _new = alpha_cards.build() + _new
+    except Exception as e:
+        print(f'alpha_cards 載入失敗：{type(e).__name__}: {e}')
+
     cards = _new + cards
 
     # ---- 排序：能回測的在前，不能回測的（NA）一律排到最後 ----
@@ -550,7 +566,7 @@ def build_cards(res, em, yr, CARDS_SERIES):
     <span class="grade" style="--gc:{col}">{letter}</span>
   </header>
   <h2 class="ctitle">{c['title']}</h2>
-  <p class="clead">{c['lead']}</p>
+  <p class="clead">{mb(c['lead'])}</p>
   {mini_html}
   <div class="metrics">{mets}</div>
   <a class="more" href="{href}">詳細資料 →</a>
@@ -616,11 +632,11 @@ def detail_page(c, col, letter, mets, card, paras, imgs):
     for k, v in [('__CSS__', DETAIL_CSS), ('__TITLE__', c['title']),
                  ('__TOPIC__', c['topic']), ('__VIDEO__', c['video']),
                  ('__COLOR__', col), ('__LETTER__', letter),
-                 ('__LEAD__', c['lead']), ('__VLINK__', vlink),
+                 ('__LEAD__', mb(c['lead'])), ('__VLINK__', vlink),
                  ('__CHART__', chart_html), ('__METRICS__', mets),
                  ('__CODE__', code_html),
                  ('__BODY__', paras), ('__IMGS__', imgs),
-                 ('__VERDICT__', c['verdict']), ('__EVID__', c['evidence']),
+                 ('__VERDICT__', mb(c['verdict'])), ('__EVID__', mb(c['evidence'])),
                  ('__VERSION__', VERSION), ('__BUILD_AT__', BUILD_AT)]:
         tpl = tpl.replace(k, v)
     return tpl
@@ -669,12 +685,39 @@ padding:12px 14px;border-radius:0 7px 7px 0;font-size:13.5px;color:#c9d1d9}
 ''' + CHART_CSS + CODE_CSS
 
 
+def mb(s):
+    """把行內 **粗體** 轉成 <b>。
+
+    lead / verdict / evidence 這三個欄位不走 md()（那是逐段的），
+    所以卡片作者若在這裡用 **，星號會原樣顯示在頁面上。
+    實測已有 5 張卡片踩到（t1-month、t1-rotation、t2-dca 等），
+    加上本輪三張，共 11 處。直接在輸出前統一轉掉，比逐張改卡片可靠。
+    """
+    if not s:
+        return s
+    out = []
+    for i, part in enumerate(s.split('**')):
+        out.append(f'<b>{part}</b>' if i % 2 else part)
+    s = ''.join(out)
+    # 行內 `code` 同理：evidence 常引用檔案路徑與程式碼片段
+    out = []
+    for i, part in enumerate(s.split('`')):
+        out.append(f'<code>{part}</code>' if i % 2 else part)
+    return ''.join(out)
+
+
 def md(paras):
     out = []
     for p in paras:
         s = p
         while '**' in s:
             s = s.replace('**', '<b>', 1).replace('**', '</b>', 1)
+        # 行內 `code`：正文常常引用檔案路徑與程式碼片段。
+        # 不轉的話，反引號會原樣出現在頁面上（本輪三張卡共 10 處）。
+        if '`' in s:
+            parts = s.split('`')
+            s = ''.join(f'<code>{x}</code>' if i % 2 else x
+                        for i, x in enumerate(parts))
         out.append(s)
     return out
 
