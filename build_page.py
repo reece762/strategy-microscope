@@ -23,12 +23,13 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.11.0'
-VERSION_NOTES = ('新增三張卡片，驗證 B 站 UP 主「阿尔法量化价格行为」的開源碼：'
-                 '(1) 五票制引擎的票數 bug——一票永遠不可能投多，十年只進場 15 次；'
-                 '(2) 支撐阻力守住率——控制波動後無穩定優勢，與他自報的零區分度一致；'
-                 '(3) 六策略一鍵對比——18 個組合僅 2 個顯著，且都為負。'
-                 '另修正：站內統計改由卡片自動計算')
+VERSION = '1.11.1'
+VERSION_NOTES = ('更正支撐阻力卡片的功勞歸屬與出處。那個 Brier／AUC 的自我否定'
+                 '不是 density-sr 作者寫的：整份程式來自 GPL-3.0 專案 '
+                 'rosemarycox5334-debug/Detect_support_and_resistance_levels（逐檔 md5 相同），'
+                 '被複製進 aiquant/engine/vendor/。另補授權風險（上游 GPL-3.0，但他的倉庫無 LICENSE 檔）'
+                 '與上游值得肯定的 leakage＋placebo 設計。'
+                 '上一版新增三張卡片並修正全站 lead／verdict／evidence 的 Markdown 轉換')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
