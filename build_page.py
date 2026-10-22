@@ -23,8 +23,8 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.7.1'
-VERSION_NOTES = '新增「關於這個站」頁面（含評級定義、資料假設、已知限制）；頁首導航含手機版；補 README'
+VERSION = '1.8.0'
+VERSION_NOTES = '第一梯七支新影片上線：MACD 背離、量比、跳空回補、KDJ、月份效應、幣圈日內時段、大小盤輪動'
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -183,6 +183,15 @@ def yearly_chart(yr):
     return b64(fig)
 
 
+
+def png_uri(name):
+    """tier1_charts.py writes PNG files; the rest of the pipeline builds figures
+    in memory. Read the file and inline it so the page stays a single file."""
+    path = os.path.join(OUT, name)
+    with open(path, 'rb') as f:
+        return 'data:image/png;base64,' + base64.b64encode(f.read()).decode()
+
+
 def main():
     global MINI, imgs_map
     res = json.load(open(os.path.join(OUT, 'results.json')))
@@ -205,6 +214,11 @@ def main():
         'em': exposure_chart(em),
         'yr': yearly_chart(yr),
     }
+    # 第一梯（新做的七支）圖表已由 tier1_charts.py 存成 PNG
+    _t1_path = os.path.join(OUT, 't1_charts.json')
+    if os.path.exists(_t1_path):
+        for key, fname in json.load(open(_t1_path)).items():
+            imgs['t1_' + key] = png_uri(fname)
 
     # --- comparison charts: one strategy + the same three benchmarks ---
     # spec comes from prep_series.py, already aligned and rebased to 1.0
@@ -417,6 +431,12 @@ def build_cards(res, em, yr, CARDS_SERIES):
             body=body, imgs=[], verdict='這支的策略無法在美股做誠實回測，所以我不給數字。',
             evidence='資料可取得性檢查：Yahoo 429、stooq 封鎖；美股無對應的逐股散戶／北向資金欄位。',
         ))
+
+    # ---- 第一梯：七支新影片 ----
+    _t1_json = os.path.join(OUT, 'tier1.json')
+    if os.path.exists(_t1_json):
+        import tier1_cards
+        cards.extend(tier1_cards.build(json.load(open(_t1_json))))
 
     # ---- render ----
     GR = {'S': ('#f0b429', 'S'), 'A': ('#3fb950', 'A'), 'B': ('#58a6ff', 'B'),
