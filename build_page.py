@@ -23,8 +23,8 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.9.0'
-VERSION_NOTES = '新增馬克維茨月配置、比特幣均線定投、BTC/ETH 輪動三張卡片'
+VERSION = '1.9.2'
+VERSION_NOTES = '首頁排序改為最新分析在前；統計與篩選計數自動計算'
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -242,9 +242,30 @@ def main():
 
     imgs_map = {k: imgs[k] for k in imgs}
     pages, details = build_cards(res, em, yr, CARDS_SERIES)
+
+    # 首頁統計與篩選器計數一律從實際卡片算，不手寫——手寫的數字每次加卡片都會變舊，
+    # 讓頁面看起來「沒有更新」。
+    import re as _re
+    def _cnt(pat):
+        return len(_re.findall(pat, pages))
+    n_cards = _cnt(r'<article class="card"')
+    n_na = _cnt(r'data-grade="NA"')
+    counts = {
+        '__N_CARDS__': str(n_cards),
+        '__N_RUN__': str(n_cards - n_na),
+        '__N_PASS__': str(_cnt(r'data-grade="[AB]"')),
+        '__N_FAIL__': str(_cnt(r'data-grade="[CD]"')),
+        '__N_NA__': str(n_na),
+        '__C_AUTHOR__': str(_cnt(r'data-author="邢不行"')),
+        '__C_US__': str(_cnt(r'data-market="us"')),
+        '__C_CRYPTO__': str(_cnt(r'data-market="crypto"')),
+    }
+
     html = (TEMPLATE.replace('__CARDS__', pages)
                     .replace('__VERSION__', VERSION)
                     .replace('__BUILD_AT__', BUILD_AT))
+    for k, v in counts.items():
+        html = html.replace(k, v)
     path = os.path.join(HERE, 'page.html')
     open(path, 'w').write(html)
     # index.html is what the server serves; keep it in lockstep with page.html
@@ -436,16 +457,20 @@ def build_cards(res, em, yr, CARDS_SERIES):
             evidence='資料可取得性檢查：Yahoo 429、stooq 封鎖；美股無對應的逐股散戶／北向資金欄位。',
         ))
 
-    # ---- 第一梯：七支新影片 ----
+    # ---- 第一梯與第二梯：新做的影片 ----
+    # 放在最前面——首頁第一屏應該是最新的分析，舊的留在後面。
+    _new = []
     _t1_json = os.path.join(OUT, 'tier1.json')
     if os.path.exists(_t1_json):
         import tier1_cards
-        cards.extend(tier1_cards.build(json.load(open(_t1_json))))
+        _new.extend(tier1_cards.build(json.load(open(_t1_json))))
 
     _t2_json = os.path.join(OUT, 'tier2.json')
     if os.path.exists(_t2_json):
         import tier2_cards
-        cards.extend(tier2_cards.build(json.load(open(_t2_json))))
+        _new.extend(tier2_cards.build(json.load(open(_t2_json))))
+
+    cards = _new + cards
 
     # ---- render ----
     GR = {'S': ('#f0b429', 'S'), 'A': ('#3fb950', 'A'), 'B': ('#58a6ff', 'B'),
@@ -702,11 +727,11 @@ footer a:hover{color:var(--acc)}
 
 <div class="filters">
   <span class="flabel">來源</span>
-  <div class="chip" data-facet="author" data-val="邢不行">邢不行 (10)</div>
+  <div class="chip" data-facet="author" data-val="邢不行">邢不行 (__C_AUTHOR__)</div>
   <span class="fsep"></span>
   <span class="flabel">市場</span>
-  <div class="chip" data-facet="market" data-val="us">美股 (8)</div>
-  <div class="chip" data-facet="market" data-val="crypto">加密貨幣 (2)</div>
+  <div class="chip" data-facet="market" data-val="us">美股 (__C_US__)</div>
+  <div class="chip" data-facet="market" data-val="crypto">加密貨幣 (__C_CRYPTO__)</div>
   <span class="fsep"></span>
   <span class="flabel">結果</span>
   <div class="chip" data-facet="grade" data-val="pass">通過 (A/B)</div>
@@ -716,11 +741,11 @@ footer a:hover{color:var(--acc)}
 <div class="fcount" id="fcount"></div>
 
 <div class="stats">
-  <div class="stat"><div class="v">5</div><div class="k">已取得逐字稿的影片</div></div>
-  <div class="stat"><div class="v">4</div><div class="k">規則可完整重跑的策略</div></div>
-  <div class="stat"><div class="v">1</div><div class="k">通過 55 年 + 10 年雙重檢驗</div></div>
-  <div class="stat"><div class="v">55.7 年</div><div class="k">最長回測樣本（納斯達克）</div></div>
-  <div class="stat"><div class="v">3 支</div><div class="k">因資料不存在而未回測</div></div>
+  <div class="stat"><div class="v">__N_CARDS__</div><div class="k">已分析的策略</div></div>
+  <div class="stat"><div class="v">__N_RUN__</div><div class="k">規則完整重跑</div></div>
+  <div class="stat"><div class="v">__N_PASS__</div><div class="k">通過（A/B 級）</div></div>
+  <div class="stat"><div class="v">__N_FAIL__</div><div class="k">未通過（C/D 級）</div></div>
+  <div class="stat"><div class="v">__N_NA__</div><div class="k">無法回測</div></div>
 </div>
 
 <div class="grid">
