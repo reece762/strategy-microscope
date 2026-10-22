@@ -23,8 +23,8 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.9.2'
-VERSION_NOTES = '首頁排序改為最新分析在前；統計與篩選計數自動計算'
+VERSION = '1.9.3'
+VERSION_NOTES = '能回測的卡片一律排在前，不能回測（NA）者不論評分一律排到最後'
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -471,6 +471,12 @@ def build_cards(res, em, yr, CARDS_SERIES):
         _new.extend(tier2_cards.build(json.load(open(_t2_json))))
 
     cards = _new + cards
+
+    # ---- 排序：能回測的在前，不能回測的（NA）一律排到最後 ----
+    # 使用者裁定：就算不能回測的卡片評分再好看，也只能排在能回測的後面。
+    # 兩組各自維持原本順序（新分析仍在前），不以評級重排——評級不是排序依據。
+    cards = ([c for c in cards if c['grade'] != 'NA'] +
+             [c for c in cards if c['grade'] == 'NA'])
 
     # ---- render ----
     GR = {'S': ('#f0b429', 'S'), 'A': ('#3fb950', 'A'), 'B': ('#58a6ff', 'B'),
