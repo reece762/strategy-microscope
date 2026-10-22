@@ -23,9 +23,10 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.10.1'
-VERSION_NOTES = ('修正詳情頁措辭：21 張沒有淨值曲線的卡片先前一律顯示「無法誠實回測」，'
-                 '其中多數其實是統計檢定型分析（如 MACD 背離），已改為依卡片性質分三種說明')
+VERSION = '1.10.2'
+VERSION_NOTES = ('補上 5 張卡片的淨值曲線：MACD 背離、KDJ、量比、槓鈴、永久投資組合。'
+                 '這些卡片正文早有年化數字，詳情頁卻顯示「無法誠實回測」；'
+                 '現以相同規則重算淨值（年化與既有數字對帳相符），並畫出對照曲線')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -234,6 +235,15 @@ def main():
     # spec comes from prep_series.py, already aligned and rebased to 1.0
     series = json.load(open(os.path.join(OUT, 'series.json')))
     CARDS_SERIES = series['cards']
+
+    # 追加：先前沒有進 series.json、但確實做過機械策略回測的卡片。
+    # tier1_curves.py 用與 tier1.py 完全相同的規則重算，並斷言年化與 tier1.json 一致。
+    for fname in ('tier1_curves.json', 'new4_curves.json', 'tier2_curves.json'):
+        p = os.path.join(OUT, fname)
+        if os.path.exists(p):
+            extra_cards = json.load(open(p))
+            CARDS_SERIES.update(extra_cards)
+            print(f'  曲線追加 {fname}: {list(extra_cards)}')
 
     SPEC = {}
     for cid, card in CARDS_SERIES.items():
@@ -583,12 +593,14 @@ def detail_page(c, col, letter, mets, card, paras, imgs):
                       .replace('__END__', card['end'])
                       .replace('__DATA__', json.dumps(payload, separators=(',', ':'))))
     else:
-        # 沒有淨值曲線有三種完全不同的原因，不能共用同一句話：
+        # 沒有淨值曲線有幾種完全不同的原因，不能共用同一句話：
+        #   chart_note → 卡片自帶說明（例如定投是現金流型，本來就沒有單一淨值）
         #   NA      → 資料不存在，確實無法回測
-        #   有統計圖 → 這是統計檢定型分析，測的是「訊號後報酬分布」，
-        #             本來就不是一條可持有的淨值曲線
+        #   有統計圖 → 這是統計檢定型分析，測的是「訊號後報酬分布」
         #   其他    → 純說明型，無圖
-        if c.get('grade') == 'NA':
+        if c.get('chart_note'):
+            chart_html = f'<div class="nochart">{c["chart_note"]}</div>'
+        elif c.get('grade') == 'NA':
             chart_html = ('<div class="nochart">這支策略無法誠實回測，因此沒有績效曲線；'
                           '原因見下方說明。</div>')
         elif c.get('imgs'):
@@ -598,9 +610,6 @@ def detail_page(c, col, letter, mets, card, paras, imgs):
         else:
             chart_html = ('<div class="nochart">這張卡片沒有淨值曲線：'
                           '內容是規則可行性與資料來源的說明，並非策略回測。</div>')
-
-        # 統計檢定型卡片仍可能有機械策略的績效數字（寫在正文裡），
-        # 但沒有逐日淨值可畫——不謊稱有，也不因此說「沒做回測」。
 
     tpl = DETAIL_TEMPLATE
     for k, v in [('__CSS__', DETAIL_CSS), ('__TITLE__', c['title']),
