@@ -23,10 +23,9 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.10.0'
-VERSION_NOTES = ('新增第四梯 8 張卡片：燭型形態、均線用法、槓鈴策略、放量、永久投資組合（可回測），'
-                 '以及匯率擇時、A股vs美股、貸款餘額擇時（缺 A 股資料，標記不可回測）；'
-                 '修正影片連結來源判定（YouTube ID 誤拼成 B 站網址）；支援一張卡片掛多支影片')
+VERSION = '1.10.1'
+VERSION_NOTES = ('修正詳情頁措辭：21 張沒有淨值曲線的卡片先前一律顯示「無法誠實回測」，'
+                 '其中多數其實是統計檢定型分析（如 MACD 背離），已改為依卡片性質分三種說明')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -584,8 +583,24 @@ def detail_page(c, col, letter, mets, card, paras, imgs):
                       .replace('__END__', card['end'])
                       .replace('__DATA__', json.dumps(payload, separators=(',', ':'))))
     else:
-        chart_html = ('<div class="nochart">這支策略無法誠實回測，因此沒有績效曲線；'
-                      '原因見下方說明。</div>')
+        # 沒有淨值曲線有三種完全不同的原因，不能共用同一句話：
+        #   NA      → 資料不存在，確實無法回測
+        #   有統計圖 → 這是統計檢定型分析，測的是「訊號後報酬分布」，
+        #             本來就不是一條可持有的淨值曲線
+        #   其他    → 純說明型，無圖
+        if c.get('grade') == 'NA':
+            chart_html = ('<div class="nochart">這支策略無法誠實回測，因此沒有績效曲線；'
+                          '原因見下方說明。</div>')
+        elif c.get('imgs'):
+            chart_html = ('<div class="nochart">這張卡片是<b>統計檢定</b>，不是單一策略的回測：'
+                          '它比較「訊號出現後」與「隨便哪天」的報酬差異，所以沒有淨值曲線可畫。'
+                          '下方的圖就是這個檢定的結果。</div>')
+        else:
+            chart_html = ('<div class="nochart">這張卡片沒有淨值曲線：'
+                          '內容是規則可行性與資料來源的說明，並非策略回測。</div>')
+
+        # 統計檢定型卡片仍可能有機械策略的績效數字（寫在正文裡），
+        # 但沒有逐日淨值可畫——不謊稱有，也不因此說「沒做回測」。
 
     tpl = DETAIL_TEMPLATE
     for k, v in [('__CSS__', DETAIL_CSS), ('__TITLE__', c['title']),
