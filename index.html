@@ -122,10 +122,12 @@ footer a:hover{color:var(--acc)}
 <div class="filters">
   <span class="flabel">來源</span>
   <div class="chip" data-facet="author" data-val="邢不行">邢不行 (28)</div>
+  <div class="chip" data-facet="author" data-val="提阿非羅大人 TiaBTC">提阿非羅大人 TiaBTC (6)</div>
+  <div class="chip" data-facet="author" data-val="阿尔法量化价格行为">阿尔法量化价格行为 (3)</div>
   <span class="fsep"></span>
   <span class="flabel">市場</span>
   <div class="chip" data-facet="market" data-val="us">美股 (23)</div>
-  <div class="chip" data-facet="market" data-val="crypto">加密貨幣 (5)</div>
+  <div class="chip" data-facet="market" data-val="crypto">加密貨幣 (11)</div>
   <span class="fsep"></span>
   <span class="flabel">結果</span>
   <div class="chip" data-facet="grade" data-val="pass">通過 (A/B)</div>
@@ -135,14 +137,74 @@ footer a:hover{color:var(--acc)}
 <div class="fcount" id="fcount"></div>
 
 <div class="stats">
-  <div class="stat"><div class="v">31</div><div class="k">已分析的策略</div></div>
-  <div class="stat"><div class="v">24</div><div class="k">規則完整重跑</div></div>
+  <div class="stat"><div class="v">37</div><div class="k">已分析的策略</div></div>
+  <div class="stat"><div class="v">29</div><div class="k">規則完整重跑</div></div>
   <div class="stat"><div class="v">10</div><div class="k">通過（A/B 級）</div></div>
-  <div class="stat"><div class="v">14</div><div class="k">未通過（C/D 級）</div></div>
-  <div class="stat"><div class="v">7</div><div class="k">無法回測</div></div>
+  <div class="stat"><div class="v">19</div><div class="k">未通過（C/D 級）</div></div>
+  <div class="stat"><div class="v">8</div><div class="k">無法回測</div></div>
 </div>
 
 <div class="grid">
+
+<article class="card" data-market="crypto" data-grade="D" data-author="提阿非羅大人 TiaBTC" id="tia-eight">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">綜合檢驗</span><span class="tag vid">1WpTDM8NM5g</span><span class="tag vid">2d9XlERn6kg</span><span class="tag vid">6VY2qDzpNbk</span><span class="tag vid">7bTMSZT-eiQ</span></div>
+    <span class="grade" style="--gc:#f85149">D</span>
+  </header>
+  <h2 class="ctitle">八門付費課程、33 條規則：沒有一條贏過「什麼都不做」</h2>
+  <p class="clead">他公開了十門課的目錄（道氏與 123 法則、波浪、和諧形態、斐波那契與江恩、盤口訂單流、價格行為、威科夫、VCP 杯柄、周易、心法）。我把前八門裡<b>能寫成程式</b>的 33 條規則全部回測，結果是<b>沒有任何一條在扣掉手續費後，平均報酬能顯著大於零</b>；而且所有策略的風險調整後報酬（夏普，數值越高代表每單位波動換到的報酬越多）<b>全部低於同期單純買進持有比特幣</b>。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">33 條</div><div class="ml">檢驗規則數</div></div><div class="metric"><div class="mv">0 條</div><div class="ml">扣成本後顯著為正</div></div><div class="metric"><div class="mv">0 條</div><div class="ml">贏過買進持有</div></div></div>
+  <a class="more" href="d_tia-eight.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" id="tia-funding">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">擇時</span><span class="tag vid">dHkDnDxYlts</span><span class="tag vid">sODb361o-HY</span></div>
+    <span class="grade" style="--gc:#d29922">C</span>
+  </header>
+  <h2 class="ctitle">他的「資金費率原則」：2022 年真的救命，2026 年已經失效</h2>
+  <p class="clead">他稱資金費率是「<b>最重要的原則，不能違背</b>」：費率極負代表散戶擁擠做空，所以偏多、不要做空。我把它寫成規則（費率為負時做多，否則空手），用 2020–2026 的日線與 1 小時資料重跑。<b>結果是：它在 2022 空頭年確實有效（+8% 對上比特幣 −64%），但 2026 年已經轉為負報酬。</b></p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">+8.0%</div><div class="ml">2022 年（比特幣 −64%）</div></div><div class="metric"><div class="mv">−9.0%</div><div class="ml">2026 年（比特幣 −6%）</div></div><div class="metric"><div class="mv">−1.4%</div><div class="ml">剔除最好 10 天後</div></div></div>
+  <a class="more" href="d_tia-funding.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" id="tia-gap">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">缺口</span><span class="tag vid">ab5GUxw2GBs</span></div>
+    <span class="grade" style="--gc:#d29922">C</span>
+  </header>
+  <h2 class="ctitle">「缺口一定會補」是真的（95%），但照著做會虧錢</h2>
+  <p class="clead">缺口（週末休市造成的價格跳空）是他最常講的現象之一。我先驗證現象本身：<b>1,953 個缺口裡，30 天內補回的比例是 95%</b>——這是真的。但把它當成交易訊號（開盤進場、目標是前一日收盤價）在扣成本後，<b>平均是負的</b>，週末缺口更差。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">95%</div><div class="ml">30 日內補回率</div></div><div class="metric"><div class="mv">−0.05% ~ −0.11%</div><div class="ml">逆勢操作平均報酬</div></div><div class="metric"><div class="mv">−0.32% ~ −0.46%</div><div class="ml">週末缺口逆勢操作</div></div></div>
+  <a class="more" href="d_tia-gap.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="crypto" data-grade="D" data-author="提阿非羅大人 TiaBTC" id="tia-fib">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">斐波那契</span><span class="tag vid">jyvMaEVCxe0</span><span class="tag vid">gBaURrIGoLs</span></div>
+    <span class="grade" style="--gc:#f85149">D</span>
+  </header>
+  <h2 class="ctitle">0.618 回撤有支撐？我的第一版結論是錯的，錯在我用了未來資訊</h2>
+  <p class="clead">他課程裡反覆教 0.618 回撤（斐波那契數列裡的一個比例）是強支撐，跌破就止損。我第一次測出「撐住比例 65.7%」，看起來支持他的說法。<b>但那個數字是錯的——我用了當時還不知道的資訊。</b> 修正之後，優勢完全消失。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">65.7%</div><div class="ml">第一版（有前視偏誤）</div></div><div class="metric"><div class="mv">54.3%</div><div class="ml">修正後</div></div><div class="metric"><div class="mv">p = 0.90</div><div class="ml">與基準的差檢定</div></div></div>
+  <a class="more" href="d_tia-fib.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" id="tia-news">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">事件交易</span><span class="tag vid">E1BFjbYS0_o</span><span class="tag vid">7bTMSZT-eiQ</span></div>
+    <span class="grade" style="--gc:#d29922">C</span>
+  </header>
+  <h2 class="ctitle">「利好出盡」：他給的四個跌幅數字，三個不是單日跌幅</h2>
+  <p class="clead">他的逃頂課給了四個實證案例：XRP 電報群約定 −55%、Doge Day −66%、Coinbase 上市比特幣 −27.6%、馬斯克上節目 Doge −44%。我逐日核對——<b>這四個數字幾乎都不是「當天跌多少」，而是「當天高點到之後谷底」的峰到谷跌幅</b>。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">−28.8% / −55.0%</div><div class="ml">XRP 單日 / 峰到谷</div></div><div class="metric"><div class="mv">−25.4% / −62.4%</div><div class="ml">Doge Day 單日 / 峰到谷</div></div><div class="metric"><div class="mv">−1.0%（不顯著）</div><div class="ml">Coinbase 上市日 比特幣</div></div></div>
+  <a class="more" href="d_tia-news.html">詳細資料 →</a>
+</article>
 
 <article class="card" data-market="us" data-grade="D" data-author="阿尔法量化价格行为" id="al-pa-bug">
   <header class="chead">
@@ -432,6 +494,18 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_calendar.html">詳細資料 →</a>
 </article>
 
+<article class="card" data-market="crypto" data-grade="NA" data-author="提阿非羅大人 TiaBTC" id="tia-risk">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">風險管理</span><span class="tag vid">HRmnIGT2How</span><span class="tag vid">MQTh3UxCPmA</span><span class="tag vid">0PK_XiE1y94</span></div>
+    <span class="grade" style="--gc:#6e7681">—</span>
+  </header>
+  <h2 class="ctitle">他真正有價值的是風控，而風控沒辦法用回測證明</h2>
+  <p class="clead">我把他的入門課程 001《計劃你的交易》與 002《風險優先》完整逐字稿讀完，再加上 10 支風控影片。<b>這一塊的內容密度與品質，遠高於他的型態招式</b>，而且與正規交易教育一致。但它決定的是「你會不會活下來」，<b>不是報酬，所以測不出夏普，也無法回測</b>。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">總資金 1%</div><div class="ml">單筆風險上限</div></div><div class="metric"><div class="mv">0.1% ~ 0.5%</div><div class="ml">新手建議</div></div><div class="metric"><div class="mv">1.5:1 ~ 3:1</div><div class="ml">盈虧比目標</div></div></div>
+  <a class="more" href="d_tia-risk.html">詳細資料 →</a>
+</article>
+
 <article class="card" data-market="us" data-grade="NA" data-author="邢不行" id="t1-vr">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">技術指標</span><span class="tag vid">08lNIsMgylY</span></div>
@@ -523,7 +597,7 @@ Binance 公開封存（BTC/USDT 2017–2026）。<br>
 成本假設：美股每趟 1 bp，加密每趟 5 bp。全部信號只用前一交易日收盤，無前視。
 比較基準含「同曝險、不擇時」的固定槓桿買進持有，以避免把「少持倉」誤讀成「會擇時」。<br>
 逐字稿經 BibiGPT 取得。本頁為歷史資料檢驗，不構成投資建議。<br>
-<span class="ver">版本 1.11.1 · 建置於 2026-10-23 06:22:51+0800 · <a href="changelog.html">版本紀錄</a></span>
+<span class="ver">版本 1.12.0 · 建置於 2026-10-23 18:45:10+0800 · <a href="changelog.html">版本紀錄</a></span>
 </footer>
 </div>
 

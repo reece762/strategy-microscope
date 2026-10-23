@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>他的「資金費率原則」：2022 年真的救命，2026 年已經失效 · 詳細資料</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--tx:#e6edf3;--tx2:#9aa7b4;--tx3:#6e7681;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+font:15px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK TC",sans-serif}
+.wrap{max-width:none;width:100%;margin:0;padding:28px clamp(20px,3vw,64px) 70px}
+.prose{max-width:1180px;margin:0 auto}
+.back{display:inline-block;color:var(--tx3);text-decoration:none;font-size:13px;margin-bottom:22px}
+.back:hover{color:var(--acc)}
+.back.bottom{margin:32px 0 0;display:block;border-top:1px solid var(--line);padding-top:18px}
+.tags{display:flex;gap:7px;align-items:center;margin-bottom:10px}
+.tag{font-size:11px;color:var(--tx3);border:1px solid var(--line);border-radius:5px;padding:2px 8px}
+.tag.vid{font-family:ui-monospace,monospace}
+.grade{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:800;
+font-size:12px;color:var(--gc);background:color-mix(in srgb,var(--gc) 15%,transparent);
+border:1px solid color-mix(in srgb,var(--gc) 45%,transparent)}
+h1{margin:0 0 12px;font-size:23px;line-height:1.45;letter-spacing:.2px}
+.lead{color:var(--tx2);margin:0 0 20px;font-size:14px}
+.vsrc{display:flex;align-items:center;gap:9px;background:#16202e;border:1px solid #26364d;
+border-radius:9px;padding:11px 14px;margin:0 0 20px;text-decoration:none;color:#c9d1d9;
+font-size:13.5px;transition:.15s}
+.vsrc:hover{border-color:var(--acc);color:#fff}
+.vsrc .vico{color:#f85149;font-size:11px}
+.vsrc .vcode{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--tx3)}
+.build{margin-top:22px;font-size:11px;color:var(--tx3);font-family:ui-monospace,monospace}
+.mini{margin:0 0 20px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.mini img{width:100%;display:block}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin-bottom:22px}
+.metric{text-align:center}
+.mv{font-size:17px;font-weight:700}
+.ml{font-size:11px;color:var(--tx3);margin-top:2px}
+.body p{margin:0 0 14px;font-size:14.2px;color:#c9d1d9}
+.body b{color:#fff;font-weight:600}
+.fig{margin:16px 0;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.fig img{width:100%;display:block}
+.verdict{margin-top:20px;background:#1a2230;border-left:3px solid var(--acc);
+padding:12px 14px;border-radius:0 7px 7px 0;font-size:13.5px;color:#c9d1d9}
+.verdict b{color:var(--acc)}
+.evid{margin-top:10px;font-size:12px;color:var(--tx3);line-height:1.7}
+
+.chartcard{background:#0d1219;border:1px solid var(--line);border-radius:11px;
+padding:16px 16px 14px;margin:0 0 24px}
+.chartctl{display:flex;justify-content:space-between;align-items:flex-end;
+gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.daterange{display:flex;align-items:flex-end;gap:9px}
+.daterange label{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--tx3)}
+.daterange input[type=date]{background:#161b22;border:1px solid var(--line);
+color:var(--tx);border-radius:6px;padding:6px 9px;font-size:13px;
+font-family:ui-monospace,monospace;color-scheme:dark}
+.daterange input[type=date]:focus{outline:none;border-color:var(--acc)}
+.dash{color:var(--tx3);padding-bottom:8px;font-size:12px}
+.quick{display:flex;gap:5px}
+.quick button{background:transparent;border:1px solid var(--line);color:var(--tx3);
+border-radius:6px;padding:5px 11px;font-size:12px;cursor:pointer;transition:.15s}
+.quick button:hover{color:var(--tx);border-color:#4a5568}
+.quick button.on{background:var(--acc);border-color:var(--acc);color:#0d1117;font-weight:600}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:8px;font-size:12px;color:#c9d1d9}
+.legend .lg{display:flex;align-items:center;gap:6px}
+.legend i,.tabwrap i{display:inline-block;width:10px;height:3px;border-radius:2px}
+.canvaswrap{position:relative}
+#chart{display:block;width:100%}
+.tip{position:absolute;display:none;background:#161b22;border:1px solid #30363d;
+border-radius:7px;padding:8px 11px;font-size:12px;color:#c9d1d9;pointer-events:none;
+z-index:5;box-shadow:0 6px 20px rgba(0,0,0,.5);line-height:1.65;white-space:nowrap}
+.tip b{color:#fff;font-size:11.5px;font-family:ui-monospace,monospace}
+.tip div{display:flex;align-items:center;gap:6px;margin-top:3px}
+.tip div i{width:9px;height:3px;border-radius:2px}
+.tip div span{margin-left:auto;padding-left:12px;font-family:ui-monospace,monospace;color:#fff}
+.tabwrap{margin-top:16px;overflow-x:auto}
+#stats{width:100%;border-collapse:collapse;font-size:12.5px}
+#stats th{text-align:right;color:var(--tx3);font-weight:500;font-size:11px;
+padding:7px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+#stats th:first-child{text-align:left}
+#stats td{text-align:right;padding:9px;border-bottom:1px solid #1c232c;
+font-family:ui-monospace,monospace;color:#c9d1d9;white-space:nowrap}
+#stats td:first-child{text-align:left;font-family:inherit}
+#stats td:first-child i{margin-right:7px;vertical-align:middle}
+#stats tr.hi td{background:#151d29;color:#fff;font-weight:600}
+#stats td.neg{color:#f0883e}
+.chartnote{margin-top:10px;font-size:11.5px;color:var(--tx3);line-height:1.7}
+.nochart{background:#0d1219;border:1px dashed var(--line);border-radius:10px;
+padding:26px;text-align:center;color:var(--tx3);font-size:13px;margin:0 0 24px}
+@media(max-width:760px){
+  .chartctl{flex-direction:column;align-items:stretch}
+  .daterange{flex-wrap:wrap}
+  .daterange input[type=date]{flex:1;min-width:0}
+  .quick{justify-content:flex-start}
+  #stats{font-size:11.5px}
+  #stats th,#stats td{padding:7px 5px}
+}
+
+.codecard{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+.codetoggle{display:inline-flex;align-items:center;gap:7px;background:#161b22;
+border:1px solid var(--line);color:var(--tx2);border-radius:8px;padding:9px 16px;
+font-size:13px;cursor:pointer;transition:.15s;font-family:inherit}
+.codetoggle:hover{color:#fff;border-color:var(--acc)}
+.codetoggle.open{color:var(--acc);border-color:var(--acc)}
+.codetoggle .caret{font-size:10px;display:inline-block;transition:transform .18s}
+.codetoggle.open .caret{transform:rotate(180deg)}
+.codewrap{margin-top:14px;border:1px solid var(--line);border-radius:9px;
+background:#0a0e14;overflow:hidden}
+.codeinfo{display:flex;align-items:flex-start;gap:12px;font-size:11.5px;color:#d29922;
+background:#141a22;border-bottom:1px solid var(--line);padding:9px 14px;
+font-family:ui-monospace,monospace;line-height:1.65}
+.codeinfo-txt{flex:1 1 auto;white-space:pre-wrap;min-width:0}
+.copybtn{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
+background:#1b232d;border:1px solid var(--line);color:var(--tx2);border-radius:6px;
+padding:5px 10px;font-size:11px;cursor:pointer;transition:.15s;font-family:inherit;
+margin:-2px -2px -2px 0}
+.copybtn:hover{color:#fff;border-color:var(--acc);background:#233040}
+.copybtn:active{transform:scale(.96)}
+.copybtn .ico-ok,.copybtn.ok .ico-copy{display:none}
+.copybtn.ok .ico-ok{display:inline-block}
+.copybtn.ok{color:#3fb950;border-color:#2d5c3a;background:#16261c}
+.copybtn .copytext{white-space:nowrap}
+.codewrap pre{margin:0;padding:14px 16px;overflow-x:auto;background:#0a0e14}
+.codewrap code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+font-size:12.2px;line-height:1.75;color:#c9d1d9;white-space:pre}
+.codefoot{font-size:11px;color:var(--tx3);padding:9px 14px;border-top:1px solid var(--line);
+background:#0d1219;line-height:1.7}
+@media(max-width:760px){
+  .codewrap code{font-size:11px}
+  .codetoggle{width:100%;justify-content:center}
+}
+</style></head>
+<body><div class="wrap"><div class="prose">
+<a class="back" href="index.html">← 回到策略列表</a>
+<div class="tags"><span class="tag">擇時</span>
+<span class="tag vid">dHkDnDxYlts</span>
+<span class="tag author">邢不行</span>
+<span class="grade" style="--gc:#d29922">C</span></div>
+<h1>他的「資金費率原則」：2022 年真的救命，2026 年已經失效</h1>
+<p class="lead">他稱資金費率是「<b>最重要的原則，不能違背</b>」：費率極負代表散戶擁擠做空，所以偏多、不要做空。我把它寫成規則（費率為負時做多，否則空手），用 2020–2026 的日線與 1 小時資料重跑。<b>結果是：它在 2022 空頭年確實有效（+8% 對上比特幣 −64%），但 2026 年已經轉為負報酬。</b></p>
+<a class="vsrc" href="https://youtu.be/dHkDnDxYlts" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">dHkDnDxYlts</span> ↗</a><a class="vsrc" href="https://youtu.be/sODb361o-HY" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">sODb361o-HY</span> ↗</a>
+<div class="nochart">這張卡片沒有淨值曲線：內容是規則可行性與資料來源的說明，並非策略回測。</div>
+<div class="metrics"><div class="metric"><div class="mv">+8.0%</div><div class="ml">2022 年（比特幣 −64%）</div></div><div class="metric"><div class="mv">−9.0%</div><div class="ml">2026 年（比特幣 −6%）</div></div><div class="metric"><div class="mv">−1.4%</div><div class="ml">剔除最好 10 天後</div></div></div>
+<div class="body"><p><b>他的原話</b>（出自 2026-01-13 與 2026-01-14 兩支日更影片的逐字稿）：「只要資金費率還是那麼負，就沒有做空的條件；這種負資金費率下，我選擇站在多頭這邊。」同一段話在 2024-04 與 2026-05 又各出現一次，用詞幾乎一致，所以這不是隨口一提，而是他反覆陳述的規則。</p><p><b>日線結果（每次換倉成本 5 個基點）。</b> 全期 2020–2026：他的規則年化 <b>+14.6%</b>、最大回撤 <b>−24.8%</b>；同期買進持有比特幣是 <b>+43.8%</b>、回撤 <b>−76.7%</b>。換句話說，<b>他拿三分之一的報酬，換到三分之一的回撤</b>——這是一種防守型擇時，不是獲利引擎。</p><p><b>分年看，只有 2022 年值得說。</b> 2022 年他 +8%、比特幣 −64%；但 2023 年他 +14%、比特幣 +156%；2024 年他 +16%、比特幣 +121%。<b>牛市裡他連比特幣的十分之一都賺不到。</b> 而到了 2026 年，他的規則 <b>−9%</b>，比特幣 −6%——<b>防守優勢也消失了</b>。</p><p><b>1 小時級別更差。</b> 他的實務是做合約、短進短出，所以我也測了 1 小時。結果：規則年化 +20.2%，買進持有 +43.5%；而且換手高達 <b>976 次</b>。<b>頻率越高、成本吃掉的越多，但優勢並沒有變大。</b>把門檻拉更嚴（年化費率低於 −5% 或 −15% 才進場）也沒有更好，年化只有 +6.8% 與 +4.9%。</p><p><b>最致命的是獲利集中度。</b> 全期年化 +14.6%，但剔除在場日表現最好的：1 天→+12.3%、5 天→+5.4%、<b>10 天→−1.4%</b>、20 天→−9.7%。<b>只要去掉最好的 10 天，整條策略就由賺轉賠。</b>這代表它的報酬來自極少數幾次「猜對轉折」，不是穩定的優勢。</p><p><b>我的判讀。</b> 這條規則在邏輯上是有道理的（資金費率確實反映擁擠方向），在 2022 那種單邊下跌年也確實提供了保護。但它有三個問題：牛市嚴重落後、報酬集中在少數日、近兩年明顯鈍化。<b>把它當「空頭年的防守開關」可以，當「可長期外推的獲利方法」不行。</b></p></div>
+
+<div class="verdict"><b>判定</b>：部分成立，但不穩定。2022 年有效、2023–2024 大幅落後、2026 年轉負；剔除最好的 10 天即翻負，代表報酬來自少數幾次而非穩定優勢。</div>
+<div class="evid">依據：BTCUSDT 永續 1 小時 K 線 59,400 根（2020-01-01 → 2026-10-10，無缺口）；資金費率 7,395 筆（8 小時一次，2020-01 → 2026-09）；日線結果延長至 2026-09。資料來源：幣安公開封存站 data.binance.vision。成本：每次換倉雙邊各 5 個基點。</div>
+
+<div class="build">版本 1.12.0 · 建置於 2026-10-23 18:45:10+0800</div>
+<a class="back bottom" href="index.html">← 回到策略列表</a>
+</div></div></body></html>

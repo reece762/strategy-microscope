@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>八門付費課程、33 條規則：沒有一條贏過「什麼都不做」 · 詳細資料</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--tx:#e6edf3;--tx2:#9aa7b4;--tx3:#6e7681;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+font:15px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK TC",sans-serif}
+.wrap{max-width:none;width:100%;margin:0;padding:28px clamp(20px,3vw,64px) 70px}
+.prose{max-width:1180px;margin:0 auto}
+.back{display:inline-block;color:var(--tx3);text-decoration:none;font-size:13px;margin-bottom:22px}
+.back:hover{color:var(--acc)}
+.back.bottom{margin:32px 0 0;display:block;border-top:1px solid var(--line);padding-top:18px}
+.tags{display:flex;gap:7px;align-items:center;margin-bottom:10px}
+.tag{font-size:11px;color:var(--tx3);border:1px solid var(--line);border-radius:5px;padding:2px 8px}
+.tag.vid{font-family:ui-monospace,monospace}
+.grade{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:800;
+font-size:12px;color:var(--gc);background:color-mix(in srgb,var(--gc) 15%,transparent);
+border:1px solid color-mix(in srgb,var(--gc) 45%,transparent)}
+h1{margin:0 0 12px;font-size:23px;line-height:1.45;letter-spacing:.2px}
+.lead{color:var(--tx2);margin:0 0 20px;font-size:14px}
+.vsrc{display:flex;align-items:center;gap:9px;background:#16202e;border:1px solid #26364d;
+border-radius:9px;padding:11px 14px;margin:0 0 20px;text-decoration:none;color:#c9d1d9;
+font-size:13.5px;transition:.15s}
+.vsrc:hover{border-color:var(--acc);color:#fff}
+.vsrc .vico{color:#f85149;font-size:11px}
+.vsrc .vcode{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--tx3)}
+.build{margin-top:22px;font-size:11px;color:var(--tx3);font-family:ui-monospace,monospace}
+.mini{margin:0 0 20px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.mini img{width:100%;display:block}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin-bottom:22px}
+.metric{text-align:center}
+.mv{font-size:17px;font-weight:700}
+.ml{font-size:11px;color:var(--tx3);margin-top:2px}
+.body p{margin:0 0 14px;font-size:14.2px;color:#c9d1d9}
+.body b{color:#fff;font-weight:600}
+.fig{margin:16px 0;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.fig img{width:100%;display:block}
+.verdict{margin-top:20px;background:#1a2230;border-left:3px solid var(--acc);
+padding:12px 14px;border-radius:0 7px 7px 0;font-size:13.5px;color:#c9d1d9}
+.verdict b{color:var(--acc)}
+.evid{margin-top:10px;font-size:12px;color:var(--tx3);line-height:1.7}
+
+.chartcard{background:#0d1219;border:1px solid var(--line);border-radius:11px;
+padding:16px 16px 14px;margin:0 0 24px}
+.chartctl{display:flex;justify-content:space-between;align-items:flex-end;
+gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.daterange{display:flex;align-items:flex-end;gap:9px}
+.daterange label{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--tx3)}
+.daterange input[type=date]{background:#161b22;border:1px solid var(--line);
+color:var(--tx);border-radius:6px;padding:6px 9px;font-size:13px;
+font-family:ui-monospace,monospace;color-scheme:dark}
+.daterange input[type=date]:focus{outline:none;border-color:var(--acc)}
+.dash{color:var(--tx3);padding-bottom:8px;font-size:12px}
+.quick{display:flex;gap:5px}
+.quick button{background:transparent;border:1px solid var(--line);color:var(--tx3);
+border-radius:6px;padding:5px 11px;font-size:12px;cursor:pointer;transition:.15s}
+.quick button:hover{color:var(--tx);border-color:#4a5568}
+.quick button.on{background:var(--acc);border-color:var(--acc);color:#0d1117;font-weight:600}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:8px;font-size:12px;color:#c9d1d9}
+.legend .lg{display:flex;align-items:center;gap:6px}
+.legend i,.tabwrap i{display:inline-block;width:10px;height:3px;border-radius:2px}
+.canvaswrap{position:relative}
+#chart{display:block;width:100%}
+.tip{position:absolute;display:none;background:#161b22;border:1px solid #30363d;
+border-radius:7px;padding:8px 11px;font-size:12px;color:#c9d1d9;pointer-events:none;
+z-index:5;box-shadow:0 6px 20px rgba(0,0,0,.5);line-height:1.65;white-space:nowrap}
+.tip b{color:#fff;font-size:11.5px;font-family:ui-monospace,monospace}
+.tip div{display:flex;align-items:center;gap:6px;margin-top:3px}
+.tip div i{width:9px;height:3px;border-radius:2px}
+.tip div span{margin-left:auto;padding-left:12px;font-family:ui-monospace,monospace;color:#fff}
+.tabwrap{margin-top:16px;overflow-x:auto}
+#stats{width:100%;border-collapse:collapse;font-size:12.5px}
+#stats th{text-align:right;color:var(--tx3);font-weight:500;font-size:11px;
+padding:7px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+#stats th:first-child{text-align:left}
+#stats td{text-align:right;padding:9px;border-bottom:1px solid #1c232c;
+font-family:ui-monospace,monospace;color:#c9d1d9;white-space:nowrap}
+#stats td:first-child{text-align:left;font-family:inherit}
+#stats td:first-child i{margin-right:7px;vertical-align:middle}
+#stats tr.hi td{background:#151d29;color:#fff;font-weight:600}
+#stats td.neg{color:#f0883e}
+.chartnote{margin-top:10px;font-size:11.5px;color:var(--tx3);line-height:1.7}
+.nochart{background:#0d1219;border:1px dashed var(--line);border-radius:10px;
+padding:26px;text-align:center;color:var(--tx3);font-size:13px;margin:0 0 24px}
+@media(max-width:760px){
+  .chartctl{flex-direction:column;align-items:stretch}
+  .daterange{flex-wrap:wrap}
+  .daterange input[type=date]{flex:1;min-width:0}
+  .quick{justify-content:flex-start}
+  #stats{font-size:11.5px}
+  #stats th,#stats td{padding:7px 5px}
+}
+
+.codecard{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+.codetoggle{display:inline-flex;align-items:center;gap:7px;background:#161b22;
+border:1px solid var(--line);color:var(--tx2);border-radius:8px;padding:9px 16px;
+font-size:13px;cursor:pointer;transition:.15s;font-family:inherit}
+.codetoggle:hover{color:#fff;border-color:var(--acc)}
+.codetoggle.open{color:var(--acc);border-color:var(--acc)}
+.codetoggle .caret{font-size:10px;display:inline-block;transition:transform .18s}
+.codetoggle.open .caret{transform:rotate(180deg)}
+.codewrap{margin-top:14px;border:1px solid var(--line);border-radius:9px;
+background:#0a0e14;overflow:hidden}
+.codeinfo{display:flex;align-items:flex-start;gap:12px;font-size:11.5px;color:#d29922;
+background:#141a22;border-bottom:1px solid var(--line);padding:9px 14px;
+font-family:ui-monospace,monospace;line-height:1.65}
+.codeinfo-txt{flex:1 1 auto;white-space:pre-wrap;min-width:0}
+.copybtn{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
+background:#1b232d;border:1px solid var(--line);color:var(--tx2);border-radius:6px;
+padding:5px 10px;font-size:11px;cursor:pointer;transition:.15s;font-family:inherit;
+margin:-2px -2px -2px 0}
+.copybtn:hover{color:#fff;border-color:var(--acc);background:#233040}
+.copybtn:active{transform:scale(.96)}
+.copybtn .ico-ok,.copybtn.ok .ico-copy{display:none}
+.copybtn.ok .ico-ok{display:inline-block}
+.copybtn.ok{color:#3fb950;border-color:#2d5c3a;background:#16261c}
+.copybtn .copytext{white-space:nowrap}
+.codewrap pre{margin:0;padding:14px 16px;overflow-x:auto;background:#0a0e14}
+.codewrap code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+font-size:12.2px;line-height:1.75;color:#c9d1d9;white-space:pre}
+.codefoot{font-size:11px;color:var(--tx3);padding:9px 14px;border-top:1px solid var(--line);
+background:#0d1219;line-height:1.7}
+@media(max-width:760px){
+  .codewrap code{font-size:11px}
+  .codetoggle{width:100%;justify-content:center}
+}
+</style></head>
+<body><div class="wrap"><div class="prose">
+<a class="back" href="index.html">← 回到策略列表</a>
+<div class="tags"><span class="tag">綜合檢驗</span>
+<span class="tag vid">1WpTDM8NM5g</span>
+<span class="tag author">邢不行</span>
+<span class="grade" style="--gc:#f85149">D</span></div>
+<h1>八門付費課程、33 條規則：沒有一條贏過「什麼都不做」</h1>
+<p class="lead">他公開了十門課的目錄（道氏與 123 法則、波浪、和諧形態、斐波那契與江恩、盤口訂單流、價格行為、威科夫、VCP 杯柄、周易、心法）。我把前八門裡<b>能寫成程式</b>的 33 條規則全部回測，結果是<b>沒有任何一條在扣掉手續費後，平均報酬能顯著大於零</b>；而且所有策略的風險調整後報酬（夏普，數值越高代表每單位波動換到的報酬越多）<b>全部低於同期單純買進持有比特幣</b>。</p>
+<a class="vsrc" href="https://youtu.be/1WpTDM8NM5g" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">1WpTDM8NM5g</span> ↗</a><a class="vsrc" href="https://youtu.be/2d9XlERn6kg" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">2d9XlERn6kg</span> ↗</a><a class="vsrc" href="https://youtu.be/6VY2qDzpNbk" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">6VY2qDzpNbk</span> ↗</a><a class="vsrc" href="https://youtu.be/7bTMSZT-eiQ" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">7bTMSZT-eiQ</span> ↗</a>
+<div class="nochart">這張卡片沒有淨值曲線：內容是規則可行性與資料來源的說明，並非策略回測。</div>
+<div class="metrics"><div class="metric"><div class="mv">33 條</div><div class="ml">檢驗規則數</div></div><div class="metric"><div class="mv">0 條</div><div class="ml">扣成本後顯著為正</div></div><div class="metric"><div class="mv">0 條</div><div class="ml">贏過買進持有</div></div></div>
+<div class="body"><p><b>先講方法，因為方法決定這個結論有多硬。</b> 擺動高低點一律用左右各 10 根 K 線的對稱窗定義，而且<b>延遲到事後第 10 根才確認</b>——不在還沒確認時就使用它。成本假設每次換倉雙邊各 5 個基點（萬分之五），另做 0／2／5／10 基點的敏感度。每一條事件策略都與同期的無條件報酬做 Welch 差檢定，並用 bootstrap 算 95% 信賴區間；33 項檢定再用 Benjamini-Hochberg 方法做多重檢定校正。</p><p><b>幾個代表性的結果。</b> 123 法則（跌破趨勢線→不再創新低→突破前高）樣本 66 次，扣成本後平均 <b>−0.18%</b>，勝率 39.4%。B 浪（反彈到 0.5~0.7 回撤）做空樣本 239 次，平均 <b>−0.57%</b>。和諧形態裡的蝙蝠（D 點在 XA 的 0.886）樣本只有 <b>8 次</b>——<b>這種樣本量不能當結論</b>，我在表上標成「樣本不足」而不是「有效」。</p><p><b>三個值得記住的細節。</b> 第一，<b>斐波那契回撤是「現象真、可交易性假」的典型</b>：價格觸及 0.5 或 0.618 之後，報酬確實顯著高於基準（t 值 4.1~4.2，通過多重校正），但改成「進場＋0.786 停損」去交易，八到九成的單子在到達目標前就被掃損，扣成本後平均仍為負。<b>現象存在，不等於能賺錢。</b></p><p>第二，<b>看漲插針在比特幣裡是偏空訊號</b>。他的價格行為課把插針當成「測試流動性後反轉」的買點，但 5,304 個看漲插針之後 10 根的平均報酬是 <b>−0.077%</b>（t=−2.81，信賴區間不含零）——<b>方向與課程相反</b>，而且統計上顯著。</p><p>第三，<b>威科夫課強調的「巨量確認」幫了倒忙</b>。衰竭 2B 形態加上「伴隨巨量」的條件後，表現比不加量<b>更差</b>（−0.18% 變成 −0.34%）。他課程裡反覆強調的那個濾網，在資料上是負貢獻。</p><p><b>還有一件我要自己認錯的事。</b> 我一開始做的「突破後回踩」測試，結論是「超額報酬約 +1.1 個百分點、邊緣顯著」。但補做正式的差檢定之後，<b>p 值是 0.45 與 0.50——完全不顯著</b>。我原先的說法過於樂觀，已更正。</p><p><b>資料限制也要講清楚。</b> 我手上沒有訂單簿與逐筆成交，所以「流動性真空」只能用3 根 K 線的跳空去代理，可信度低；POC（成交最密集價位）也只能用量加權近似；杯柄形態在無前視的嚴格定義下，日線只剩 <b>3 個</b>樣本，被迫降到 1 小時才有 41 個，統計力很弱。<b>這三類與其說是「測過了」，不如說是「測不乾淨」。</b></p></div>
+
+<div class="verdict"><b>判定</b>：不成立。33 條規則裡扣成本後顯著為正的有 0 條，風險調整後報酬全部低於單純持有比特幣。真正在資料裡站得住的只有「均值回歸」與「順勢動能」兩種底層效應，而且都被成本吃掉。</div>
+<div class="evid">依據：A 卷（第 1–4 類）與 B 卷（第 5–8 類）兩份獨立報告，腳本與資料在 workspace-coder/tia_backtest_A 與 _B，可一鍵重跑。買進持有基準：2020-2026 總報酬 +371%、1 小時淨夏普 0.90。</div>
+
+<div class="build">版本 1.12.0 · 建置於 2026-10-23 18:45:10+0800</div>
+<a class="back bottom" href="index.html">← 回到策略列表</a>
+</div></div></body></html>

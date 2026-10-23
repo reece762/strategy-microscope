@@ -23,13 +23,12 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.11.1'
-VERSION_NOTES = ('更正支撐阻力卡片的功勞歸屬與出處。那個 Brier／AUC 的自我否定'
-                 '不是 density-sr 作者寫的：整份程式來自 GPL-3.0 專案 '
-                 'rosemarycox5334-debug/Detect_support_and_resistance_levels（逐檔 md5 相同），'
-                 '被複製進 aiquant/engine/vendor/。另補授權風險（上游 GPL-3.0，但他的倉庫無 LICENSE 檔）'
-                 '與上游值得肯定的 leakage＋placebo 設計。'
-                 '上一版新增三張卡片並修正全站 lead／verdict／evidence 的 Markdown 轉換')
+VERSION = '1.12.0'
+VERSION_NOTES = ('新增 TiaBTC（提阿非羅大人）六張卡片：八門付費課程 33 條規則總檢、'
+                 '資金費率原則、CME 缺口、0.618 回撤（含我自己前視偏誤的更正）、'
+                 '「利好出盡」事件標籤錯置、風控（無法回測）。'
+                 '另修正：來源篩選原本寫死只有邢不行一個 chip，新作者的卡片有分類卻無法用來源篩選；'
+                 '現改為由實際卡片自動彙總（邢不行 28 / TiaBTC 6 / 阿尔法量化 3）')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -276,13 +275,21 @@ def main():
     n_cards = _cnt(r'<article class="card"')
     n_na = _cnt(r'data-grade="NA"')
     n_grade = {g: _cnt(rf'data-grade="{g}"') for g in 'ABCD'}
+    # 來源 chips 由實際卡片自動彙總——寫死單一作者時，新作者的卡片會分得到「新分類」，
+    # 卻無法用「來源」篩選，頁面看起來只認識舊來源。
+    _authors = {}
+    for _a in _re.findall(r'data-author="([^"]+)"', pages):
+        _authors[_a] = _authors.get(_a, 0) + 1
+    AUTHOR_CHIPS = '\n'.join(
+        f'  <div class="chip" data-facet="author" data-val="{_a}">{_a} ({_n})</div>'
+        for _a, _n in sorted(_authors.items(), key=lambda kv: (-kv[1], kv[0])))
     counts = {
         '__N_CARDS__': str(n_cards),
         '__N_RUN__': str(n_cards - n_na),
         '__N_PASS__': str(_cnt(r'data-grade="[AB]"')),
         '__N_FAIL__': str(_cnt(r'data-grade="[CD]"')),
         '__N_NA__': str(n_na),
-        '__C_AUTHOR__': str(_cnt(r'data-author="邢不行"')),
+        '__AUTHOR_CHIPS__': AUTHOR_CHIPS,
         '__C_US__': str(_cnt(r'data-market="us"')),
         '__C_CRYPTO__': str(_cnt(r'data-market="crypto"')),
     }
@@ -532,6 +539,14 @@ def build_cards(res, em, yr, CARDS_SERIES):
     except Exception as e:
         print(f'alpha_cards 載入失敗：{type(e).__name__}: {e}')
 
+    # 提阿非羅大人 TiaBTC：YouTube 頻道，49 支逐字稿 + 完整回測（六張）
+    # 這是目前唯一「聽過他本人怎麼說」再回測的一批，分析基礎比 alpha 那批厚。
+    try:
+        import tia_cards
+        _new = tia_cards.build() + _new
+    except Exception as e:
+        print(f'tia_cards 載入失敗：{type(e).__name__}: {e}')
+
     cards = _new + cards
 
     # ---- 排序：能回測的在前，不能回測的（NA）一律排到最後 ----
@@ -631,7 +646,9 @@ def detail_page(c, col, letter, mets, card, paras, imgs):
 
     tpl = DETAIL_TEMPLATE
     for k, v in [('__CSS__', DETAIL_CSS), ('__TITLE__', c['title']),
-                 ('__TOPIC__', c['topic']), ('__VIDEO__', c['video']),
+                 ('__TOPIC__', c['topic']),
+                 # 有些卡片只給 videos 清單、沒有單一 video 欄位（多支影片的主題）
+                 ('__VIDEO__', c.get('video') or c['videos'][0]),
                  ('__COLOR__', col), ('__LETTER__', letter),
                  ('__LEAD__', mb(c['lead'])), ('__VLINK__', vlink),
                  ('__CHART__', chart_html), ('__METRICS__', mets),
@@ -846,7 +863,7 @@ footer a:hover{color:var(--acc)}
 
 <div class="filters">
   <span class="flabel">來源</span>
-  <div class="chip" data-facet="author" data-val="邢不行">邢不行 (__C_AUTHOR__)</div>
+__AUTHOR_CHIPS__
   <span class="fsep"></span>
   <span class="flabel">市場</span>
   <div class="chip" data-facet="market" data-val="us">美股 (__C_US__)</div>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>他真正有價值的是風控，而風控沒辦法用回測證明 · 詳細資料</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--tx:#e6edf3;--tx2:#9aa7b4;--tx3:#6e7681;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+font:15px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK TC",sans-serif}
+.wrap{max-width:none;width:100%;margin:0;padding:28px clamp(20px,3vw,64px) 70px}
+.prose{max-width:1180px;margin:0 auto}
+.back{display:inline-block;color:var(--tx3);text-decoration:none;font-size:13px;margin-bottom:22px}
+.back:hover{color:var(--acc)}
+.back.bottom{margin:32px 0 0;display:block;border-top:1px solid var(--line);padding-top:18px}
+.tags{display:flex;gap:7px;align-items:center;margin-bottom:10px}
+.tag{font-size:11px;color:var(--tx3);border:1px solid var(--line);border-radius:5px;padding:2px 8px}
+.tag.vid{font-family:ui-monospace,monospace}
+.grade{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:800;
+font-size:12px;color:var(--gc);background:color-mix(in srgb,var(--gc) 15%,transparent);
+border:1px solid color-mix(in srgb,var(--gc) 45%,transparent)}
+h1{margin:0 0 12px;font-size:23px;line-height:1.45;letter-spacing:.2px}
+.lead{color:var(--tx2);margin:0 0 20px;font-size:14px}
+.vsrc{display:flex;align-items:center;gap:9px;background:#16202e;border:1px solid #26364d;
+border-radius:9px;padding:11px 14px;margin:0 0 20px;text-decoration:none;color:#c9d1d9;
+font-size:13.5px;transition:.15s}
+.vsrc:hover{border-color:var(--acc);color:#fff}
+.vsrc .vico{color:#f85149;font-size:11px}
+.vsrc .vcode{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--tx3)}
+.build{margin-top:22px;font-size:11px;color:var(--tx3);font-family:ui-monospace,monospace}
+.mini{margin:0 0 20px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.mini img{width:100%;display:block}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin-bottom:22px}
+.metric{text-align:center}
+.mv{font-size:17px;font-weight:700}
+.ml{font-size:11px;color:var(--tx3);margin-top:2px}
+.body p{margin:0 0 14px;font-size:14.2px;color:#c9d1d9}
+.body b{color:#fff;font-weight:600}
+.fig{margin:16px 0;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.fig img{width:100%;display:block}
+.verdict{margin-top:20px;background:#1a2230;border-left:3px solid var(--acc);
+padding:12px 14px;border-radius:0 7px 7px 0;font-size:13.5px;color:#c9d1d9}
+.verdict b{color:var(--acc)}
+.evid{margin-top:10px;font-size:12px;color:var(--tx3);line-height:1.7}
+
+.chartcard{background:#0d1219;border:1px solid var(--line);border-radius:11px;
+padding:16px 16px 14px;margin:0 0 24px}
+.chartctl{display:flex;justify-content:space-between;align-items:flex-end;
+gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.daterange{display:flex;align-items:flex-end;gap:9px}
+.daterange label{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--tx3)}
+.daterange input[type=date]{background:#161b22;border:1px solid var(--line);
+color:var(--tx);border-radius:6px;padding:6px 9px;font-size:13px;
+font-family:ui-monospace,monospace;color-scheme:dark}
+.daterange input[type=date]:focus{outline:none;border-color:var(--acc)}
+.dash{color:var(--tx3);padding-bottom:8px;font-size:12px}
+.quick{display:flex;gap:5px}
+.quick button{background:transparent;border:1px solid var(--line);color:var(--tx3);
+border-radius:6px;padding:5px 11px;font-size:12px;cursor:pointer;transition:.15s}
+.quick button:hover{color:var(--tx);border-color:#4a5568}
+.quick button.on{background:var(--acc);border-color:var(--acc);color:#0d1117;font-weight:600}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:8px;font-size:12px;color:#c9d1d9}
+.legend .lg{display:flex;align-items:center;gap:6px}
+.legend i,.tabwrap i{display:inline-block;width:10px;height:3px;border-radius:2px}
+.canvaswrap{position:relative}
+#chart{display:block;width:100%}
+.tip{position:absolute;display:none;background:#161b22;border:1px solid #30363d;
+border-radius:7px;padding:8px 11px;font-size:12px;color:#c9d1d9;pointer-events:none;
+z-index:5;box-shadow:0 6px 20px rgba(0,0,0,.5);line-height:1.65;white-space:nowrap}
+.tip b{color:#fff;font-size:11.5px;font-family:ui-monospace,monospace}
+.tip div{display:flex;align-items:center;gap:6px;margin-top:3px}
+.tip div i{width:9px;height:3px;border-radius:2px}
+.tip div span{margin-left:auto;padding-left:12px;font-family:ui-monospace,monospace;color:#fff}
+.tabwrap{margin-top:16px;overflow-x:auto}
+#stats{width:100%;border-collapse:collapse;font-size:12.5px}
+#stats th{text-align:right;color:var(--tx3);font-weight:500;font-size:11px;
+padding:7px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+#stats th:first-child{text-align:left}
+#stats td{text-align:right;padding:9px;border-bottom:1px solid #1c232c;
+font-family:ui-monospace,monospace;color:#c9d1d9;white-space:nowrap}
+#stats td:first-child{text-align:left;font-family:inherit}
+#stats td:first-child i{margin-right:7px;vertical-align:middle}
+#stats tr.hi td{background:#151d29;color:#fff;font-weight:600}
+#stats td.neg{color:#f0883e}
+.chartnote{margin-top:10px;font-size:11.5px;color:var(--tx3);line-height:1.7}
+.nochart{background:#0d1219;border:1px dashed var(--line);border-radius:10px;
+padding:26px;text-align:center;color:var(--tx3);font-size:13px;margin:0 0 24px}
+@media(max-width:760px){
+  .chartctl{flex-direction:column;align-items:stretch}
+  .daterange{flex-wrap:wrap}
+  .daterange input[type=date]{flex:1;min-width:0}
+  .quick{justify-content:flex-start}
+  #stats{font-size:11.5px}
+  #stats th,#stats td{padding:7px 5px}
+}
+
+.codecard{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+.codetoggle{display:inline-flex;align-items:center;gap:7px;background:#161b22;
+border:1px solid var(--line);color:var(--tx2);border-radius:8px;padding:9px 16px;
+font-size:13px;cursor:pointer;transition:.15s;font-family:inherit}
+.codetoggle:hover{color:#fff;border-color:var(--acc)}
+.codetoggle.open{color:var(--acc);border-color:var(--acc)}
+.codetoggle .caret{font-size:10px;display:inline-block;transition:transform .18s}
+.codetoggle.open .caret{transform:rotate(180deg)}
+.codewrap{margin-top:14px;border:1px solid var(--line);border-radius:9px;
+background:#0a0e14;overflow:hidden}
+.codeinfo{display:flex;align-items:flex-start;gap:12px;font-size:11.5px;color:#d29922;
+background:#141a22;border-bottom:1px solid var(--line);padding:9px 14px;
+font-family:ui-monospace,monospace;line-height:1.65}
+.codeinfo-txt{flex:1 1 auto;white-space:pre-wrap;min-width:0}
+.copybtn{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
+background:#1b232d;border:1px solid var(--line);color:var(--tx2);border-radius:6px;
+padding:5px 10px;font-size:11px;cursor:pointer;transition:.15s;font-family:inherit;
+margin:-2px -2px -2px 0}
+.copybtn:hover{color:#fff;border-color:var(--acc);background:#233040}
+.copybtn:active{transform:scale(.96)}
+.copybtn .ico-ok,.copybtn.ok .ico-copy{display:none}
+.copybtn.ok .ico-ok{display:inline-block}
+.copybtn.ok{color:#3fb950;border-color:#2d5c3a;background:#16261c}
+.copybtn .copytext{white-space:nowrap}
+.codewrap pre{margin:0;padding:14px 16px;overflow-x:auto;background:#0a0e14}
+.codewrap code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+font-size:12.2px;line-height:1.75;color:#c9d1d9;white-space:pre}
+.codefoot{font-size:11px;color:var(--tx3);padding:9px 14px;border-top:1px solid var(--line);
+background:#0d1219;line-height:1.7}
+@media(max-width:760px){
+  .codewrap code{font-size:11px}
+  .codetoggle{width:100%;justify-content:center}
+}
+</style></head>
+<body><div class="wrap"><div class="prose">
+<a class="back" href="index.html">← 回到策略列表</a>
+<div class="tags"><span class="tag">風險管理</span>
+<span class="tag vid">HRmnIGT2How</span>
+<span class="tag author">邢不行</span>
+<span class="grade" style="--gc:#6e7681">—</span></div>
+<h1>他真正有價值的是風控，而風控沒辦法用回測證明</h1>
+<p class="lead">我把他的入門課程 001《計劃你的交易》與 002《風險優先》完整逐字稿讀完，再加上 10 支風控影片。<b>這一塊的內容密度與品質，遠高於他的型態招式</b>，而且與正規交易教育一致。但它決定的是「你會不會活下來」，<b>不是報酬，所以測不出夏普，也無法回測</b>。</p>
+<a class="vsrc" href="https://youtu.be/HRmnIGT2How" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">HRmnIGT2How</span> ↗</a><a class="vsrc" href="https://youtu.be/MQTh3UxCPmA" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">MQTh3UxCPmA</span> ↗</a><a class="vsrc" href="https://youtu.be/0PK_XiE1y94" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">0PK_XiE1y94</span> ↗</a>
+<div class="nochart">這支策略無法誠實回測，因此沒有績效曲線；原因見下方說明。</div>
+<div class="metrics"><div class="metric"><div class="mv">總資金 1%</div><div class="ml">單筆風險上限</div></div><div class="metric"><div class="mv">0.1% ~ 0.5%</div><div class="ml">新手建議</div></div><div class="metric"><div class="mv">1.5:1 ~ 3:1</div><div class="ml">盈虧比目標</div></div></div>
+<div class="body"><p><b>為什麼這張卡沒有評級。</b> 評級看的是證據強度，而風控規則的效果是「讓你活得久」，不是「讓你賺得多」。用報酬去衡量風控，就像用體重去衡量血壓——量錯了東西。所以標成「無法回測」，不給 A~D。</p><p><b>他的六要素交易計畫</b>（課程 001 原話，逐條）：① 何時入場 ② 止損 ③ 止盈 ④ 頭寸規模 ⑤ 槓桿倍數 ⑥ 開倉理由。他特別強調第 ⑥ 項要固定：「開倉理由一定要固定下來」，並說「我本人以後永遠只做一種交易，就是趨勢線突破 123 法則」。他舉的反面例子很具體：「交易理由是某個博主說了」——那是最糟的理由。</p><p><b>風險優先的核心論述</b>（課程 002）：他引《幽靈的禮物》的「交易是失敗者的遊戲，最善於輸的人最終會贏」。具體推論是：開倉前<b>只算會虧多少，不算會賺多少</b>；把資金切成很多小份，每次虧損只是一個「學費」；並用拋硬幣的比喻說明大數法則——勝率 50%、盈虧比 2:1 就能穩定盈利，<b>前提是你有足夠多次的機會</b>，所以不能一次定生死。</p><p><b>可操作的規則（這幾條是乾貨）：</b> ① <b>單筆風險 ≤ 總資金 1%</b>，新手 0.5% 甚至 0.1%；② <b>用止損金額反推倉位</b>，不要用「我要下多少倉」去想；③ <b>倉位必須一致</b>，不可忽大忽小——他講「先大後小是屢戰屢敗，先小後大是一次大虧吃掉前面一百次小賺」；④ <b>開倉前必須設好止盈止損</b>，否則不開單，並且明確反對「精神止損」（心裡想著到某個價位要砍，實際不掛單）；⑤ <b>不用全倉、不用重倉</b>，他自己也不用全倉。</p><p><b>一個很少見的做法：他公開自己的止損單。</b> 有一支影片專門示範一筆虧 200~300 美元的失敗交易，反覆強調「開倉理由是對的、止損也是對的」。對照他的說法——「如果有人告訴你他是交易大師、從來不止損，那你可能上當了」——<b>這種一致性比他的任何勝率宣稱都更值得參考。</b></p><p><b>但這裡有個必須說的矛盾。</b> 他的收入來自兩塊：交易所推薦返佣、以及用「交易量」兌換會員（30 天交易量 ≥1 BTC 是「山門」、≥5 BTC 是「內殿」、≥10 BTC 是「藏經」）。<b>這兩塊都與「觀眾交易得越多、越頻繁」正相關</b>，但他嘴上又常說「不要做太頻繁的交易」。<b>利益衝突是結構性的，看內容時要放在心上。</b></p><p><b>我的判讀。</b> 如果把他的內容分成兩半：型態與指標那一半（123 法則、波浪、和諧、0.618、缺口、威科夫）在資料上幾乎全數失效；<b>風控與紀律那一半，則與正規教育一致且內容紮實</b>。他能在社群裡長期立得住，可信度來自後者（包含公開承認虧損），而不是前者。<b>這也是我對整份分析的最終結論：他值得學的是「怎麼不死」，不是「怎麼抓進場點」。</b></p></div>
+
+<div class="verdict"><b>判定</b>：無法回測。風控決定生存與回撤，不決定報酬。但這是整份分析裡唯一與正規教育一致、且內容紮實的部分。</div>
+<div class="evid">依據：逐字稿：課程 001《計劃你的交易》(HRmnIGT2How)、002《風險優先》(MQTh3UxCPmA)全文，加上 10 支風控影片與 12 支熊市影片。其中 2 支（ASYiJoohO8w、eKjsd_VJI-s）抓到損壞的自動翻譯軌，內容不可用，已排除。</div>
+
+<div class="build">版本 1.12.0 · 建置於 2026-10-23 18:45:10+0800</div>
+<a class="back bottom" href="index.html">← 回到策略列表</a>
+</div></div></body></html>
