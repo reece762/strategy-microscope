@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>江恩九方圖算出的價位，跟它旁邊隨便一個數字一樣有效 · 詳細資料</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--tx:#e6edf3;--tx2:#9aa7b4;--tx3:#6e7681;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+font:15px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK TC",sans-serif}
+.wrap{max-width:none;width:100%;margin:0;padding:28px clamp(20px,3vw,64px) 70px}
+.prose{max-width:1180px;margin:0 auto}
+.back{display:inline-block;color:var(--tx3);text-decoration:none;font-size:13px;margin-bottom:22px}
+.back:hover{color:var(--acc)}
+.back.bottom{margin:32px 0 0;display:block;border-top:1px solid var(--line);padding-top:18px}
+.tags{display:flex;gap:7px;align-items:center;margin-bottom:10px}
+.tag{font-size:11px;color:var(--tx3);border:1px solid var(--line);border-radius:5px;padding:2px 8px}
+.tag.vid{font-family:ui-monospace,monospace}
+.grade{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:800;
+font-size:12px;color:var(--gc);background:color-mix(in srgb,var(--gc) 15%,transparent);
+border:1px solid color-mix(in srgb,var(--gc) 45%,transparent)}
+h1{margin:0 0 12px;font-size:23px;line-height:1.45;letter-spacing:.2px}
+.lead{color:var(--tx2);margin:0 0 20px;font-size:14px}
+.vsrc{display:flex;align-items:center;gap:9px;background:#16202e;border:1px solid #26364d;
+border-radius:9px;padding:11px 14px;margin:0 0 20px;text-decoration:none;color:#c9d1d9;
+font-size:13.5px;transition:.15s}
+.vsrc:hover{border-color:var(--acc);color:#fff}
+.vsrc .vico{color:#f85149;font-size:11px}
+.vsrc .vcode{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--tx3)}
+.build{margin-top:22px;font-size:11px;color:var(--tx3);font-family:ui-monospace,monospace}
+.mini{margin:0 0 20px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.mini img{width:100%;display:block}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin-bottom:22px}
+.metric{text-align:center}
+.mv{font-size:17px;font-weight:700}
+.ml{font-size:11px;color:var(--tx3);margin-top:2px}
+.body p{margin:0 0 14px;font-size:14.2px;color:#c9d1d9}
+.body b{color:#fff;font-weight:600}
+.fig{margin:16px 0;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.fig img{width:100%;display:block}
+.verdict{margin-top:20px;background:#1a2230;border-left:3px solid var(--acc);
+padding:12px 14px;border-radius:0 7px 7px 0;font-size:13.5px;color:#c9d1d9}
+.verdict b{color:var(--acc)}
+.evid{margin-top:10px;font-size:12px;color:var(--tx3);line-height:1.7}
+
+.chartcard{background:#0d1219;border:1px solid var(--line);border-radius:11px;
+padding:16px 16px 14px;margin:0 0 24px}
+.chartctl{display:flex;justify-content:space-between;align-items:flex-end;
+gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.daterange{display:flex;align-items:flex-end;gap:9px}
+.daterange label{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--tx3)}
+.daterange input[type=date]{background:#161b22;border:1px solid var(--line);
+color:var(--tx);border-radius:6px;padding:6px 9px;font-size:13px;
+font-family:ui-monospace,monospace;color-scheme:dark}
+.daterange input[type=date]:focus{outline:none;border-color:var(--acc)}
+.dash{color:var(--tx3);padding-bottom:8px;font-size:12px}
+.quick{display:flex;gap:5px}
+.quick button{background:transparent;border:1px solid var(--line);color:var(--tx3);
+border-radius:6px;padding:5px 11px;font-size:12px;cursor:pointer;transition:.15s}
+.quick button:hover{color:var(--tx);border-color:#4a5568}
+.quick button.on{background:var(--acc);border-color:var(--acc);color:#0d1117;font-weight:600}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:8px;font-size:12px;color:#c9d1d9}
+.legend .lg{display:flex;align-items:center;gap:6px}
+.legend i,.tabwrap i{display:inline-block;width:10px;height:3px;border-radius:2px}
+.canvaswrap{position:relative}
+#chart{display:block;width:100%}
+.tip{position:absolute;display:none;background:#161b22;border:1px solid #30363d;
+border-radius:7px;padding:8px 11px;font-size:12px;color:#c9d1d9;pointer-events:none;
+z-index:5;box-shadow:0 6px 20px rgba(0,0,0,.5);line-height:1.65;white-space:nowrap}
+.tip b{color:#fff;font-size:11.5px;font-family:ui-monospace,monospace}
+.tip div{display:flex;align-items:center;gap:6px;margin-top:3px}
+.tip div i{width:9px;height:3px;border-radius:2px}
+.tip div span{margin-left:auto;padding-left:12px;font-family:ui-monospace,monospace;color:#fff}
+.tabwrap{margin-top:16px;overflow-x:auto}
+#stats{width:100%;border-collapse:collapse;font-size:12.5px}
+#stats th{text-align:right;color:var(--tx3);font-weight:500;font-size:11px;
+padding:7px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+#stats th:first-child{text-align:left}
+#stats td{text-align:right;padding:9px;border-bottom:1px solid #1c232c;
+font-family:ui-monospace,monospace;color:#c9d1d9;white-space:nowrap}
+#stats td:first-child{text-align:left;font-family:inherit}
+#stats td:first-child i{margin-right:7px;vertical-align:middle}
+#stats tr.hi td{background:#151d29;color:#fff;font-weight:600}
+#stats td.neg{color:#f0883e}
+.chartnote{margin-top:10px;font-size:11.5px;color:var(--tx3);line-height:1.7}
+.nochart{background:#0d1219;border:1px dashed var(--line);border-radius:10px;
+padding:26px;text-align:center;color:var(--tx3);font-size:13px;margin:0 0 24px}
+@media(max-width:760px){
+  .chartctl{flex-direction:column;align-items:stretch}
+  .daterange{flex-wrap:wrap}
+  .daterange input[type=date]{flex:1;min-width:0}
+  .quick{justify-content:flex-start}
+  #stats{font-size:11.5px}
+  #stats th,#stats td{padding:7px 5px}
+}
+
+.codecard{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+.codetoggle{display:inline-flex;align-items:center;gap:7px;background:#161b22;
+border:1px solid var(--line);color:var(--tx2);border-radius:8px;padding:9px 16px;
+font-size:13px;cursor:pointer;transition:.15s;font-family:inherit}
+.codetoggle:hover{color:#fff;border-color:var(--acc)}
+.codetoggle.open{color:var(--acc);border-color:var(--acc)}
+.codetoggle .caret{font-size:10px;display:inline-block;transition:transform .18s}
+.codetoggle.open .caret{transform:rotate(180deg)}
+.codewrap{margin-top:14px;border:1px solid var(--line);border-radius:9px;
+background:#0a0e14;overflow:hidden}
+.codeinfo{display:flex;align-items:flex-start;gap:12px;font-size:11.5px;color:#d29922;
+background:#141a22;border-bottom:1px solid var(--line);padding:9px 14px;
+font-family:ui-monospace,monospace;line-height:1.65}
+.codeinfo-txt{flex:1 1 auto;white-space:pre-wrap;min-width:0}
+.copybtn{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
+background:#1b232d;border:1px solid var(--line);color:var(--tx2);border-radius:6px;
+padding:5px 10px;font-size:11px;cursor:pointer;transition:.15s;font-family:inherit;
+margin:-2px -2px -2px 0}
+.copybtn:hover{color:#fff;border-color:var(--acc);background:#233040}
+.copybtn:active{transform:scale(.96)}
+.copybtn .ico-ok,.copybtn.ok .ico-copy{display:none}
+.copybtn.ok .ico-ok{display:inline-block}
+.copybtn.ok{color:#3fb950;border-color:#2d5c3a;background:#16261c}
+.copybtn .copytext{white-space:nowrap}
+.codewrap pre{margin:0;padding:14px 16px;overflow-x:auto;background:#0a0e14}
+.codewrap code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+font-size:12.2px;line-height:1.75;color:#c9d1d9;white-space:pre}
+.codefoot{font-size:11px;color:var(--tx3);padding:9px 14px;border-top:1px solid var(--line);
+background:#0d1219;line-height:1.7}
+@media(max-width:760px){
+  .codewrap code{font-size:11px}
+  .codetoggle{width:100%;justify-content:center}
+}
+</style></head>
+<body><div class="wrap"><div class="prose">
+<a class="back" href="index.html">← 回到策略列表</a>
+<div class="tags"><span class="tag">江恩</span>
+<span class="tag vid">UnIevHKurL4</span>
+<span class="tag author">邢不行</span>
+<span class="grade" style="--gc:#f85149">D</span></div>
+<h1>江恩九方圖算出的價位，跟它旁邊隨便一個數字一樣有效</h1>
+<p class="lead">九方圖是把數字排成螺旋（1 為中心、順時針往外），再用開平方加減 2 之類的規則，推算「下一個支撐或阻力價位」。他用了兩支影片、近 50 分鐘講原理與用法。我把這些算出來的價位，跟<b>同距離但隨機抖動 2% 的鄰近價位</b>做對照——<b>兩者的觸及率與反轉報酬，統計上分不出差別。</b></p>
+<a class="vsrc" href="https://youtu.be/UnIevHKurL4" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">UnIevHKurL4</span> ↗</a><a class="vsrc" href="https://youtu.be/JdMD75gv9gg" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">JdMD75gv9gg</span> ↗</a><a class="vsrc" href="https://youtu.be/IweI4y99FaM" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">IweI4y99FaM</span> ↗</a>
+<div class="nochart">這張卡片沒有淨值曲線：內容是規則可行性與資料來源的說明，並非策略回測。</div>
+<div class="metrics"><div class="metric"><div class="mv">35.7%</div><div class="ml">九方圖價位 觸及率</div></div><div class="metric"><div class="mv">35.6%</div><div class="ml">鄰近價位 觸及率</div></div><div class="metric"><div class="mv">+0.12 個百分點</div><div class="ml">兩者差距</div></div></div>
+<div class="body"><p><b>先講九方圖怎麼運作，因為它的規則其實很明確、可以完全程式化。</b> 數字從中心 1 開始順時針往外螺旋排列，第一圈結束在 9、第二圈 10–25、第三圈 26–49。換算價位的規則（他影片裡示範的）：把價格開根號、加減 0.5 代表轉四分之一圈、加減 1 代表半圈、加減 2 代表整圈，再平方回去。例如 54 的平方根是 7.349，減 2 再平方得 28.7（約 29），那就是「往下的下一圈」。<b>這套規則沒有模糊空間，我完全照他講的實作。</b></p><p><b>測試方法。</b> 我用左右各 10 根 K 線的對稱窗找出擺動高低點，並且<b>延遲 10 根才確認</b>（避免用到當時還不知道的資訊）。從每一個確認過的擺動點出發，用九方圖算出往下（或往上）的 10 個目標價位，然後看未來 60 根 K 線內價格有沒有走到那裡（容忍 0.2%）。</p><p><b>關鍵是對照組。</b> 光算「觸及率」沒有意義——任何一個位於現價下方 5% 的數字，在 60 天內都會被觸及。所以我用了嚴格得多的對照：<b>把同一個距離隨機抖動 ±2% 後的鄰近價位</b>。如果九方圖那個「特定數字」真的有意義，它應該明顯優於它旁邊的數字。</p><p><b>結果（SPY，526 個價位）：九方圖價位觸及率 35.74%，鄰近價位 35.62%，只差 0.12 個百分點。</b> QQQ 差 0.03、IWM 差 0.13。三個標的、超過 1,500 個價位，差距全部落在雜訊範圍內。</p><p><b>再測一層：觸及之後會不會反轉。</b> 支撐阻力的真正主張不是「價格會碰到」，而是「碰到之後會彈開」。所以我再算觸及後 20 根的報酬（支撐＝預期反彈、阻力＝預期回落）：SPY +0.088% 對照組 +0.084%（t=0.01）；QQQ +0.351% 對照 −0.373%（t=−0.03）；IWM −0.584% 對照 −0.601%（t=0.02）。<b>t 值全部接近零，意思是「九方圖的數字」與「它旁邊隨便一個數字」沒有可辨識的差別。</b></p><p><b>我要說明這個測試能證明什麼、不能證明什麼。</b> 能證明的是：<b>九方圖挑出來的價位，不比同距離的任意價位更容易被觸及、更容易反轉。</b> 不能證明的是：他在影片裡示範的那些案例（Google 從 150 跌到 128、105、87；特斯拉 410 換算成 41 再往下降）是假的——那些案例我沒有逐筆核對，而且<b>在看不出差別的價位裡挑出幾個剛好命中的，本來就很容易</b>。他自己在影片中示範時也說「相差兩個點、相差不是特別大」，這種容許誤差在統計上等於沒有預測力。</p><p><b>還有一個方法上的問題。</b> 他示範時是<b>先看歷史走勢、再畫九方圖</b>（「我們先看谷歌最高點產生於 2021 年 11 月 19 日、大概 150 點，那我們就以 150 點做圖」）。先知道轉折點在哪裡、再回推價位，任何一套數字系統都可以找到「吻合」的解釋。<b>我的測試是在事前算價位、事後看有沒有走到，條件嚴格得多。</b></p></div>
+
+<div class="verdict"><b>判定</b>：不成立。三個標的、超過 1,500 個價位，九方圖價位與同距離隨機鄰近價位的觸及率差 0.03–0.13 個百分點，反轉報酬的 t 值全部接近零。這套規則可以完全程式化，但程式化之後就看不出任何優勢。</div>
+<div class="evid">依據：SPY/QQQ/IWM 日線 2016-10 → 2026-10。擺動點左右各 10 根對稱窗、延遲 10 根確認。價位＝開平方加減 0.5/1/1.5/2/3/4/5/6/8/10 後平方（1/4 圈至 5 圈）。對照組＝同距離抖動 ±2%、每個價位抽 25–40 次。腳本：laolu/analyze.py、analyze2.py。</div>
+
+<div class="build">版本 1.13.0 · 建置於 2026-10-23 19:20:23+0800</div>
+<a class="back bottom" href="index.html">← 回到策略列表</a>
+</div></div></body></html>

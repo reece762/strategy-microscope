@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>蝶式期權「90% 勝率」：這次他講對了，但代價寫得很小 · 詳細資料</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--tx:#e6edf3;--tx2:#9aa7b4;--tx3:#6e7681;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+font:15px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK TC",sans-serif}
+.wrap{max-width:none;width:100%;margin:0;padding:28px clamp(20px,3vw,64px) 70px}
+.prose{max-width:1180px;margin:0 auto}
+.back{display:inline-block;color:var(--tx3);text-decoration:none;font-size:13px;margin-bottom:22px}
+.back:hover{color:var(--acc)}
+.back.bottom{margin:32px 0 0;display:block;border-top:1px solid var(--line);padding-top:18px}
+.tags{display:flex;gap:7px;align-items:center;margin-bottom:10px}
+.tag{font-size:11px;color:var(--tx3);border:1px solid var(--line);border-radius:5px;padding:2px 8px}
+.tag.vid{font-family:ui-monospace,monospace}
+.grade{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:800;
+font-size:12px;color:var(--gc);background:color-mix(in srgb,var(--gc) 15%,transparent);
+border:1px solid color-mix(in srgb,var(--gc) 45%,transparent)}
+h1{margin:0 0 12px;font-size:23px;line-height:1.45;letter-spacing:.2px}
+.lead{color:var(--tx2);margin:0 0 20px;font-size:14px}
+.vsrc{display:flex;align-items:center;gap:9px;background:#16202e;border:1px solid #26364d;
+border-radius:9px;padding:11px 14px;margin:0 0 20px;text-decoration:none;color:#c9d1d9;
+font-size:13.5px;transition:.15s}
+.vsrc:hover{border-color:var(--acc);color:#fff}
+.vsrc .vico{color:#f85149;font-size:11px}
+.vsrc .vcode{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--tx3)}
+.build{margin-top:22px;font-size:11px;color:var(--tx3);font-family:ui-monospace,monospace}
+.mini{margin:0 0 20px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.mini img{width:100%;display:block}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin-bottom:22px}
+.metric{text-align:center}
+.mv{font-size:17px;font-weight:700}
+.ml{font-size:11px;color:var(--tx3);margin-top:2px}
+.body p{margin:0 0 14px;font-size:14.2px;color:#c9d1d9}
+.body b{color:#fff;font-weight:600}
+.fig{margin:16px 0;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.fig img{width:100%;display:block}
+.verdict{margin-top:20px;background:#1a2230;border-left:3px solid var(--acc);
+padding:12px 14px;border-radius:0 7px 7px 0;font-size:13.5px;color:#c9d1d9}
+.verdict b{color:var(--acc)}
+.evid{margin-top:10px;font-size:12px;color:var(--tx3);line-height:1.7}
+
+.chartcard{background:#0d1219;border:1px solid var(--line);border-radius:11px;
+padding:16px 16px 14px;margin:0 0 24px}
+.chartctl{display:flex;justify-content:space-between;align-items:flex-end;
+gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.daterange{display:flex;align-items:flex-end;gap:9px}
+.daterange label{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--tx3)}
+.daterange input[type=date]{background:#161b22;border:1px solid var(--line);
+color:var(--tx);border-radius:6px;padding:6px 9px;font-size:13px;
+font-family:ui-monospace,monospace;color-scheme:dark}
+.daterange input[type=date]:focus{outline:none;border-color:var(--acc)}
+.dash{color:var(--tx3);padding-bottom:8px;font-size:12px}
+.quick{display:flex;gap:5px}
+.quick button{background:transparent;border:1px solid var(--line);color:var(--tx3);
+border-radius:6px;padding:5px 11px;font-size:12px;cursor:pointer;transition:.15s}
+.quick button:hover{color:var(--tx);border-color:#4a5568}
+.quick button.on{background:var(--acc);border-color:var(--acc);color:#0d1117;font-weight:600}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:8px;font-size:12px;color:#c9d1d9}
+.legend .lg{display:flex;align-items:center;gap:6px}
+.legend i,.tabwrap i{display:inline-block;width:10px;height:3px;border-radius:2px}
+.canvaswrap{position:relative}
+#chart{display:block;width:100%}
+.tip{position:absolute;display:none;background:#161b22;border:1px solid #30363d;
+border-radius:7px;padding:8px 11px;font-size:12px;color:#c9d1d9;pointer-events:none;
+z-index:5;box-shadow:0 6px 20px rgba(0,0,0,.5);line-height:1.65;white-space:nowrap}
+.tip b{color:#fff;font-size:11.5px;font-family:ui-monospace,monospace}
+.tip div{display:flex;align-items:center;gap:6px;margin-top:3px}
+.tip div i{width:9px;height:3px;border-radius:2px}
+.tip div span{margin-left:auto;padding-left:12px;font-family:ui-monospace,monospace;color:#fff}
+.tabwrap{margin-top:16px;overflow-x:auto}
+#stats{width:100%;border-collapse:collapse;font-size:12.5px}
+#stats th{text-align:right;color:var(--tx3);font-weight:500;font-size:11px;
+padding:7px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+#stats th:first-child{text-align:left}
+#stats td{text-align:right;padding:9px;border-bottom:1px solid #1c232c;
+font-family:ui-monospace,monospace;color:#c9d1d9;white-space:nowrap}
+#stats td:first-child{text-align:left;font-family:inherit}
+#stats td:first-child i{margin-right:7px;vertical-align:middle}
+#stats tr.hi td{background:#151d29;color:#fff;font-weight:600}
+#stats td.neg{color:#f0883e}
+.chartnote{margin-top:10px;font-size:11.5px;color:var(--tx3);line-height:1.7}
+.nochart{background:#0d1219;border:1px dashed var(--line);border-radius:10px;
+padding:26px;text-align:center;color:var(--tx3);font-size:13px;margin:0 0 24px}
+@media(max-width:760px){
+  .chartctl{flex-direction:column;align-items:stretch}
+  .daterange{flex-wrap:wrap}
+  .daterange input[type=date]{flex:1;min-width:0}
+  .quick{justify-content:flex-start}
+  #stats{font-size:11.5px}
+  #stats th,#stats td{padding:7px 5px}
+}
+
+.codecard{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+.codetoggle{display:inline-flex;align-items:center;gap:7px;background:#161b22;
+border:1px solid var(--line);color:var(--tx2);border-radius:8px;padding:9px 16px;
+font-size:13px;cursor:pointer;transition:.15s;font-family:inherit}
+.codetoggle:hover{color:#fff;border-color:var(--acc)}
+.codetoggle.open{color:var(--acc);border-color:var(--acc)}
+.codetoggle .caret{font-size:10px;display:inline-block;transition:transform .18s}
+.codetoggle.open .caret{transform:rotate(180deg)}
+.codewrap{margin-top:14px;border:1px solid var(--line);border-radius:9px;
+background:#0a0e14;overflow:hidden}
+.codeinfo{display:flex;align-items:flex-start;gap:12px;font-size:11.5px;color:#d29922;
+background:#141a22;border-bottom:1px solid var(--line);padding:9px 14px;
+font-family:ui-monospace,monospace;line-height:1.65}
+.codeinfo-txt{flex:1 1 auto;white-space:pre-wrap;min-width:0}
+.copybtn{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
+background:#1b232d;border:1px solid var(--line);color:var(--tx2);border-radius:6px;
+padding:5px 10px;font-size:11px;cursor:pointer;transition:.15s;font-family:inherit;
+margin:-2px -2px -2px 0}
+.copybtn:hover{color:#fff;border-color:var(--acc);background:#233040}
+.copybtn:active{transform:scale(.96)}
+.copybtn .ico-ok,.copybtn.ok .ico-copy{display:none}
+.copybtn.ok .ico-ok{display:inline-block}
+.copybtn.ok{color:#3fb950;border-color:#2d5c3a;background:#16261c}
+.copybtn .copytext{white-space:nowrap}
+.codewrap pre{margin:0;padding:14px 16px;overflow-x:auto;background:#0a0e14}
+.codewrap code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+font-size:12.2px;line-height:1.75;color:#c9d1d9;white-space:pre}
+.codefoot{font-size:11px;color:var(--tx3);padding:9px 14px;border-top:1px solid var(--line);
+background:#0d1219;line-height:1.7}
+@media(max-width:760px){
+  .codewrap code{font-size:11px}
+  .codetoggle{width:100%;justify-content:center}
+}
+</style></head>
+<body><div class="wrap"><div class="prose">
+<a class="back" href="index.html">← 回到策略列表</a>
+<div class="tags"><span class="tag">期權</span>
+<span class="tag vid">Hyk40GsOFjM</span>
+<span class="tag author">邢不行</span>
+<span class="grade" style="--gc:#58a6ff">B</span></div>
+<h1>蝶式期權「90% 勝率」：這次他講對了，但代價寫得很小</h1>
+<p class="lead">他花一半篇幅講多頭蝶式（四條腿的價差組合），然後說：<b>做多頭的勝率等於買彩票，但反過來做成空頭，機率就站在我們這邊。</b> 我用他影片裡自己報的價格，配上過去 10 年 SPY 的 15 日報酬分布實際算過——<b>這句話基本上正確</b>。但「勝率 90%」的代價，他只用一句「虧損 500、獲利 500」帶過。</p>
+<a class="vsrc" href="https://youtu.be/Hyk40GsOFjM" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">Hyk40GsOFjM</span> ↗</a>
+<div class="nochart">這張卡片沒有淨值曲線：內容是規則可行性與資料來源的說明，並非策略回測。</div>
+<div class="metrics"><div class="metric"><div class="mv">24.0%</div><div class="ml">多頭蝶式 勝率</div></div><div class="metric"><div class="mv">−50.4%（佔成本）</div><div class="ml">多頭蝶式 平均報酬</div></div><div class="metric"><div class="mv">76.0%</div><div class="ml">空頭蝶式 勝率</div></div></div>
+<div class="body"><p><b>先把名詞講清楚。</b> 蝶式期權是四條腿的組合：買一張低履約價的看漲期權、賣兩張中間履約價的看漲期權、再買一張高履約價的看漲期權，三個履約價等距。到期時股價<b>剛好停在中間那個價位</b>，獲利最大；離得越遠，獲利越少，最差就是賠掉整筆權利金。因為損益圖兩邊尖、中間平，像蝴蝶，所以叫這個名字。</p><p><b>他的例子（SPY，425 為中心，15 天到期）。</b> 買 414 的看漲、賣兩張 425 的看漲、買 436 的看漲。成本算法是 12.4 + 0.29 − 3.27×2 = <b>6.15 美元／股</b>，一張合約 100 股，所以要付 <b>615 美元</b>。這是多頭蝶式。</p><p><b>他對多頭蝶式的判斷完全正確。</b> 我用 2016-10 到 2026-10 的 SPY 日線，把每一段 15 個交易日的報酬都縮放到「中心價 425」計算損益：<b>勝率只有 24.0%</b>，平均每次 <b>−3.10 美元／股（−50.4% 的成本）</b>。最賺的一次 +4.84、最賠的一次 −6.15。這確實非常接近買彩票——他自己在影片裡就說「這種概率相當於買彩票，中獎的可能性微乎其微」。</p><p><b>然後他把策略反過來，做成空頭蝶式。</b> 空頭蝶式就是把上面每一條腿的方向全部顛倒：收到 615 美元的權利金，只要到期時股價<b>不在</b>那個窄帶裡就賺錢。同一組資料算出來：<b>勝率 76.0%，平均 +3.10 美元／股（+50.4% 的權利金）</b>。<b>勝率與期望值兩個方向都對，這一點我必須說他講得準。</b></p><p><b>但為什麼會這樣？這個原因比策略本身重要。</b> 我算出這組價差的「合理價值」只有 <b>3.05 美元</b>，而市場賣 <b>6.15 美元</b>——<b>貴了一倍</b>。這個差距不是他發現的定價錯誤，而是<b>隱含波動率長期高於實際波動率</b>（學名叫波動率風險溢酬）：市場願意為「買保險」多付錢，所以賣保險的人長期有優勢。<b>這是結構性的，不是他的技巧。</b>換句話說，任何人賣任何一種價差，只要撐得夠久，大致都會收到這份溢酬。</p><p><b>他沒講清楚的三件事。</b> 第一，<b>成本</b>：四條腿、每條腿都有買賣價差，AMC 那種高波動股票的價差可以拉到歷史最大，這會吃掉相當一部分溢酬；我這裡沒有計入手續費與滑價。第二，<b>連續虧損期</b>：賣方在 2020 年 3 月、2022 年那種高波動期會連續虧，我的平均值是把這些都平均掉了。第三，<b>他自己的獲利數字無法核對</b>——他說在 AMC 上一週來回做了幾次、小賺 7000 多美元，但沒有交易紀錄。</p><p><b>還有一個算術對不上的地方，我要指出來。</b> 他說「股價停在 425 時獲利最大，為 4243 美元」。但用他自己給的價格算：寬度 11 點 − 成本 6.15 = <b>4.85 美元／股</b>，一張合約就是 <b>485 美元</b>，不是 4243 美元。差了將近九倍。<b>這可能是轉錄誤差（自動字幕把數字聽錯），也可能他把不同寬度的組合混在一起講</b>——我無法從逐字稿判斷是哪一種，所以照實寫出來，不替他圓。</p></div>
+
+<div class="verdict"><b>判定</b>：主張成立。多頭蝶式勝率 24%、空頭 76%，方向與他說的完全一致。但這來自「隱含波動率長期高於實際波動率」的結構性溢酬，不是他的獨門發現；而且他自報的最大獲利與自己給的價格相差近九倍，無法自洽。</div>
+<div class="evid">依據：SPY/QQQ/IWM 日線 2016-10-19 → 2026-10-19（各約 2,500 個交易日），取每一段 15 個交易日報酬，套用他影片中的 414/425/436 價差結構。未計手續費與買賣價差；無歷史期權鏈，故未做完整隱含波動率重跑。腳本：laolu/analyze3.py。</div>
+
+<div class="build">版本 1.13.0 · 建置於 2026-10-23 19:20:23+0800</div>
+<a class="back bottom" href="index.html">← 回到策略列表</a>
+</div></div></body></html>

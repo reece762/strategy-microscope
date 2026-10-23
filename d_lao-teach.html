@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>為什麼高手不帶新人——他給的理由，比多數人誠實 · 詳細資料</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--tx:#e6edf3;--tx2:#9aa7b4;--tx3:#6e7681;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+font:15px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK TC",sans-serif}
+.wrap{max-width:none;width:100%;margin:0;padding:28px clamp(20px,3vw,64px) 70px}
+.prose{max-width:1180px;margin:0 auto}
+.back{display:inline-block;color:var(--tx3);text-decoration:none;font-size:13px;margin-bottom:22px}
+.back:hover{color:var(--acc)}
+.back.bottom{margin:32px 0 0;display:block;border-top:1px solid var(--line);padding-top:18px}
+.tags{display:flex;gap:7px;align-items:center;margin-bottom:10px}
+.tag{font-size:11px;color:var(--tx3);border:1px solid var(--line);border-radius:5px;padding:2px 8px}
+.tag.vid{font-family:ui-monospace,monospace}
+.grade{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:800;
+font-size:12px;color:var(--gc);background:color-mix(in srgb,var(--gc) 15%,transparent);
+border:1px solid color-mix(in srgb,var(--gc) 45%,transparent)}
+h1{margin:0 0 12px;font-size:23px;line-height:1.45;letter-spacing:.2px}
+.lead{color:var(--tx2);margin:0 0 20px;font-size:14px}
+.vsrc{display:flex;align-items:center;gap:9px;background:#16202e;border:1px solid #26364d;
+border-radius:9px;padding:11px 14px;margin:0 0 20px;text-decoration:none;color:#c9d1d9;
+font-size:13.5px;transition:.15s}
+.vsrc:hover{border-color:var(--acc);color:#fff}
+.vsrc .vico{color:#f85149;font-size:11px}
+.vsrc .vcode{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--tx3)}
+.build{margin-top:22px;font-size:11px;color:var(--tx3);font-family:ui-monospace,monospace}
+.mini{margin:0 0 20px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.mini img{width:100%;display:block}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin-bottom:22px}
+.metric{text-align:center}
+.mv{font-size:17px;font-weight:700}
+.ml{font-size:11px;color:var(--tx3);margin-top:2px}
+.body p{margin:0 0 14px;font-size:14.2px;color:#c9d1d9}
+.body b{color:#fff;font-weight:600}
+.fig{margin:16px 0;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.fig img{width:100%;display:block}
+.verdict{margin-top:20px;background:#1a2230;border-left:3px solid var(--acc);
+padding:12px 14px;border-radius:0 7px 7px 0;font-size:13.5px;color:#c9d1d9}
+.verdict b{color:var(--acc)}
+.evid{margin-top:10px;font-size:12px;color:var(--tx3);line-height:1.7}
+
+.chartcard{background:#0d1219;border:1px solid var(--line);border-radius:11px;
+padding:16px 16px 14px;margin:0 0 24px}
+.chartctl{display:flex;justify-content:space-between;align-items:flex-end;
+gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.daterange{display:flex;align-items:flex-end;gap:9px}
+.daterange label{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--tx3)}
+.daterange input[type=date]{background:#161b22;border:1px solid var(--line);
+color:var(--tx);border-radius:6px;padding:6px 9px;font-size:13px;
+font-family:ui-monospace,monospace;color-scheme:dark}
+.daterange input[type=date]:focus{outline:none;border-color:var(--acc)}
+.dash{color:var(--tx3);padding-bottom:8px;font-size:12px}
+.quick{display:flex;gap:5px}
+.quick button{background:transparent;border:1px solid var(--line);color:var(--tx3);
+border-radius:6px;padding:5px 11px;font-size:12px;cursor:pointer;transition:.15s}
+.quick button:hover{color:var(--tx);border-color:#4a5568}
+.quick button.on{background:var(--acc);border-color:var(--acc);color:#0d1117;font-weight:600}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:8px;font-size:12px;color:#c9d1d9}
+.legend .lg{display:flex;align-items:center;gap:6px}
+.legend i,.tabwrap i{display:inline-block;width:10px;height:3px;border-radius:2px}
+.canvaswrap{position:relative}
+#chart{display:block;width:100%}
+.tip{position:absolute;display:none;background:#161b22;border:1px solid #30363d;
+border-radius:7px;padding:8px 11px;font-size:12px;color:#c9d1d9;pointer-events:none;
+z-index:5;box-shadow:0 6px 20px rgba(0,0,0,.5);line-height:1.65;white-space:nowrap}
+.tip b{color:#fff;font-size:11.5px;font-family:ui-monospace,monospace}
+.tip div{display:flex;align-items:center;gap:6px;margin-top:3px}
+.tip div i{width:9px;height:3px;border-radius:2px}
+.tip div span{margin-left:auto;padding-left:12px;font-family:ui-monospace,monospace;color:#fff}
+.tabwrap{margin-top:16px;overflow-x:auto}
+#stats{width:100%;border-collapse:collapse;font-size:12.5px}
+#stats th{text-align:right;color:var(--tx3);font-weight:500;font-size:11px;
+padding:7px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+#stats th:first-child{text-align:left}
+#stats td{text-align:right;padding:9px;border-bottom:1px solid #1c232c;
+font-family:ui-monospace,monospace;color:#c9d1d9;white-space:nowrap}
+#stats td:first-child{text-align:left;font-family:inherit}
+#stats td:first-child i{margin-right:7px;vertical-align:middle}
+#stats tr.hi td{background:#151d29;color:#fff;font-weight:600}
+#stats td.neg{color:#f0883e}
+.chartnote{margin-top:10px;font-size:11.5px;color:var(--tx3);line-height:1.7}
+.nochart{background:#0d1219;border:1px dashed var(--line);border-radius:10px;
+padding:26px;text-align:center;color:var(--tx3);font-size:13px;margin:0 0 24px}
+@media(max-width:760px){
+  .chartctl{flex-direction:column;align-items:stretch}
+  .daterange{flex-wrap:wrap}
+  .daterange input[type=date]{flex:1;min-width:0}
+  .quick{justify-content:flex-start}
+  #stats{font-size:11.5px}
+  #stats th,#stats td{padding:7px 5px}
+}
+
+.codecard{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+.codetoggle{display:inline-flex;align-items:center;gap:7px;background:#161b22;
+border:1px solid var(--line);color:var(--tx2);border-radius:8px;padding:9px 16px;
+font-size:13px;cursor:pointer;transition:.15s;font-family:inherit}
+.codetoggle:hover{color:#fff;border-color:var(--acc)}
+.codetoggle.open{color:var(--acc);border-color:var(--acc)}
+.codetoggle .caret{font-size:10px;display:inline-block;transition:transform .18s}
+.codetoggle.open .caret{transform:rotate(180deg)}
+.codewrap{margin-top:14px;border:1px solid var(--line);border-radius:9px;
+background:#0a0e14;overflow:hidden}
+.codeinfo{display:flex;align-items:flex-start;gap:12px;font-size:11.5px;color:#d29922;
+background:#141a22;border-bottom:1px solid var(--line);padding:9px 14px;
+font-family:ui-monospace,monospace;line-height:1.65}
+.codeinfo-txt{flex:1 1 auto;white-space:pre-wrap;min-width:0}
+.copybtn{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
+background:#1b232d;border:1px solid var(--line);color:var(--tx2);border-radius:6px;
+padding:5px 10px;font-size:11px;cursor:pointer;transition:.15s;font-family:inherit;
+margin:-2px -2px -2px 0}
+.copybtn:hover{color:#fff;border-color:var(--acc);background:#233040}
+.copybtn:active{transform:scale(.96)}
+.copybtn .ico-ok,.copybtn.ok .ico-copy{display:none}
+.copybtn.ok .ico-ok{display:inline-block}
+.copybtn.ok{color:#3fb950;border-color:#2d5c3a;background:#16261c}
+.copybtn .copytext{white-space:nowrap}
+.codewrap pre{margin:0;padding:14px 16px;overflow-x:auto;background:#0a0e14}
+.codewrap code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+font-size:12.2px;line-height:1.75;color:#c9d1d9;white-space:pre}
+.codefoot{font-size:11px;color:var(--tx3);padding:9px 14px;border-top:1px solid var(--line);
+background:#0d1219;line-height:1.7}
+@media(max-width:760px){
+  .codewrap code{font-size:11px}
+  .codetoggle{width:100%;justify-content:center}
+}
+</style></head>
+<body><div class="wrap"><div class="prose">
+<a class="back" href="index.html">← 回到策略列表</a>
+<div class="tags"><span class="tag">心法</span>
+<span class="tag vid">CK_ofNnT2Lc</span>
+<span class="tag author">邢不行</span>
+<span class="grade" style="--gc:#6e7681">—</span></div>
+<h1>為什麼高手不帶新人——他給的理由，比多數人誠實</h1>
+<p class="lead">這是他最新的影片（2026-03），而且<b>不是他本人講的</b>——開頭就說「本視頻文案由老魯撰寫，我代為朗讀」。內容談為什麼真正的高手不願帶新人，也順帶說明了<b>他自己的商業模式</b>。同系列另一支給了一份書單與學習路徑。</p>
+<a class="vsrc" href="https://youtu.be/CK_ofNnT2Lc" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">CK_ofNnT2Lc</span> ↗</a><a class="vsrc" href="https://youtu.be/Vqznc2Bpaw0" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">Vqznc2Bpaw0</span> ↗</a>
+<div class="nochart">這支策略無法誠實回測，因此沒有績效曲線；原因見下方說明。</div>
+<div class="metrics"><div class="metric"><div class="mv">43 支</div><div class="ml">頻道影片總數</div></div><div class="metric"><div class="mv">約 57.9 萬</div><div class="ml">總觀看數</div></div><div class="metric"><div class="mv">2026-03-14</div><div class="ml">最新影片</div></div></div>
+<div class="body"><p><b>先講一個查證上的細節。</b> 這支影片開頭是「Hello 嘍，大家好，我是老魯的小助手。本視頻文案由老魯撰寫，我代為朗讀。」——<b>所以這支的聲音不是他本人。</b> 這件事值得寫出來，因為如果只聽聲音，會誤以為是他親口說的。</p><p><b>他的核心論點：技術可以教，心態教不了。</b> 「教一個人畫趨勢線、計算倉位，這些都很簡單，可你沒辦法教他連續錯了五次之後還能有勇氣果斷下單。」他舉了一個很具體的場景：嚴格按策略操作、順利止盈，但跟著做的人「總想著再等等賺更多，行情反轉後該止損又不止損死扛，最後虧了錢反而回過頭來怪他」。</p><p><b>他給的第二個理由更少見：責任與回報不對稱。</b> 「你帶別人賺了錢，很少有人會主動說分你一部分，可如果虧了錢，第一個被指責的肯定是帶單的人。」然後他直接講到自己的處境：「包括我自己的社區網站，目前也是在全部拒絕新粉絲的加入，為什麼呢？溝通成本實在太高了，而且極度的浪費時間。」<b>這句話等於承認：他現在的變現方式不是擴張，而是縮小服務範圍、提高單價。</b></p><p><b>他的第三個理由，關於「悟性」。</b> 「技術是可以教的，但性格和悟性是沒辦法複製的」、「就像海龜交易法的實驗，所有人學的都是同樣的方法，可最後有人賺得盆滿缽滿，有人卻虧得一敗塗地。」<b>順帶一提，海龜實驗的公開結果確實是這樣</b>——同一套規則、同一批學員，最後的績效差異極大。這是個站得住腳的引用。</p><p><b>書單與學習路徑（另一支影片）。</b> 他推了五本：①《日本蠟燭圖技術》（史蒂夫·尼森）——「所有職業交易員必讀」；②《道氏理論》——「整本書其實就講了兩個字：趨勢」；③《期貨市場技術分析》——他稱之為技術分析的聖經；④《艾略特波浪理論》——但誠實地指出「千人千浪」的問題；⑤《華爾街 45 年》（江恩）——<b>但他明確說「不建議新手去閱讀」</b>，理由是「相當於從幼兒園直接跳到了大學」。<b>這個分級建議比單純列書單有價值</b>，因為多數人會把所有書一起推。</p><p><b>他還講了一個區分：投機 vs 投資。</b> 「低於一年以下的交易都稱不上是投資，只能說是投機」、「如果你的交易頻率低於 1 年以下，就應該學習投機相關的知識；如果你的交易頻率高于 5 年以上，就應該學習投資相關的知識」。他也直接回應了「巴菲特不看 K 線」這個常見反駁：指出巴菲特有保險公司提供的<b>無息浮存金</b>（源源不絕的免費子彈），「如果換做是你，你能滿足哪一條」——<b>這個回應是有效的</b>，因為它指出的是資金結構差異，不是能力差異。</p><p><b>我的判讀。</b> 這批心法內容的品質，明顯高於他的江恩那批。特徵是：<b>他願意講自己的失敗、願意說「不建議新手讀」、也願意承認自己在縮小服務範圍</b>。這些都是反行銷的姿態。但同時要注意結構性的利益衝突：他的變現是<b>付費會員社群</b>，而會員要的正是「明確點位」——這與他這支影片裡說的「不該盲目聽從指令」是矛盾的。</p></div>
+
+<div class="verdict"><b>判定</b>：無法回測。內容是「為什麼高手不帶人」與學習路徑，論點與正規交易教育一致，且願意指出哪些書不適合新手。注意：這支影片由助手代為朗讀，不是他本人聲音。他的變現模式（付費會員要明確點位）與他的主張（不該聽指令）之間存在張力。</div>
+<div class="evid">依據：逐字稿：《为什么金融交易市场里真正厉害的高手，大多都不太愿意带新人》(CK_ofNnT2Lc，2026-03-14，助手朗讀)、《顶级职业金融交易员必读书籍推荐，价值百万》(Vqznc2Bpaw0)。頻道規模：43 支影片、總觀看 57.9 萬（2026-10-23 抓取）。</div>
+
+<div class="build">版本 1.13.0 · 建置於 2026-10-23 19:20:23+0800</div>
+<a class="back bottom" href="index.html">← 回到策略列表</a>
+</div></div></body></html>

@@ -123,30 +123,60 @@ footer a:hover{color:var(--acc)}
   <span class="flabel">來源</span>
   <div class="chip" data-facet="author" data-val="邢不行">邢不行 (28)</div>
   <div class="chip" data-facet="author" data-val="提阿非羅大人 TiaBTC">提阿非羅大人 TiaBTC (6)</div>
+  <div class="chip" data-facet="author" data-val="老魯隨筆">老魯隨筆 (5)</div>
   <div class="chip" data-facet="author" data-val="阿尔法量化价格行为">阿尔法量化价格行为 (3)</div>
   <span class="fsep"></span>
   <span class="flabel">市場</span>
-  <div class="chip" data-facet="market" data-val="us">美股 (23)</div>
+  <div class="chip" data-facet="market" data-val="us">美股 (28)</div>
   <div class="chip" data-facet="market" data-val="crypto">加密貨幣 (11)</div>
   <span class="fsep"></span>
   <span class="flabel">結果</span>
   <div class="chip" data-facet="grade" data-val="pass">通過 (A/B)</div>
   <div class="chip" data-facet="grade" data-val="fail">未通過 (C/D)</div>
+  <span class="fsep"></span>
+  <span class="flabel">性質</span>
+  <div class="chip" data-facet="kind" data-val="backtest">可回測 (31)</div>
+  <div class="chip" data-facet="kind" data-val="mindset">心法／觀念 (3)</div>
+  <div class="chip" data-facet="kind" data-val="unportable">無法移植 (8)</div>
   <div class="chip reset" id="freset">清除篩選</div>
 </div>
 <div class="fcount" id="fcount"></div>
 
 <div class="stats">
-  <div class="stat"><div class="v">37</div><div class="k">已分析的策略</div></div>
-  <div class="stat"><div class="v">29</div><div class="k">規則完整重跑</div></div>
-  <div class="stat"><div class="v">10</div><div class="k">通過（A/B 級）</div></div>
-  <div class="stat"><div class="v">19</div><div class="k">未通過（C/D 級）</div></div>
-  <div class="stat"><div class="v">8</div><div class="k">無法回測</div></div>
+  <div class="stat"><div class="v">42</div><div class="k">已分析的策略</div></div>
+  <div class="stat"><div class="v">31</div><div class="k">規則完整重跑</div></div>
+  <div class="stat"><div class="v">11</div><div class="k">通過（A/B 級）</div></div>
+  <div class="stat"><div class="v">20</div><div class="k">未通過（C/D 級）</div></div>
+  <div class="stat"><div class="v">11</div><div class="k">無法回測</div></div>
 </div>
 
 <div class="grid">
 
-<article class="card" data-market="crypto" data-grade="D" data-author="提阿非羅大人 TiaBTC" id="tia-eight">
+<article class="card" data-market="us" data-grade="B" data-author="老魯隨筆" data-kind="backtest" id="lao-bfly">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">老魯隨筆</span><span class="tag">期權</span><span class="tag vid">Hyk40GsOFjM</span></div>
+    <span class="grade" style="--gc:#58a6ff">B</span>
+  </header>
+  <h2 class="ctitle">蝶式期權「90% 勝率」：這次他講對了，但代價寫得很小</h2>
+  <p class="clead">他花一半篇幅講多頭蝶式（四條腿的價差組合），然後說：<b>做多頭的勝率等於買彩票，但反過來做成空頭，機率就站在我們這邊。</b> 我用他影片裡自己報的價格，配上過去 10 年 SPY 的 15 日報酬分布實際算過——<b>這句話基本上正確</b>。但「勝率 90%」的代價，他只用一句「虧損 500、獲利 500」帶過。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">24.0%</div><div class="ml">多頭蝶式 勝率</div></div><div class="metric"><div class="mv">−50.4%（佔成本）</div><div class="ml">多頭蝶式 平均報酬</div></div><div class="metric"><div class="mv">76.0%</div><div class="ml">空頭蝶式 勝率</div></div></div>
+  <a class="more" href="d_lao-bfly.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="us" data-grade="D" data-author="老魯隨筆" data-kind="backtest" id="lao-gann">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">老魯隨筆</span><span class="tag">江恩</span><span class="tag vid">UnIevHKurL4</span><span class="tag vid">JdMD75gv9gg</span><span class="tag vid">IweI4y99FaM</span></div>
+    <span class="grade" style="--gc:#f85149">D</span>
+  </header>
+  <h2 class="ctitle">江恩九方圖算出的價位，跟它旁邊隨便一個數字一樣有效</h2>
+  <p class="clead">九方圖是把數字排成螺旋（1 為中心、順時針往外），再用開平方加減 2 之類的規則，推算「下一個支撐或阻力價位」。他用了兩支影片、近 50 分鐘講原理與用法。我把這些算出來的價位，跟<b>同距離但隨機抖動 2% 的鄰近價位</b>做對照——<b>兩者的觸及率與反轉報酬，統計上分不出差別。</b></p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">35.7%</div><div class="ml">九方圖價位 觸及率</div></div><div class="metric"><div class="mv">35.6%</div><div class="ml">鄰近價位 觸及率</div></div><div class="metric"><div class="mv">+0.12 個百分點</div><div class="ml">兩者差距</div></div></div>
+  <a class="more" href="d_lao-gann.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="crypto" data-grade="D" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-eight">
   <header class="chead">
     <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">綜合檢驗</span><span class="tag vid">1WpTDM8NM5g</span><span class="tag vid">2d9XlERn6kg</span><span class="tag vid">6VY2qDzpNbk</span><span class="tag vid">7bTMSZT-eiQ</span></div>
     <span class="grade" style="--gc:#f85149">D</span>
@@ -158,7 +188,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_tia-eight.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" id="tia-funding">
+<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-funding">
   <header class="chead">
     <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">擇時</span><span class="tag vid">dHkDnDxYlts</span><span class="tag vid">sODb361o-HY</span></div>
     <span class="grade" style="--gc:#d29922">C</span>
@@ -170,7 +200,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_tia-funding.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" id="tia-gap">
+<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-gap">
   <header class="chead">
     <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">缺口</span><span class="tag vid">ab5GUxw2GBs</span></div>
     <span class="grade" style="--gc:#d29922">C</span>
@@ -182,7 +212,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_tia-gap.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="crypto" data-grade="D" data-author="提阿非羅大人 TiaBTC" id="tia-fib">
+<article class="card" data-market="crypto" data-grade="D" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-fib">
   <header class="chead">
     <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">斐波那契</span><span class="tag vid">jyvMaEVCxe0</span><span class="tag vid">gBaURrIGoLs</span></div>
     <span class="grade" style="--gc:#f85149">D</span>
@@ -194,7 +224,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_tia-fib.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" id="tia-news">
+<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-news">
   <header class="chead">
     <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">事件交易</span><span class="tag vid">E1BFjbYS0_o</span><span class="tag vid">7bTMSZT-eiQ</span></div>
     <span class="grade" style="--gc:#d29922">C</span>
@@ -206,7 +236,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_tia-news.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="D" data-author="阿尔法量化价格行为" id="al-pa-bug">
+<article class="card" data-market="us" data-grade="D" data-author="阿尔法量化价格行为" data-kind="backtest" id="al-pa-bug">
   <header class="chead">
     <div class="ctags"><span class="tag author">阿尔法量化价格行为</span><span class="tag">程式實作</span><span class="tag vid">BV1EnJ569EEE</span><span class="tag vid">BV1xeLm6JEnQ</span><span class="tag vid">BV1s7je62Edt</span></div>
     <span class="grade" style="--gc:#f85149">D</span>
@@ -218,7 +248,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_al-pa-bug.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="D" data-author="阿尔法量化价格行为" id="al-sr">
+<article class="card" data-market="us" data-grade="D" data-author="阿尔法量化价格行为" data-kind="backtest" id="al-sr">
   <header class="chead">
     <div class="ctags"><span class="tag author">阿尔法量化价格行为</span><span class="tag">支撐阻力</span><span class="tag vid">BV1EnJ569EEE</span><span class="tag vid">BV1s7je62Edt</span></div>
     <span class="grade" style="--gc:#f85149">D</span>
@@ -230,7 +260,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_al-sr.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="D" data-author="阿尔法量化价格行为" id="al-six">
+<article class="card" data-market="us" data-grade="D" data-author="阿尔法量化价格行为" data-kind="backtest" id="al-six">
   <header class="chead">
     <div class="ctags"><span class="tag author">阿尔法量化价格行为</span><span class="tag">策略組合</span><span class="tag vid">BV1iqgQ6NE65</span><span class="tag vid">BV1D3DCBaEVW</span></div>
     <span class="grade" style="--gc:#f85149">D</span>
@@ -242,7 +272,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_al-six.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="D" data-author="邢不行" id="t1-macd">
+<article class="card" data-market="us" data-grade="D" data-author="邢不行" data-kind="backtest" id="t1-macd">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">技術指標</span><span class="tag vid">NO5JOVjDO_I</span><span class="tag vid">DJ7nzs9k5hM</span><span class="tag vid">HcYaHSqCQAY</span></div>
     <span class="grade" style="--gc:#f85149">D</span>
@@ -254,7 +284,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_t1-macd.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="B" data-author="邢不行" id="t1-gap">
+<article class="card" data-market="us" data-grade="B" data-author="邢不行" data-kind="backtest" id="t1-gap">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">量價結構</span><span class="tag vid">mUMyXYxpL24</span></div>
     <span class="grade" style="--gc:#58a6ff">B</span>
@@ -266,7 +296,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_t1-gap.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="D" data-author="邢不行" id="t1-kdj">
+<article class="card" data-market="us" data-grade="D" data-author="邢不行" data-kind="backtest" id="t1-kdj">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">技術指標</span><span class="tag vid">LENnqMT7NH8</span></div>
     <span class="grade" style="--gc:#f85149">D</span>
@@ -278,7 +308,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_t1-kdj.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="B" data-author="邢不行" id="t1-month">
+<article class="card" data-market="us" data-grade="B" data-author="邢不行" data-kind="backtest" id="t1-month">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">日曆效應</span><span class="tag vid">B3N9s41YcUE</span></div>
     <span class="grade" style="--gc:#58a6ff">B</span>
@@ -290,7 +320,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_t1-month.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="crypto" data-grade="B" data-author="邢不行" id="t1-intraday">
+<article class="card" data-market="crypto" data-grade="B" data-author="邢不行" data-kind="backtest" id="t1-intraday">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">市場結構</span><span class="tag vid">CvDPVtOalCY</span></div>
     <span class="grade" style="--gc:#58a6ff">B</span>
@@ -302,7 +332,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_t1-intraday.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="D" data-author="邢不行" id="t1-rotation">
+<article class="card" data-market="us" data-grade="D" data-author="邢不行" data-kind="backtest" id="t1-rotation">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">風格輪動</span><span class="tag vid">b_ERGIP8U1k</span></div>
     <span class="grade" style="--gc:#f85149">D</span>
@@ -314,7 +344,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_t1-rotation.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="C" data-author="邢不行" id="t2-markowitz">
+<article class="card" data-market="us" data-grade="C" data-author="邢不行" data-kind="backtest" id="t2-markowitz">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">資產配置</span><span class="tag vid">axLvMf4qBBk</span></div>
     <span class="grade" style="--gc:#d29922">C</span>
@@ -326,7 +356,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_t2-markowitz.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="crypto" data-grade="B" data-author="邢不行" id="t2-dca">
+<article class="card" data-market="crypto" data-grade="B" data-author="邢不行" data-kind="backtest" id="t2-dca">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">定期定額</span><span class="tag vid">5RzvGxU_2Ak</span><span class="tag vid">9QERjmLYLFw</span></div>
     <span class="grade" style="--gc:#58a6ff">B</span>
@@ -338,7 +368,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_t2-dca.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="crypto" data-grade="B" data-author="邢不行" id="t2-btceth">
+<article class="card" data-market="crypto" data-grade="B" data-author="邢不行" data-kind="backtest" id="t2-btceth">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">幣種輪動</span><span class="tag vid">YhEz95Vmm14</span><span class="tag vid">26FDkdaT8fo</span></div>
     <span class="grade" style="--gc:#58a6ff">B</span>
@@ -350,7 +380,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_t2-btceth.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="D" data-author="邢不行" id="n4-kline">
+<article class="card" data-market="us" data-grade="D" data-author="邢不行" data-kind="backtest" id="n4-kline">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">燭型形態</span><span class="tag vid">PM0z7SeJOWA</span><span class="tag vid">kIniDabV8Oo</span></div>
     <span class="grade" style="--gc:#f85149">D</span>
@@ -362,7 +392,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_n4-kline.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="D" data-author="邢不行" id="n4-ma">
+<article class="card" data-market="us" data-grade="D" data-author="邢不行" data-kind="backtest" id="n4-ma">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">技術指標</span><span class="tag vid">ENWCSojkmvs</span></div>
     <span class="grade" style="--gc:#f85149">D</span>
@@ -374,7 +404,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_n4-ma.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="C" data-author="邢不行" id="n4-barbell">
+<article class="card" data-market="us" data-grade="C" data-author="邢不行" data-kind="backtest" id="n4-barbell">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">資產配置</span><span class="tag vid">Ri5bSmMnoYw</span></div>
     <span class="grade" style="--gc:#d29922">C</span>
@@ -386,7 +416,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_n4-barbell.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="D" data-author="邢不行" id="n4-volume">
+<article class="card" data-market="us" data-grade="D" data-author="邢不行" data-kind="backtest" id="n4-volume">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">量價結構</span><span class="tag vid">ilb2Xh1se-E</span></div>
     <span class="grade" style="--gc:#f85149">D</span>
@@ -398,7 +428,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_n4-volume.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="C" data-author="邢不行" id="n4-perm">
+<article class="card" data-market="us" data-grade="C" data-author="邢不行" data-kind="backtest" id="n4-perm">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">資產配置</span><span class="tag vid">wSZeRkeOh0E</span></div>
     <span class="grade" style="--gc:#d29922">C</span>
@@ -410,7 +440,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_n4-perm.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="C" data-author="邢不行" id="wd-us">
+<article class="card" data-market="us" data-grade="C" data-author="邢不行" data-kind="backtest" id="wd-us">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">日曆效應</span><span class="tag vid">BV1si4y177RU</span></div>
     <span class="grade" style="--gc:#d29922">C</span>
@@ -422,7 +452,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_wd-us.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="D" data-author="邢不行" id="skip-nas">
+<article class="card" data-market="us" data-grade="D" data-author="邢不行" data-kind="backtest" id="skip-nas">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">日曆效應</span><span class="tag vid">BV1si4y177RU</span></div>
     <span class="grade" style="--gc:#f85149">D</span>
@@ -434,7 +464,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_skip-nas.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="B" data-author="邢不行" id="skip-etf">
+<article class="card" data-market="us" data-grade="B" data-author="邢不行" data-kind="backtest" id="skip-etf">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">日曆效應</span><span class="tag vid">BV1si4y177RU</span></div>
     <span class="grade" style="--gc:#58a6ff">B</span>
@@ -446,7 +476,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_skip-etf.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="A" data-author="邢不行" id="regime">
+<article class="card" data-market="us" data-grade="A" data-author="邢不行" data-kind="backtest" id="regime">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">擇時</span><span class="tag vid">BV1si4y177RU</span></div>
     <span class="grade" style="--gc:#3fb950">A</span>
@@ -458,7 +488,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_regime.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="crypto" data-grade="B" data-author="邢不行" id="btc-skip">
+<article class="card" data-market="crypto" data-grade="B" data-author="邢不行" data-kind="backtest" id="btc-skip">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">日曆效應</span><span class="tag vid">BV1si4y177RU</span></div>
     <span class="grade" style="--gc:#58a6ff">B</span>
@@ -470,7 +500,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_btc-skip.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="crypto" data-grade="B" data-author="邢不行" id="btc-regime">
+<article class="card" data-market="crypto" data-grade="B" data-author="邢不行" data-kind="backtest" id="btc-regime">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">擇時</span><span class="tag vid">BV1si4y177RU</span></div>
     <span class="grade" style="--gc:#58a6ff">B</span>
@@ -482,7 +512,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_btc-regime.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="B" data-author="邢不行" id="calendar">
+<article class="card" data-market="us" data-grade="B" data-author="邢不行" data-kind="backtest" id="calendar">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">日曆效應</span><span class="tag vid">BV1638968EzE</span></div>
     <span class="grade" style="--gc:#58a6ff">B</span>
@@ -494,7 +524,43 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_calendar.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="crypto" data-grade="NA" data-author="提阿非羅大人 TiaBTC" id="tia-risk">
+<article class="card" data-market="us" data-grade="NA" data-author="老魯隨筆" data-kind="mindset" id="lao-mind">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">老魯隨筆</span><span class="tag">心法</span><span class="tag vid">vcTVsROJoG0</span><span class="tag vid">CMMdA1bWcEQ</span></div>
+    <span class="grade" style="--gc:#6e7681">—</span>
+  </header>
+  <h2 class="ctitle">交易者的四個階段：他自己就是從爆倉走過來的</h2>
+  <p class="clead">這張卡沒有評級——它講的是「人怎麼撐下去」，不是「哪條規則能賺錢」，<b>用報酬衡量它是量錯了東西</b>。但他把交易者的成長分成四個階段，並且拿自己爆倉的經歷當例子，這部分內容密度高、且與正規交易教育一致。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">約 60%</div><div class="ml">新手三個月內退出</div></div><div class="metric"><div class="mv">再 20%</div><div class="ml">撐到一年內退出</div></div><div class="metric"><div class="mv">5% ~ 10%</div><div class="ml">最終留下並穩定獲利</div></div></div>
+  <a class="more" href="d_lao-mind.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="us" data-grade="NA" data-author="老魯隨筆" data-kind="mindset" id="lao-system">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">老魯隨筆</span><span class="tag">心法</span><span class="tag vid">CMMdA1bWcEQ</span><span class="tag vid">kOcnKLHlngU</span></div>
+    <span class="grade" style="--gc:#6e7681">—</span>
+  </header>
+  <h2 class="ctitle">他的交易系統：中長線、平推保本，以及一個違反常識的重倉觀</h2>
+  <p class="clead">他把交易系統拆成四個問題，並介紹了一個具體操作技巧「平推」。但同一支影片裡他也說了一句<b>與主流風控相反</b>的話：「止損只有兩個點，你重倉又怎樣呢？」這句值得單獨討論。另外，他唯一給出明確日期的績效宣稱，我核對後<b>成立</b>。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">進場/止損/倉位/出場</div><div class="ml">交易系統四問</div></div><div class="metric"><div class="mv">+22.6%</div><div class="ml">2025-04 滿倉指數 120 日</div></div><div class="metric"><div class="mv">−7.5%（4/8）</div><div class="ml">同期最低點</div></div></div>
+  <a class="more" href="d_lao-system.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="us" data-grade="NA" data-author="老魯隨筆" data-kind="mindset" id="lao-teach">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">老魯隨筆</span><span class="tag">心法</span><span class="tag vid">CK_ofNnT2Lc</span><span class="tag vid">Vqznc2Bpaw0</span></div>
+    <span class="grade" style="--gc:#6e7681">—</span>
+  </header>
+  <h2 class="ctitle">為什麼高手不帶新人——他給的理由，比多數人誠實</h2>
+  <p class="clead">這是他最新的影片（2026-03），而且<b>不是他本人講的</b>——開頭就說「本視頻文案由老魯撰寫，我代為朗讀」。內容談為什麼真正的高手不願帶新人，也順帶說明了<b>他自己的商業模式</b>。同系列另一支給了一份書單與學習路徑。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">43 支</div><div class="ml">頻道影片總數</div></div><div class="metric"><div class="mv">約 57.9 萬</div><div class="ml">總觀看數</div></div><div class="metric"><div class="mv">2026-03-14</div><div class="ml">最新影片</div></div></div>
+  <a class="more" href="d_lao-teach.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="crypto" data-grade="NA" data-author="提阿非羅大人 TiaBTC" data-kind="unportable" id="tia-risk">
   <header class="chead">
     <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">風險管理</span><span class="tag vid">HRmnIGT2How</span><span class="tag vid">MQTh3UxCPmA</span><span class="tag vid">0PK_XiE1y94</span></div>
     <span class="grade" style="--gc:#6e7681">—</span>
@@ -506,7 +572,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_tia-risk.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="NA" data-author="邢不行" id="t1-vr">
+<article class="card" data-market="us" data-grade="NA" data-author="邢不行" data-kind="unportable" id="t1-vr">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">技術指標</span><span class="tag vid">08lNIsMgylY</span></div>
     <span class="grade" style="--gc:#6e7681">—</span>
@@ -518,7 +584,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_t1-vr.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="cn" data-grade="NA" data-author="邢不行" id="n4-fx">
+<article class="card" data-market="cn" data-grade="NA" data-author="邢不行" data-kind="unportable" id="n4-fx">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">無法移植</span><span class="tag vid">5deQrzIdHAU</span></div>
     <span class="grade" style="--gc:#6e7681">—</span>
@@ -530,7 +596,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_n4-fx.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="cn" data-grade="NA" data-author="邢不行" id="n4-asus">
+<article class="card" data-market="cn" data-grade="NA" data-author="邢不行" data-kind="unportable" id="n4-asus">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">無法移植</span><span class="tag vid">Q_jBwLEk_6k</span></div>
     <span class="grade" style="--gc:#6e7681">—</span>
@@ -542,7 +608,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_n4-asus.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="cn" data-grade="NA" data-author="邢不行" id="n4-loan">
+<article class="card" data-market="cn" data-grade="NA" data-author="邢不行" data-kind="unportable" id="n4-loan">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">無法移植</span><span class="tag vid">rZoS-gZPSJA</span></div>
     <span class="grade" style="--gc:#6e7681">—</span>
@@ -554,7 +620,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_n4-loan.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="NA" data-author="邢不行" id="northbound">
+<article class="card" data-market="us" data-grade="NA" data-author="邢不行" data-kind="unportable" id="northbound">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">無法移植</span><span class="tag vid">BV1c64y147Qz</span></div>
     <span class="grade" style="--gc:#6e7681">—</span>
@@ -566,7 +632,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_northbound.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="NA" data-author="邢不行" id="retail">
+<article class="card" data-market="us" data-grade="NA" data-author="邢不行" data-kind="unportable" id="retail">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">無法移植</span><span class="tag vid">BV1m94y1S7ZZ</span></div>
     <span class="grade" style="--gc:#6e7681">—</span>
@@ -578,7 +644,7 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_retail.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="NA" data-author="邢不行" id="stockpick">
+<article class="card" data-market="us" data-grade="NA" data-author="邢不行" data-kind="unportable" id="stockpick">
   <header class="chead">
     <div class="ctags"><span class="tag author">邢不行</span><span class="tag">無法移植</span><span class="tag vid">BV1Dyni66ExJ</span></div>
     <span class="grade" style="--gc:#6e7681">—</span>
@@ -597,7 +663,7 @@ Binance 公開封存（BTC/USDT 2017–2026）。<br>
 成本假設：美股每趟 1 bp，加密每趟 5 bp。全部信號只用前一交易日收盤，無前視。
 比較基準含「同曝險、不擇時」的固定槓桿買進持有，以避免把「少持倉」誤讀成「會擇時」。<br>
 逐字稿經 BibiGPT 取得。本頁為歷史資料檢驗，不構成投資建議。<br>
-<span class="ver">版本 1.12.0 · 建置於 2026-10-23 18:45:10+0800 · <a href="changelog.html">版本紀錄</a></span>
+<span class="ver">版本 1.13.0 · 建置於 2026-10-23 19:20:23+0800 · <a href="changelog.html">版本紀錄</a></span>
 </footer>
 </div>
 
@@ -605,13 +671,15 @@ Binance 公開封存（BTC/USDT 2017–2026）。<br>
 /* Multi-select facets.
    Selections within one facet are OR; different facets are AND.
    Clicking an active chip deselects it, so 邢不行+美股 -> click 美股 -> only 邢不行. */
-var state = {author: new Set(), market: new Set(), grade: new Set()};
+var state = {author: new Set(), market: new Set(), grade: new Set(), kind: new Set()};
 var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
 
 function matches(card) {
-  var a = card.dataset.author, m = card.dataset.market, g = card.dataset.grade;
+  var a = card.dataset.author, m = card.dataset.market, g = card.dataset.grade,
+      k = card.dataset.kind;
   if (state.author.size && !state.author.has(a)) return false;
   if (state.market.size && !state.market.has(m)) return false;
+  if (state.kind.size && !state.kind.has(k)) return false;
   if (state.grade.size) {
     var ok = (state.grade.has('pass') && (g === 'A' || g === 'B')) ||
              (state.grade.has('fail') && (g === 'C' || g === 'D'));
@@ -645,7 +713,7 @@ document.querySelectorAll('.chip[data-facet]').forEach(function (ch) {
 });
 
 document.getElementById('freset').onclick = function () {
-  state.author.clear(); state.market.clear(); state.grade.clear();
+  state.author.clear(); state.market.clear(); state.grade.clear(); state.kind.clear();
   apply();
 };
 

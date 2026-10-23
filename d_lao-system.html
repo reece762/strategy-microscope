@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>他的交易系統：中長線、平推保本，以及一個違反常識的重倉觀 · 詳細資料</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--tx:#e6edf3;--tx2:#9aa7b4;--tx3:#6e7681;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+font:15px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK TC",sans-serif}
+.wrap{max-width:none;width:100%;margin:0;padding:28px clamp(20px,3vw,64px) 70px}
+.prose{max-width:1180px;margin:0 auto}
+.back{display:inline-block;color:var(--tx3);text-decoration:none;font-size:13px;margin-bottom:22px}
+.back:hover{color:var(--acc)}
+.back.bottom{margin:32px 0 0;display:block;border-top:1px solid var(--line);padding-top:18px}
+.tags{display:flex;gap:7px;align-items:center;margin-bottom:10px}
+.tag{font-size:11px;color:var(--tx3);border:1px solid var(--line);border-radius:5px;padding:2px 8px}
+.tag.vid{font-family:ui-monospace,monospace}
+.grade{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:800;
+font-size:12px;color:var(--gc);background:color-mix(in srgb,var(--gc) 15%,transparent);
+border:1px solid color-mix(in srgb,var(--gc) 45%,transparent)}
+h1{margin:0 0 12px;font-size:23px;line-height:1.45;letter-spacing:.2px}
+.lead{color:var(--tx2);margin:0 0 20px;font-size:14px}
+.vsrc{display:flex;align-items:center;gap:9px;background:#16202e;border:1px solid #26364d;
+border-radius:9px;padding:11px 14px;margin:0 0 20px;text-decoration:none;color:#c9d1d9;
+font-size:13.5px;transition:.15s}
+.vsrc:hover{border-color:var(--acc);color:#fff}
+.vsrc .vico{color:#f85149;font-size:11px}
+.vsrc .vcode{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--tx3)}
+.build{margin-top:22px;font-size:11px;color:var(--tx3);font-family:ui-monospace,monospace}
+.mini{margin:0 0 20px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.mini img{width:100%;display:block}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin-bottom:22px}
+.metric{text-align:center}
+.mv{font-size:17px;font-weight:700}
+.ml{font-size:11px;color:var(--tx3);margin-top:2px}
+.body p{margin:0 0 14px;font-size:14.2px;color:#c9d1d9}
+.body b{color:#fff;font-weight:600}
+.fig{margin:16px 0;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#0a0e14}
+.fig img{width:100%;display:block}
+.verdict{margin-top:20px;background:#1a2230;border-left:3px solid var(--acc);
+padding:12px 14px;border-radius:0 7px 7px 0;font-size:13.5px;color:#c9d1d9}
+.verdict b{color:var(--acc)}
+.evid{margin-top:10px;font-size:12px;color:var(--tx3);line-height:1.7}
+
+.chartcard{background:#0d1219;border:1px solid var(--line);border-radius:11px;
+padding:16px 16px 14px;margin:0 0 24px}
+.chartctl{display:flex;justify-content:space-between;align-items:flex-end;
+gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.daterange{display:flex;align-items:flex-end;gap:9px}
+.daterange label{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--tx3)}
+.daterange input[type=date]{background:#161b22;border:1px solid var(--line);
+color:var(--tx);border-radius:6px;padding:6px 9px;font-size:13px;
+font-family:ui-monospace,monospace;color-scheme:dark}
+.daterange input[type=date]:focus{outline:none;border-color:var(--acc)}
+.dash{color:var(--tx3);padding-bottom:8px;font-size:12px}
+.quick{display:flex;gap:5px}
+.quick button{background:transparent;border:1px solid var(--line);color:var(--tx3);
+border-radius:6px;padding:5px 11px;font-size:12px;cursor:pointer;transition:.15s}
+.quick button:hover{color:var(--tx);border-color:#4a5568}
+.quick button.on{background:var(--acc);border-color:var(--acc);color:#0d1117;font-weight:600}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:8px;font-size:12px;color:#c9d1d9}
+.legend .lg{display:flex;align-items:center;gap:6px}
+.legend i,.tabwrap i{display:inline-block;width:10px;height:3px;border-radius:2px}
+.canvaswrap{position:relative}
+#chart{display:block;width:100%}
+.tip{position:absolute;display:none;background:#161b22;border:1px solid #30363d;
+border-radius:7px;padding:8px 11px;font-size:12px;color:#c9d1d9;pointer-events:none;
+z-index:5;box-shadow:0 6px 20px rgba(0,0,0,.5);line-height:1.65;white-space:nowrap}
+.tip b{color:#fff;font-size:11.5px;font-family:ui-monospace,monospace}
+.tip div{display:flex;align-items:center;gap:6px;margin-top:3px}
+.tip div i{width:9px;height:3px;border-radius:2px}
+.tip div span{margin-left:auto;padding-left:12px;font-family:ui-monospace,monospace;color:#fff}
+.tabwrap{margin-top:16px;overflow-x:auto}
+#stats{width:100%;border-collapse:collapse;font-size:12.5px}
+#stats th{text-align:right;color:var(--tx3);font-weight:500;font-size:11px;
+padding:7px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+#stats th:first-child{text-align:left}
+#stats td{text-align:right;padding:9px;border-bottom:1px solid #1c232c;
+font-family:ui-monospace,monospace;color:#c9d1d9;white-space:nowrap}
+#stats td:first-child{text-align:left;font-family:inherit}
+#stats td:first-child i{margin-right:7px;vertical-align:middle}
+#stats tr.hi td{background:#151d29;color:#fff;font-weight:600}
+#stats td.neg{color:#f0883e}
+.chartnote{margin-top:10px;font-size:11.5px;color:var(--tx3);line-height:1.7}
+.nochart{background:#0d1219;border:1px dashed var(--line);border-radius:10px;
+padding:26px;text-align:center;color:var(--tx3);font-size:13px;margin:0 0 24px}
+@media(max-width:760px){
+  .chartctl{flex-direction:column;align-items:stretch}
+  .daterange{flex-wrap:wrap}
+  .daterange input[type=date]{flex:1;min-width:0}
+  .quick{justify-content:flex-start}
+  #stats{font-size:11.5px}
+  #stats th,#stats td{padding:7px 5px}
+}
+
+.codecard{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+.codetoggle{display:inline-flex;align-items:center;gap:7px;background:#161b22;
+border:1px solid var(--line);color:var(--tx2);border-radius:8px;padding:9px 16px;
+font-size:13px;cursor:pointer;transition:.15s;font-family:inherit}
+.codetoggle:hover{color:#fff;border-color:var(--acc)}
+.codetoggle.open{color:var(--acc);border-color:var(--acc)}
+.codetoggle .caret{font-size:10px;display:inline-block;transition:transform .18s}
+.codetoggle.open .caret{transform:rotate(180deg)}
+.codewrap{margin-top:14px;border:1px solid var(--line);border-radius:9px;
+background:#0a0e14;overflow:hidden}
+.codeinfo{display:flex;align-items:flex-start;gap:12px;font-size:11.5px;color:#d29922;
+background:#141a22;border-bottom:1px solid var(--line);padding:9px 14px;
+font-family:ui-monospace,monospace;line-height:1.65}
+.codeinfo-txt{flex:1 1 auto;white-space:pre-wrap;min-width:0}
+.copybtn{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
+background:#1b232d;border:1px solid var(--line);color:var(--tx2);border-radius:6px;
+padding:5px 10px;font-size:11px;cursor:pointer;transition:.15s;font-family:inherit;
+margin:-2px -2px -2px 0}
+.copybtn:hover{color:#fff;border-color:var(--acc);background:#233040}
+.copybtn:active{transform:scale(.96)}
+.copybtn .ico-ok,.copybtn.ok .ico-copy{display:none}
+.copybtn.ok .ico-ok{display:inline-block}
+.copybtn.ok{color:#3fb950;border-color:#2d5c3a;background:#16261c}
+.copybtn .copytext{white-space:nowrap}
+.codewrap pre{margin:0;padding:14px 16px;overflow-x:auto;background:#0a0e14}
+.codewrap code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+font-size:12.2px;line-height:1.75;color:#c9d1d9;white-space:pre}
+.codefoot{font-size:11px;color:var(--tx3);padding:9px 14px;border-top:1px solid var(--line);
+background:#0d1219;line-height:1.7}
+@media(max-width:760px){
+  .codewrap code{font-size:11px}
+  .codetoggle{width:100%;justify-content:center}
+}
+</style></head>
+<body><div class="wrap"><div class="prose">
+<a class="back" href="index.html">← 回到策略列表</a>
+<div class="tags"><span class="tag">心法</span>
+<span class="tag vid">CMMdA1bWcEQ</span>
+<span class="tag author">邢不行</span>
+<span class="grade" style="--gc:#6e7681">—</span></div>
+<h1>他的交易系統：中長線、平推保本，以及一個違反常識的重倉觀</h1>
+<p class="lead">他把交易系統拆成四個問題，並介紹了一個具體操作技巧「平推」。但同一支影片裡他也說了一句<b>與主流風控相反</b>的話：「止損只有兩個點，你重倉又怎樣呢？」這句值得單獨討論。另外，他唯一給出明確日期的績效宣稱，我核對後<b>成立</b>。</p>
+<a class="vsrc" href="https://youtu.be/CMMdA1bWcEQ" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">CMMdA1bWcEQ</span> ↗</a><a class="vsrc" href="https://youtu.be/kOcnKLHlngU" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">kOcnKLHlngU</span> ↗</a>
+<div class="nochart">這支策略無法誠實回測，因此沒有績效曲線；原因見下方說明。</div>
+<div class="metrics"><div class="metric"><div class="mv">進場/止損/倉位/出場</div><div class="ml">交易系統四問</div></div><div class="metric"><div class="mv">+22.6%</div><div class="ml">2025-04 滿倉指數 120 日</div></div><div class="metric"><div class="mv">−7.5%（4/8）</div><div class="ml">同期最低點</div></div></div>
+<div class="body"><p><b>交易系統＝四個問題。</b> 他的說法很乾淨：「所有的交易系統無非就解決四件事情：第一件怎麼進場、第二件事情怎麼止損、第三件事情倉位多少、第四件事情怎麼出場。」他補了一句更關鍵的：「本質上是解決<b>你要賺什麼錢</b>的問題，以及<b>你適合賺什麼錢</b>的問題。」並說自己賺的是「中長線波段交易的錢」，所以「很多做短線的高頻的來找我學習，我就是不能收」。</p><p><b>什麼是「平推」。</b> 這是他少數講得很具體的操作技巧：買進之後如果價格連續上漲，<b>不要急著止盈，先把止損價抬到買入價</b>——「先給你的這筆交易做一個保本，萬一行情突然逆勢掉頭，我至少是可以保本離場的。」這是移動止損的一種，英文叫 breakeven stop。<b>缺點他沒講：把止損抬到成本價，會被正常回檔掃掉</b>，等於把「小賺」變成「零賺」，長期下來會降低期望值。這是取捨，不是免費的午餐。</p><p><b>那個違反常識的重倉觀。</b> 他說：「也有人說你不能重倉交易，誰教你重倉的都是害你的，不過老魯我呢並不這麼認為。你試想一下，在一段行情中，如果你的止損只有兩個點，你重倉又怎樣呢？大不了我虧 200 塊錢我離場就是了。但是我一旦做對了，盈虧比和利潤都是極高的。」</p><p><b>這段話需要拆開看。</b> 邏輯上他說得通：<b>如果</b>止損真的很近（2%）、<b>而且</b>真的能執行（不滑價、不跳空），那重倉的單筆風險確實可以控制在小金額。但實務上有兩個致命前提：一是<b>跳空</b>——美股開盤跳空 2% 以上很常見，你的止損單會在最差的價格成交，2% 會變成 5% 或更多；二是<b>連續止損</b>——2% 的止損代表被掃的頻率很高，十次連續止損就是 20%，重倉之下這是重傷。<b>他自己在另一支影片裡講的「先小後大是一次大虧吃掉前面一百次小賺」，正好就是這個風險。</b> 兩段話放在一起看，是有張力的。</p><p><b>唯一可核對的績效宣稱，我核對後成立。</b> 他在 2026 年的影片裡回顧：「2025 年 4 月 3 日……今天繼續保持左側交易，加倉指數標的」、「2025 年 4 月的行情更是滿倉抓住了」。這是少數給了明確日期的宣稱，所以我直接查了 SPY：</p><p>2025-04-03 收盤 <b>536.70</b>。之後 20 個交易日 <b>+5.60%</b>、60 日 <b>+15.08%</b>、90 日 <b>+20.16%</b>、120 日 <b>+22.61%</b>。期間最低點出現在 <b>4 月 8 日的 496.48</b>，距進場價 <b>−7.49%</b>。<b>所以：他如果在 4/3 滿倉，會先承受約 7.5% 的帳面虧損，然後在四個月內賺到 22.6%。</b> 這個宣稱與資料相符，而且他當時說的是「左側交易、繼續加倉」，也就是<b>在下跌途中買</b>——這一點也與 4/8 才見底的事實吻合。</p><p><b>但要注意這證明了什麼。</b> 它證明「他說的這個時間點與方向是真的」，<b>不證明「他的方法可以重複」</b>。買指數在 2025 年 4 月見底後上漲，本質上是一次成功的抄底；同樣的操作在 2022 年會連續失敗。他也沒公開完整的交易紀錄，所以我無法計算他長期的實際績效。</p></div>
+
+<div class="verdict"><b>判定</b>：無法回測。交易系統四問與「平推」是標準做法，其中平推的取捨他沒講清楚；重倉觀與他自己另一支影片的告誡互相衝突。他唯一給明確日期的績效宣稱（2025-04 滿倉指數）核對後成立。</div>
+<div class="evid">依據：逐字稿：《90%的人輸在急躁，只有少數人懂得等待的力量！》(CMMdA1bWcEQ)、《職業交易員思維是怎樣的？課程價值百萬》(kOcnKLHlngU)。2025-04 核對用 SPY 日線（2025-04-03 收盤 536.70 起算）。腳本：laolu/analyze2.py。</div>
+
+<div class="build">版本 1.13.0 · 建置於 2026-10-23 19:20:23+0800</div>
+<a class="back bottom" href="index.html">← 回到策略列表</a>
+</div></div></body></html>

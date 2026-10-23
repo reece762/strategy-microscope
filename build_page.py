@@ -23,12 +23,12 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.12.0'
-VERSION_NOTES = ('新增 TiaBTC（提阿非羅大人）六張卡片：八門付費課程 33 條規則總檢、'
-                 '資金費率原則、CME 缺口、0.618 回撤（含我自己前視偏誤的更正）、'
-                 '「利好出盡」事件標籤錯置、風控（無法回測）。'
-                 '另修正：來源篩選原本寫死只有邢不行一個 chip，新作者的卡片有分類卻無法用來源篩選；'
-                 '現改為由實際卡片自動彙總（邢不行 28 / TiaBTC 6 / 阿尔法量化 3）')
+VERSION = '1.13.0'
+VERSION_NOTES = ('新增老魯隨筆（美股期權）五張卡片：蝶式期權 90% 勝率（B，主張成立）、'
+                 '江恩九方圖（D，與隨機鄰近價位無差）、交易者四階段／交易系統與平推／'
+                 '為什麼高手不帶新人（三張心法，無法回測）。'
+                 '新增「性質」篩選：可回測 / 心法·觀念 / 無法移植，'
+                 '心法類卡片以 kind=mindset 標記，可單獨篩出來一起看')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -292,6 +292,9 @@ def main():
         '__AUTHOR_CHIPS__': AUTHOR_CHIPS,
         '__C_US__': str(_cnt(r'data-market="us"')),
         '__C_CRYPTO__': str(_cnt(r'data-market="crypto"')),
+        '__C_BT__': str(_cnt(r'data-kind="backtest"')),
+        '__C_MIND__': str(_cnt(r'data-kind="mindset"')),
+        '__C_UNP__': str(_cnt(r'data-kind="unportable"')),
     }
 
     html = (TEMPLATE.replace('__CARDS__', pages)
@@ -547,6 +550,14 @@ def build_cards(res, em, yr, CARDS_SERIES):
     except Exception as e:
         print(f'tia_cards 載入失敗：{type(e).__name__}: {e}')
 
+    # 老魯隨筆—美股期權交易：43 支影片、10 支逐字稿（五張）
+    # 兩張可回測（蝶式、江恩九方圖）＋三張心法（標 kind=mindset，無法回測）。
+    try:
+        import laolu_cards
+        _new = laolu_cards.build() + _new
+    except Exception as e:
+        print(f'laolu_cards 載入失敗：{type(e).__name__}: {e}')
+
     cards = _new + cards
 
     # ---- 排序：能回測的在前，不能回測的（NA）一律排到最後 ----
@@ -576,7 +587,7 @@ def build_cards(res, em, yr, CARDS_SERIES):
             f'<span class="tag vid">{vid}</span>' for vid, _ in video_links(c))
 
         out.append(f'''
-<article class="card" data-market="{c['market']}" data-grade="{c['grade']}" data-author="{c['author']}" id="{c['id']}">
+<article class="card" data-market="{c['market']}" data-grade="{c['grade']}" data-author="{c['author']}" data-kind="{c.get('kind', 'backtest' if c['grade'] != 'NA' else 'unportable')}" id="{c['id']}">
   <header class="chead">
     <div class="ctags"><span class="tag author">{c['author']}</span><span class="tag">{c['topic']}</span>{vid_tags}</div>
     <span class="grade" style="--gc:{col}">{letter}</span>
@@ -872,6 +883,11 @@ __AUTHOR_CHIPS__
   <span class="flabel">結果</span>
   <div class="chip" data-facet="grade" data-val="pass">通過 (A/B)</div>
   <div class="chip" data-facet="grade" data-val="fail">未通過 (C/D)</div>
+  <span class="fsep"></span>
+  <span class="flabel">性質</span>
+  <div class="chip" data-facet="kind" data-val="backtest">可回測 (__C_BT__)</div>
+  <div class="chip" data-facet="kind" data-val="mindset">心法／觀念 (__C_MIND__)</div>
+  <div class="chip" data-facet="kind" data-val="unportable">無法移植 (__C_UNP__)</div>
   <div class="chip reset" id="freset">清除篩選</div>
 </div>
 <div class="fcount" id="fcount"></div>
@@ -902,13 +918,15 @@ Binance 公開封存（BTC/USDT 2017–2026）。<br>
 /* Multi-select facets.
    Selections within one facet are OR; different facets are AND.
    Clicking an active chip deselects it, so 邢不行+美股 -> click 美股 -> only 邢不行. */
-var state = {author: new Set(), market: new Set(), grade: new Set()};
+var state = {author: new Set(), market: new Set(), grade: new Set(), kind: new Set()};
 var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
 
 function matches(card) {
-  var a = card.dataset.author, m = card.dataset.market, g = card.dataset.grade;
+  var a = card.dataset.author, m = card.dataset.market, g = card.dataset.grade,
+      k = card.dataset.kind;
   if (state.author.size && !state.author.has(a)) return false;
   if (state.market.size && !state.market.has(m)) return false;
+  if (state.kind.size && !state.kind.has(k)) return false;
   if (state.grade.size) {
     var ok = (state.grade.has('pass') && (g === 'A' || g === 'B')) ||
              (state.grade.has('fail') && (g === 'C' || g === 'D'));
@@ -942,7 +960,7 @@ document.querySelectorAll('.chip[data-facet]').forEach(function (ch) {
 });
 
 document.getElementById('freset').onclick = function () {
-  state.author.clear(); state.market.clear(); state.grade.clear();
+  state.author.clear(); state.market.clear(); state.grade.clear(); state.kind.clear();
   apply();
 };
 
