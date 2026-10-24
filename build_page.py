@@ -23,11 +23,12 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.13.1'
-VERSION_NOTES = ('修正詳情頁說明錯誤：7 張做過回測的卡片（老魯蝶式/九方圖、'
-                 'TiaBTC 五張）被寫成「並非策略回測」，實際上是「沒有可一直持有的淨值曲線」，'
-                 '不是沒做功課。改為依卡片類型給專屬說明。'
-                 '老魯蝶式與九方圖補上圖表：單次損益分布、九方圖 vs 隨機鄰位觸及率')
+VERSION = '1.13.2'
+VERSION_NOTES = ('排序規則明確化：第一層「可回測組全部排在無法回測組之前」'
+                 '（不可回測的卡片再新、評級再高也只能排後面），'
+                 '第二層才是「組內新分析在前」；任何情況都不按評級重排。'
+                 '排序依據改用 card_kind（可否回測）而非 grade != NA，'
+                 '與篩選標籤共用同一函式，避免兩處推導走鐘')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -193,6 +194,15 @@ def png_uri(name):
     path = os.path.join(OUT, name)
     with open(path, 'rb') as f:
         return 'data:image/png;base64,' + base64.b64encode(f.read()).decode()
+
+
+def card_kind(c):
+    """這張卡片是哪一類：backtest（可回測）／mindset（心法）／unportable（無法移植）。
+
+    排序與篩選都吃這一個函式，避免兩處各寫一套推導而走鐘。
+    未明示 kind 的卡片沿用舊推導：NA → unportable，其餘 → backtest。
+    """
+    return c.get('kind') or ('backtest' if c['grade'] != 'NA' else 'unportable')
 
 
 def main():
@@ -565,11 +575,15 @@ def build_cards(res, em, yr, CARDS_SERIES):
 
     cards = _new + cards
 
-    # ---- 排序：能回測的在前，不能回測的（NA）一律排到最後 ----
-    # 使用者裁定：就算不能回測的卡片評分再好看，也只能排在能回測的後面。
-    # 兩組各自維持原本順序（新分析仍在前），不以評級重排——評級不是排序依據。
-    cards = ([c for c in cards if c['grade'] != 'NA'] +
-             [c for c in cards if c['grade'] == 'NA'])
+    # ---- 排序：兩層，順序不可對調 ----
+    # 第一層（最高優先）：可回測的一律排在無法回測的前面。
+    #   就算不能回測的卡片評分再好看、再新，也只能排在能回測的後面。
+    # 第二層：同一組內維持原本順序——新做的分析在前。
+    # 任何一層都不按評級重排：評級不是排序依據。
+    # 用 sorted 而非兩串相接，因為 sorted 是穩定排序，組內原序自動保留；
+    # 判斷依據用 card_kind（可否回測），不是 grade != 'NA'——兩者目前結果相同，
+    # 但語意不同，用 kind 才不會哪天出現「NA 但可回測」的卡片時默默排錯。
+    cards = sorted(cards, key=lambda c: 0 if card_kind(c) == 'backtest' else 1)
 
     # ---- render ----
     GR = {'S': ('#f0b429', 'S'), 'A': ('#3fb950', 'A'), 'B': ('#58a6ff', 'B'),
@@ -592,7 +606,7 @@ def build_cards(res, em, yr, CARDS_SERIES):
             f'<span class="tag vid">{vid}</span>' for vid, _ in video_links(c))
 
         out.append(f'''
-<article class="card" data-market="{c['market']}" data-grade="{c['grade']}" data-author="{c['author']}" data-kind="{c.get('kind', 'backtest' if c['grade'] != 'NA' else 'unportable')}" id="{c['id']}">
+<article class="card" data-market="{c['market']}" data-grade="{c['grade']}" data-author="{c['author']}" data-kind="{card_kind(c)}" id="{c['id']}">
   <header class="chead">
     <div class="ctags"><span class="tag author">{c['author']}</span><span class="tag">{c['topic']}</span>{vid_tags}</div>
     <span class="grade" style="--gc:{col}">{letter}</span>
