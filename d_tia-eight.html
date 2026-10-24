@@ -137,13 +137,13 @@ background:#0d1219;line-height:1.7}
 <h1>八門付費課程、33 條規則：沒有一條贏過「什麼都不做」</h1>
 <p class="lead">他公開了十門課的目錄（道氏與 123 法則、波浪、和諧形態、斐波那契與江恩、盤口訂單流、價格行為、威科夫、VCP 杯柄、周易、心法）。我把前八門裡<b>能寫成程式</b>的 33 條規則全部回測，結果是<b>沒有任何一條在扣掉手續費後，平均報酬能顯著大於零</b>；而且所有策略的風險調整後報酬（夏普，數值越高代表每單位波動換到的報酬越多）<b>全部低於同期單純買進持有比特幣</b>。</p>
 <a class="vsrc" href="https://youtu.be/1WpTDM8NM5g" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">1WpTDM8NM5g</span> ↗</a><a class="vsrc" href="https://youtu.be/2d9XlERn6kg" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">2d9XlERn6kg</span> ↗</a><a class="vsrc" href="https://youtu.be/6VY2qDzpNbk" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">6VY2qDzpNbk</span> ↗</a><a class="vsrc" href="https://youtu.be/7bTMSZT-eiQ" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">7bTMSZT-eiQ</span> ↗</a>
-<div class="nochart">這張卡片沒有淨值曲線：內容是規則可行性與資料來源的說明，並非策略回測。</div>
+<div class="nochart">這張卡片沒有淨值曲線，因為它不是一個可以一直持有的策略：它問的是「某種情況發生後，報酬跟平常有沒有不同」，答案是一次性的統計量，畫成淨值曲線會誤導。檢定結果在上方指標與下方說明。</div>
 <div class="metrics"><div class="metric"><div class="mv">33 條</div><div class="ml">檢驗規則數</div></div><div class="metric"><div class="mv">0 條</div><div class="ml">扣成本後顯著為正</div></div><div class="metric"><div class="mv">0 條</div><div class="ml">贏過買進持有</div></div></div>
 <div class="body"><p><b>先講方法，因為方法決定這個結論有多硬。</b> 擺動高低點一律用左右各 10 根 K 線的對稱窗定義，而且<b>延遲到事後第 10 根才確認</b>——不在還沒確認時就使用它。成本假設每次換倉雙邊各 5 個基點（萬分之五），另做 0／2／5／10 基點的敏感度。每一條事件策略都與同期的無條件報酬做 Welch 差檢定，並用 bootstrap 算 95% 信賴區間；33 項檢定再用 Benjamini-Hochberg 方法做多重檢定校正。</p><p><b>幾個代表性的結果。</b> 123 法則（跌破趨勢線→不再創新低→突破前高）樣本 66 次，扣成本後平均 <b>−0.18%</b>，勝率 39.4%。B 浪（反彈到 0.5~0.7 回撤）做空樣本 239 次，平均 <b>−0.57%</b>。和諧形態裡的蝙蝠（D 點在 XA 的 0.886）樣本只有 <b>8 次</b>——<b>這種樣本量不能當結論</b>，我在表上標成「樣本不足」而不是「有效」。</p><p><b>三個值得記住的細節。</b> 第一，<b>斐波那契回撤是「現象真、可交易性假」的典型</b>：價格觸及 0.5 或 0.618 之後，報酬確實顯著高於基準（t 值 4.1~4.2，通過多重校正），但改成「進場＋0.786 停損」去交易，八到九成的單子在到達目標前就被掃損，扣成本後平均仍為負。<b>現象存在，不等於能賺錢。</b></p><p>第二，<b>看漲插針在比特幣裡是偏空訊號</b>。他的價格行為課把插針當成「測試流動性後反轉」的買點，但 5,304 個看漲插針之後 10 根的平均報酬是 <b>−0.077%</b>（t=−2.81，信賴區間不含零）——<b>方向與課程相反</b>，而且統計上顯著。</p><p>第三，<b>威科夫課強調的「巨量確認」幫了倒忙</b>。衰竭 2B 形態加上「伴隨巨量」的條件後，表現比不加量<b>更差</b>（−0.18% 變成 −0.34%）。他課程裡反覆強調的那個濾網，在資料上是負貢獻。</p><p><b>還有一件我要自己認錯的事。</b> 我一開始做的「突破後回踩」測試，結論是「超額報酬約 +1.1 個百分點、邊緣顯著」。但補做正式的差檢定之後，<b>p 值是 0.45 與 0.50——完全不顯著</b>。我原先的說法過於樂觀，已更正。</p><p><b>資料限制也要講清楚。</b> 我手上沒有訂單簿與逐筆成交，所以「流動性真空」只能用3 根 K 線的跳空去代理，可信度低；POC（成交最密集價位）也只能用量加權近似；杯柄形態在無前視的嚴格定義下，日線只剩 <b>3 個</b>樣本，被迫降到 1 小時才有 41 個，統計力很弱。<b>這三類與其說是「測過了」，不如說是「測不乾淨」。</b></p></div>
 
 <div class="verdict"><b>判定</b>：不成立。33 條規則裡扣成本後顯著為正的有 0 條，風險調整後報酬全部低於單純持有比特幣。真正在資料裡站得住的只有「均值回歸」與「順勢動能」兩種底層效應，而且都被成本吃掉。</div>
 <div class="evid">依據：A 卷（第 1–4 類）與 B 卷（第 5–8 類）兩份獨立報告，腳本與資料在 workspace-coder/tia_backtest_A 與 _B，可一鍵重跑。買進持有基準：2020-2026 總報酬 +371%、1 小時淨夏普 0.90。</div>
 
-<div class="build">版本 1.13.0 · 建置於 2026-10-23 19:20:23+0800</div>
+<div class="build">版本 1.13.1 · 建置於 2026-10-24 08:55:26+0800</div>
 <a class="back bottom" href="index.html">← 回到策略列表</a>
 </div></div></body></html>

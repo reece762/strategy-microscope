@@ -137,13 +137,13 @@ background:#0d1219;line-height:1.7}
 <h1>「利好出盡」：他給的四個跌幅數字，三個不是單日跌幅</h1>
 <p class="lead">他的逃頂課給了四個實證案例：XRP 電報群約定 −55%、Doge Day −66%、Coinbase 上市比特幣 −27.6%、馬斯克上節目 Doge −44%。我逐日核對——<b>這四個數字幾乎都不是「當天跌多少」，而是「當天高點到之後谷底」的峰到谷跌幅</b>。</p>
 <a class="vsrc" href="https://youtu.be/E1BFjbYS0_o" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">E1BFjbYS0_o</span> ↗</a><a class="vsrc" href="https://youtu.be/7bTMSZT-eiQ" target="_blank" rel="noopener"><span class="vico">▶</span> 在 YouTube 觀看原視頻 <span class="vcode">7bTMSZT-eiQ</span> ↗</a>
-<div class="nochart">這張卡片沒有淨值曲線：內容是規則可行性與資料來源的說明，並非策略回測。</div>
+<div class="nochart">這張卡片沒有淨值曲線，因為它不是一個可以一直持有的策略：它問的是「某種情況發生後，報酬跟平常有沒有不同」，答案是一次性的統計量，畫成淨值曲線會誤導。檢定結果在上方指標與下方說明。</div>
 <div class="metrics"><div class="metric"><div class="mv">−28.8% / −55.0%</div><div class="ml">XRP 單日 / 峰到谷</div></div><div class="metric"><div class="mv">−25.4% / −62.4%</div><div class="ml">Doge Day 單日 / 峰到谷</div></div><div class="metric"><div class="mv">−1.0%（不顯著）</div><div class="ml">Coinbase 上市日 比特幣</div></div></div>
 <div class="body"><p><b>先把四個案例攤開。</b> 我用幣安現貨日線逐日核對，同時算「當日報酬」與「從事件日盤中高點到之後谷底的跌幅」：</p><p>XRP 2021-02-01（電報群約定拉到 5 美元）：當日 <b>−28.8%</b>（z 分數 −3.42，也就是比 99.9% 的日子都跌得多），峰到谷 <b>−55.0%</b>——<b>他說的 −55% 是峰到谷</b>。Doge Day 2021-04-20：當日 <b>−25.4%</b>（z=−1.77），峰到谷 <b>−62.4%</b>，他說的 −66% 也接近峰到谷。</p><p><b>Coinbase 上市 2021-04-14 是最清楚的例子。</b> 比特幣當日只跌 <b>0.97%</b>（z=−0.19，<b>統計上完全不顯著</b>），但 20 日後累計跌了 27.6%——他說的「−27.6%」是<b>三週之後的結果</b>，不是當天。馬斯克上節目 2021-05-08：Doge 當日 −8.0%（z=−0.63，不顯著），峰到谷 −43.8%。</p><p><b>為什麼這個差別很重要。</b> 如果事件當天只跌 1%，那「事件當天賣出」這個動作本身就沒有價值——你賣掉之後，價格可能在接下來三週才慢慢跌。真正的訊息是「事件前已經漲了一波」，而不是「事件本身」。</p><p><b>資料支持這一點。</b> 他點名的案例有個共同點：事件<b>之前</b>都已經急漲過（XRP 前一日 +61%、Doge 前一日 +121%）。而沒有搶跑的事件——比特幣現貨 ETF 通過 2024-01-10、第四次減半 2024-04-20——<b>當天反而是收漲的</b>（+1.17% 與 +1.74%）。<b>關鍵變數是「事件前是否已經漲一波」，不是事件本身。</b></p><p><b>所以可交易性在哪？</b> 在<b>事件前的搶跑段</b>，不在「事件當天賣」。換句話說，這是一個「識別擁擠」的問題，不是「記住日曆」的問題。而擁擠與否，事前很難判定——這也是為什麼它難以變成規則。</p><p><b>我沒能驗證的部分</b>：他的實盤績效沒有公開紀錄，所以無法確認他是否真的靠這個方法賺錢，或只是事後選出四個符合的案例。</p></div>
 
 <div class="verdict"><b>判定</b>：部分成立，但標籤錯了。四個跌幅數字多半是「峰到谷」而非「單日」；事件當天的單日跌幅多數不顯著。真正的驅動因素是事件前的搶跑，不是事件本身。</div>
 <div class="evid">依據：幣安現貨日線（BTCUSDT、XRPUSDT、DOGEUSDT、ETHUSDT，2020-2026）。每個事件算當日報酬、z 分數、百分位、以及 1/3/30 日峰到谷回撤。腳本與原始資料：tia/team_out/sell_the_news。</div>
 
-<div class="build">版本 1.13.0 · 建置於 2026-10-23 19:20:23+0800</div>
+<div class="build">版本 1.13.1 · 建置於 2026-10-24 08:55:26+0800</div>
 <a class="back bottom" href="index.html">← 回到策略列表</a>
 </div></div></body></html>

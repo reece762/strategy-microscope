@@ -23,12 +23,11 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.13.0'
-VERSION_NOTES = ('新增老魯隨筆（美股期權）五張卡片：蝶式期權 90% 勝率（B，主張成立）、'
-                 '江恩九方圖（D，與隨機鄰近價位無差）、交易者四階段／交易系統與平推／'
-                 '為什麼高手不帶新人（三張心法，無法回測）。'
-                 '新增「性質」篩選：可回測 / 心法·觀念 / 無法移植，'
-                 '心法類卡片以 kind=mindset 標記，可單獨篩出來一起看')
+VERSION = '1.13.1'
+VERSION_NOTES = ('修正詳情頁說明錯誤：7 張做過回測的卡片（老魯蝶式/九方圖、'
+                 'TiaBTC 五張）被寫成「並非策略回測」，實際上是「沒有可一直持有的淨值曲線」，'
+                 '不是沒做功課。改為依卡片類型給專屬說明。'
+                 '老魯蝶式與九方圖補上圖表：單次損益分布、九方圖 vs 隨機鄰位觸及率')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -237,6 +236,12 @@ def main():
     if os.path.exists(_al_path):
         for key, fname in json.load(open(_al_path)).items():
             imgs[key if key.startswith('al_') else 'al_' + key] = png_uri(fname)
+
+    # 老魯（蝶式、江恩九方圖）的圖表，key 已帶 lao_ 前綴
+    _lao_path = os.path.join(OUT, 'lao_charts.json')
+    if os.path.exists(_lao_path):
+        for key, fname in json.load(open(_lao_path)).items():
+            imgs[key if key.startswith('lao_') else 'lao_' + key] = png_uri(fname)
 
     # --- comparison charts: one strategy + the same three benchmarks ---
     # spec comes from prep_series.py, already aligned and rebased to 1.0
@@ -652,8 +657,14 @@ def detail_page(c, col, letter, mets, card, paras, imgs):
                           '它比較「訊號出現後」與「隨便哪天」的報酬差異，所以沒有淨值曲線可畫。'
                           '下方的圖就是這個檢定的結果。</div>')
         else:
-            chart_html = ('<div class="nochart">這張卡片沒有淨值曲線：'
-                          '內容是規則可行性與資料來源的說明，並非策略回測。</div>')
+            # 這一類做過扎實的統計檢定／事件研究，但沒有一條「一直持有」的
+            # 部位，所以畫不出淨值曲線。舊版寫成「並非策略回測」是錯的，
+            # 會被讀成「這張卡沒有做功課」——實際上是「問的問題不同」。
+            chart_html = ('<div class="nochart">這張卡片沒有淨值曲線，'
+                          '因為它不是一個可以一直持有的策略：'
+                          '它問的是「某種情況發生後，報酬跟平常有沒有不同」，'
+                          '答案是一次性的統計量，畫成淨值曲線會誤導。'
+                          '檢定結果在上方指標與下方說明。</div>')
 
     tpl = DETAIL_TEMPLATE
     for k, v in [('__CSS__', DETAIL_CSS), ('__TITLE__', c['title']),

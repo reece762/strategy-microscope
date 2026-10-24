@@ -22,7 +22,13 @@ def build():
     cards.append(dict(
         id='lao-bfly', author='老魯隨筆', grade='B',
         topic='期權', market='us', kind='backtest',
-        imgs=[],
+        imgs=['lao_bfly'],
+        chart_note=('這張卡片沒有淨值曲線，因為它測的是<b>單次交易的損益分布</b>，'
+                    '不是一條可以一直持有的部位。'
+                    '他推薦的空頭蝶式，每次進場都是獨立的 15 天合約，'
+                    '到期就結算、下次重新押注——這種東西的績效不能用累積淨值表達，'
+                    '要用「勝率 × 平均損益」來看。<b>下圖左是 2,497 段歷史樣本的單次損益分布，'
+                    '右是多頭與空頭翻面後的對照。</b>'),
         title='蝶式期權「90% 勝率」：這次他講對了，但代價寫得很小',
         videos=['Hyk40GsOFjM'],
         lead=(
@@ -95,7 +101,12 @@ def build():
     cards.append(dict(
         id='lao-gann', author='老魯隨筆', grade='D',
         topic='江恩', market='us', kind='backtest',
-        imgs=[],
+        imgs=['lao_gann'],
+        chart_note=('這張卡片沒有淨值曲線，因為九方圖不是一套交易策略，'
+                    '而是「挑價位的方法」——它只告訴你某個數字可能是支撐或阻力，'
+                    '沒有進出場規則、沒有部位大小，所以無法累積成一條淨值。'
+                    '要檢驗它，只能問：<b>它挑的價位，比隨便挑一個同距離的價位更有效嗎？</b>'
+                    '下圖左是觸及率、右是觸及後的反轉報酬，兩者都與隨機對照組比較。'),
         title='江恩九方圖算出的價位，跟它旁邊隨便一個數字一樣有效',
         videos=['UnIevHKurL4', 'JdMD75gv9gg', 'IweI4y99FaM'],
         lead=(
