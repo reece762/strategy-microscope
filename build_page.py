@@ -23,15 +23,15 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.14.0'
-VERSION_NOTES = ('新增 RTA《交易之路》第二期兩張卡片。這是全系列唯一有完整逐字稿的一期'
-                 '（36,350 字，本機轉錄，2:26:22 無截斷）：三組學生報告、院長逐頁挑錯。'
-                 '兩張卡分別測：(1) 院長主張的「MA120 拐頭優於破線」——九年資料上不成立，'
-                 '拐頭年化 11.3%、落後同曝險基準 26.2pp；學生聲稱的四年 8 倍無法用任何定義重現。'
-                 '(2) 三個尺度：主要趨勢中位 48–90 天（支持院長「一季」而非「一年多」）、'
-                 '日線波動中位 4.3%（課程寫 0.5% 錯一個數量級）、'
-                 '回撤落在 1/3~2/3 者 57%（院長說「常只到 0.236」僅 4.8%，不成立）。'
-                 '另修正：README 統計為手寫且已過期（寫 28 張，實際 44 張），sync 為 44/33/11')
+VERSION = '1.14.1'
+VERSION_NOTES = ('修正詳情頁作者名寫死 bug：detail_tpl.py 模板裡的作者標籤一直是硬寫的'
+                 '「邢不行」，而替換清單從未提供 __AUTHOR__ 佔位符。'
+                 '這個 bug 從第一張非邢不行卡片（阿尔法量化）就存在，'
+                 '但因新作者都是分批加入、沒人逐頁點進去看，一直沒被發現。'
+                 '影響 16 個詳情頁（TiaBTC 6、老魯 5、阿尔法 3、RTA 2），'
+                 '全部顯示成錯誤的作者。現改為從卡片資料取 c["author"]。'
+                 '另一版說明：v1.14.0 新增 RTA 第二期兩張卡片（MA120 拐頭 vs 破線、'
+                 '三個尺度），並修正 README 統計過期')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -700,6 +700,7 @@ def detail_page(c, col, letter, mets, card, paras, imgs):
     tpl = DETAIL_TEMPLATE
     for k, v in [('__CSS__', DETAIL_CSS), ('__TITLE__', c['title']),
                  ('__TOPIC__', c['topic']),
+                 ('__AUTHOR__', c['author']),
                  # 有些卡片只給 videos 清單、沒有單一 video 欄位（多支影片的主題）
                  ('__VIDEO__', c.get('video') or c['videos'][0]),
                  ('__COLOR__', col), ('__LETTER__', letter),

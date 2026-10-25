@@ -14,7 +14,7 @@ DETAIL_TEMPLATE = r'''<!doctype html>
 <a class="back" href="index.html">← 回到策略列表</a>
 <div class="tags"><span class="tag">__TOPIC__</span>
 <span class="tag vid">__VIDEO__</span>
-<span class="tag author">邢不行</span>
+<span class="tag author">__AUTHOR__</span>
 <span class="grade" style="--gc:__COLOR__">__LETTER__</span></div>
 <h1>__TITLE__</h1>
 <p class="lead">__LEAD__</p>
