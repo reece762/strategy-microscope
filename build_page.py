@@ -23,12 +23,15 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.13.2'
-VERSION_NOTES = ('排序規則明確化：第一層「可回測組全部排在無法回測組之前」'
-                 '（不可回測的卡片再新、評級再高也只能排後面），'
-                 '第二層才是「組內新分析在前」；任何情況都不按評級重排。'
-                 '排序依據改用 card_kind（可否回測）而非 grade != NA，'
-                 '與篩選標籤共用同一函式，避免兩處推導走鐘')
+VERSION = '1.14.0'
+VERSION_NOTES = ('新增 RTA《交易之路》第二期兩張卡片。這是全系列唯一有完整逐字稿的一期'
+                 '（36,350 字，本機轉錄，2:26:22 無截斷）：三組學生報告、院長逐頁挑錯。'
+                 '兩張卡分別測：(1) 院長主張的「MA120 拐頭優於破線」——九年資料上不成立，'
+                 '拐頭年化 11.3%、落後同曝險基準 26.2pp；學生聲稱的四年 8 倍無法用任何定義重現。'
+                 '(2) 三個尺度：主要趨勢中位 48–90 天（支持院長「一季」而非「一年多」）、'
+                 '日線波動中位 4.3%（課程寫 0.5% 錯一個數量級）、'
+                 '回撤落在 1/3~2/3 者 57%（院長說「常只到 0.236」僅 4.8%，不成立）。'
+                 '另修正：README 統計為手寫且已過期（寫 28 張，實際 44 張），sync 為 44/33/11')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -253,6 +256,12 @@ def main():
         for key, fname in json.load(open(_lao_path)).items():
             imgs[key if key.startswith('lao_') else 'lao_' + key] = png_uri(fname)
 
+    # RTA 交易之路（趨勢判斷）的圖表，key 已帶 rta_ 前綴
+    _rta_path = os.path.join(OUT, 'rta_charts.json')
+    if os.path.exists(_rta_path):
+        for key, fname in json.load(open(_rta_path)).items():
+            imgs[key if key.startswith('rta_') else 'rta_' + key] = png_uri(fname)
+
     # --- comparison charts: one strategy + the same three benchmarks ---
     # spec comes from prep_series.py, already aligned and rebased to 1.0
     series = json.load(open(os.path.join(OUT, 'series.json')))
@@ -261,7 +270,7 @@ def main():
     # 追加：先前沒有進 series.json、但確實做過機械策略回測的卡片。
     # tier1_curves.py 用與 tier1.py 完全相同的規則重算，並斷言年化與 tier1.json 一致。
     for fname in ('tier1_curves.json', 'new4_curves.json', 'tier2_curves.json',
-                  'alpha_curves.json'):
+                  'alpha_curves.json', 'rta_curves.json'):
         p = os.path.join(OUT, fname)
         if os.path.exists(p):
             extra_cards = json.load(open(p))
@@ -572,6 +581,14 @@ def build_cards(res, em, yr, CARDS_SERIES):
         _new = laolu_cards.build() + _new
     except Exception as e:
         print(f'laolu_cards 載入失敗：{type(e).__name__}: {e}')
+
+    # RTA 交易之路第二期：唯一有完整逐字稿的一期（三組報告＋院長逐頁挑錯）。
+    # 兩張卡：MA120 拐頭 vs 破線、三個尺度（趨勢長度／回撤／波動）＋MA60 對照。
+    try:
+        import rta_cards
+        _new = rta_cards.build() + _new
+    except Exception as e:
+        print(f'rta_cards 載入失敗：{type(e).__name__}: {e}')
 
     cards = _new + cards
 
