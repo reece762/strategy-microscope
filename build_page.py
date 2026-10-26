@@ -23,16 +23,19 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.16.0'
-VERSION_NOTES = ('新增一張卡片：J Law「VCP 三招」。這是全部測試裡帳面數字最漂亮的一個'
-                 '（年化 37.6% vs 市場 16.1%，1,466 筆交易），'
-                 '但扣掉同期市場報酬後超額報酬是 +0.01%（t=0.01）。'
-                 '把 VCP 型態條件完全拿掉、只留「均線多頭排列＋創 60 日新高＋量能放大」，'
-                 '表現幾乎一樣（剔除最好 5% 後 VCP +0.43%、對照組 +0.50%）。'
-                 '90.6% 的總報酬來自前 5% 的交易。六個參數變體的超額報酬全部落在零附近。'
-                 '判級 C——不是「效應衰減」，是「從頭到尾沒有 alpha」，它賺的是 beta。'
-                 '新增檔案：vcp_test.py（主回測）、vcp_control.py（對照組）、'
-                 'vcp_sweep.py（參數穩健性）、vcp_charts.py、vcp_cards.py。')
+VERSION = '1.17.0'
+VERSION_NOTES = ('新增三張卡片：趨勢線突破（春哥 XClOoOIiwpE + J Law zbb09zSKYts）、'
+                 '平行通道（J Law BM3jm780w4Q）、恐慌進場（J Law xVXB5AIg9dk）。'
+                 '三張都做了超額報酬與對照組檢驗，結論一致：原始報酬為正，'
+                 '扣掉同期市場報酬後歸零或轉負。'
+                 '趨勢線 63,832 筆，超額 −0.04%（t=−1.06），剔除最好 5% 後 −0.59%，逐年 8/20 為正。'
+                 '平行通道 221,186 筆，超額 −0.03%（t=−1.77），'
+                 '且他的獲利目標（通道上軌）只有 6.1% 被達成。'
+                 '恐慌進場 33 個樣本，四個持有期全部低於無條件基準。'
+                 '建置修正：趨勢線的「觸及次數」原本把連續落在容差內的 K 線算成多次，'
+                 '中位數虛高到 12 次；改為只計觸及叢集後為 5 次，樣本由 7.2 萬降到 6.4 萬。')
+VERSION_PREV = ('v1.16.0 新增 J Law「VCP 三招」：年化 37.6% 全是 beta，'
+                '扣掉市場後超額 +0.01%（t=0.01）。')
 VERSION_PREV = ('v1.14.1 修正詳情頁作者名寫死 bug：detail_tpl.py 模板裡的作者標籤一直是硬寫的'
                 '「邢不行」，而替換清單從未提供 __AUTHOR__ 佔位符。'
                 '影響 16 個詳情頁，全部顯示成錯誤的作者。')
@@ -281,6 +284,13 @@ def main():
         _vcp = json.load(open(_vcp_path))
         for key, fname in _vcp.get('charts', {}).items():
             imgs['vcp_' + key] = png_uri(fname)
+
+    # 本輪三張（趨勢線、平行通道、恐慌進場）的圖，key 已帶 n6_ 前綴
+    _n6_path = os.path.join(OUT, 'new6_cards.json')
+    if os.path.exists(_n6_path):
+        _n6 = json.load(open(_n6_path))
+        for key, fname in _n6.get('charts', {}).items():
+            imgs['n6_' + key] = png_uri(fname)
 
     # --- comparison charts: one strategy + the same three benchmarks ---
     # spec comes from prep_series.py, already aligned and rebased to 1.0
@@ -576,6 +586,13 @@ def build_cards(res, em, yr, CARDS_SERIES):
         _new = vcp_cards.build() + _new
     except Exception as e:
         print(f'vcp_cards 載入失敗：{type(e).__name__}: {e}')
+
+    # 本輪三張：趨勢線、平行通道、恐慌進場
+    try:
+        import new6_cards
+        _new = new6_cards.build() + _new
+    except Exception as e:
+        print(f'new6_cards 載入失敗：{type(e).__name__}: {e}')
 
     _t1_json = os.path.join(OUT, 'tier1.json')
     if os.path.exists(_t1_json):
