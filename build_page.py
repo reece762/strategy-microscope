@@ -23,15 +23,19 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.14.1'
-VERSION_NOTES = ('修正詳情頁作者名寫死 bug：detail_tpl.py 模板裡的作者標籤一直是硬寫的'
-                 '「邢不行」，而替換清單從未提供 __AUTHOR__ 佔位符。'
-                 '這個 bug 從第一張非邢不行卡片（阿尔法量化）就存在，'
-                 '但因新作者都是分批加入、沒人逐頁點進去看，一直沒被發現。'
-                 '影響 16 個詳情頁（TiaBTC 6、老魯 5、阿尔法 3、RTA 2），'
-                 '全部顯示成錯誤的作者。現改為從卡片資料取 c["author"]。'
-                 '另一版說明：v1.14.0 新增 RTA 第二期兩張卡片（MA120 拐頭 vs 破線、'
-                 '三個尺度），並修正 README 統計過期')
+VERSION = '1.15.0'
+VERSION_NOTES = ('新增六張卡片：Alpha101 技術面因子（矩陣死、訊號只活一個月）、'
+                 'PEAD 財報後價格漂移（方向對但統計不顯著）、'
+                 '春哥「3 步驟選股」（簡化準則選出的股票只有 33% 符合原版，'
+                 '多出的 67% 月超額 −0.27%、t=−2.16）、'
+                 'Jack「科學止損」與「交易計劃」（兩張心法卡，算術全對但勝率為自述）、'
+                 '中文圈 17 個頻道調查（只有 3 個提出可檢驗規則）。'
+                 '建置修正：detail_page 原本假設每張卡都有 videos[0]，'
+                 '遇到事件研究與頻道調查這類「沒有對應影片」的卡片就 IndexError；'
+                 '現在兩者都空時顯示破折號。')
+VERSION_PREV = ('v1.14.1 修正詳情頁作者名寫死 bug：detail_tpl.py 模板裡的作者標籤一直是硬寫的'
+                '「邢不行」，而替換清單從未提供 __AUTHOR__ 佔位符。'
+                '影響 16 個詳情頁，全部顯示成錯誤的作者。')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -261,6 +265,15 @@ def main():
     if os.path.exists(_rta_path):
         for key, fname in json.load(open(_rta_path)).items():
             imgs[key if key.startswith('rta_') else 'rta_' + key] = png_uri(fname)
+
+    # 本輪六張卡（Alpha101／PEAD／春哥／兩張 Jack／頻道調查）的圖表。
+    # new5_cards.json 同時存了計算結果與 PNG 檔名，卡片模組讀同一份，
+    # 避免「圖上的數字」與「卡片上的數字」各自手打而對不上。
+    _n5_path = os.path.join(OUT, 'new5_cards.json')
+    if os.path.exists(_n5_path):
+        _n5 = json.load(open(_n5_path))
+        for key, fname in _n5.get('charts', {}).items():
+            imgs['n5_' + key] = png_uri(fname)
 
     # --- comparison charts: one strategy + the same three benchmarks ---
     # spec comes from prep_series.py, already aligned and rebased to 1.0
@@ -541,6 +554,15 @@ def build_cards(res, em, yr, CARDS_SERIES):
     # ---- 第一梯與第二梯：新做的影片 ----
     # 放在最前面——首頁第一屏應該是最新的分析，舊的留在後面。
     _new = []
+
+    # 本輪最新（Alpha101 因子、PEAD、春哥選股、兩張 Jack、中文頻道調查）。
+    # 六張一次加入，放在 _new 最前面，首頁第一屏就是這批。
+    try:
+        import new5_cards
+        _new = new5_cards.build() + _new
+    except Exception as e:
+        print(f'new5_cards 載入失敗：{type(e).__name__}: {e}')
+
     _t1_json = os.path.join(OUT, 'tier1.json')
     if os.path.exists(_t1_json):
         import tier1_cards
@@ -701,8 +723,10 @@ def detail_page(c, col, letter, mets, card, paras, imgs):
     for k, v in [('__CSS__', DETAIL_CSS), ('__TITLE__', c['title']),
                  ('__TOPIC__', c['topic']),
                  ('__AUTHOR__', c['author']),
-                 # 有些卡片只給 videos 清單、沒有單一 video 欄位（多支影片的主題）
-                 ('__VIDEO__', c.get('video') or c['videos'][0]),
+                 # 有些卡片只給 videos 清單、沒有單一 video 欄位（多支影片的主題）；
+                 # 事件研究與頻道調查這類「沒有對應影片」的卡片則兩者都空，此時留破折號。
+                 ('__VIDEO__', c.get('video')
+                  or (c['videos'][0] if c.get('videos') else '—')),
                  ('__COLOR__', col), ('__LETTER__', letter),
                  ('__LEAD__', mb(c['lead'])), ('__VLINK__', vlink),
                  ('__CHART__', chart_html), ('__METRICS__', mets),
