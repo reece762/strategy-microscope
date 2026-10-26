@@ -169,7 +169,7 @@ def chart_trend_nav(D, C, AB):
     fig.patch.set_facecolor(BG)
 
     # ---- 左：淨值
-    for key, col, lab in (('trend_ma20', DN, '趨勢線策略'), ('market', BLUE, '等權市場買進持有')):
+    for key, col, lab in (('trend_ma20', DN, '趨勢線策略'), ('market', BLUE, '等權市場（每日重平衡）')):
         c = C[key]['curve']
         x = pd.to_datetime(c['dates'])
         axes[0].plot(x, c['nav'], color=col, lw=1.6,
@@ -177,7 +177,6 @@ def chart_trend_nav(D, C, AB):
     axes[0].set_yscale('log')
     axes[0].legend(facecolor=BG, edgecolor=GRID, labelcolor=TX, fontsize=7.5, loc='upper left')
     _style(axes[0], '同樣的錢放著不動：策略年化 9.5% vs 市場 18.8%', ylab='淨值（對數）')
-
     # ---- 右：觸及數效應，兩種出場規則
     ks = ['3', '4', '5', '6+']
     f20 = [C['touch_fixed20'][k]['excess'] * 100 for k in ks]

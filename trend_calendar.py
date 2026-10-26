@@ -116,7 +116,7 @@ def main():
     res['trend_ma20'] = calendar_time(t, R, '趨勢線（3% 停損＋跌破 MA20 出場）')
     _mnav = (1 + mkt).cumprod()
     _mm = _mnav.resample('ME').last().dropna()
-    res['market'] = dict(label='等權市場（買進持有）', days=int(len(mkt)),
+    res['market'] = dict(label='等權市場（每日重平衡）', days=int(len(mkt)),
                          ann=float(mkt_ann), sharpe=float(mkt_sharpe),
                          mdd=float(mdd), years=float(years),
                          curve={'dates': [d.strftime('%Y-%m') for d in _mm.index],
