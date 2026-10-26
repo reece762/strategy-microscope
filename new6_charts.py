@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""本輪三張新卡的圖：趨勢線、平行通道、恐慌進場。
+"""本輪三張卡的圖（修正版）。
 
-三張圖都想回答同一個問題：**這個訊號本身有沒有超額報酬？**
-所以每張圖都把「原始報酬」與「扣掉市場之後」並排，
-右側再放對照組或無條件基準。
+修正原因（見 n6_final.py 與 ablation.py 的說明）：
+1. 第一版用「每根 K 線符合條件就算一筆」的交易，平行通道 221,186 筆裡
+   56% 是持倉期重複。改用去重後的樣本。
+2. 第一版把「通道下軌 vs 跌破均線後站回」當成消融對照組——那不是
+   同一策略拿掉一個條件，而是換了另一個訊號，導致「通道選得比較好」
+   這個結論方向錯誤。改用真正的安慰劑組（均線支撐）與隨機組。
 """
 import json
 import os
@@ -21,8 +24,7 @@ plt.rcParams['figure.dpi'] = 155
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'out')
-LINES = '/root/.openclaw/workspace/reports/_agent_lines'
-PATT = '/root/.openclaw/workspace/reports/_agent_pattern'
+ABL = '/root/.openclaw/workspace/reports/_agent_pattern/ablation.json'
 
 BG = '#0a0e14'
 TX = '#c9d1d9'
@@ -58,158 +60,131 @@ def save(fig, name):
     return name
 
 
-def two_bars(ax, labels, raw, exc, title, ylab='%'):
-    x = np.arange(len(labels))
-    w = 0.36
-    b1 = ax.bar(x - w / 2, np.array(raw) * 100, w, label='原始報酬',
-                color=BLUE, alpha=0.85)
-    b2 = ax.bar(x + w / 2, np.array(exc) * 100, w, label='扣掉市場後',
-                color=DN, alpha=0.85)
-    for bars in (b1, b2):
-        for r in bars:
-            h = r.get_height()
-            ax.text(r.get_x() + r.get_width() / 2, h + (0.02 if h >= 0 else -0.06),
-                    f'{h:+.2f}%', ha='center', color=TX, fontsize=8.5)
-    ax.set_xticks(x)
-    ax.set_xticklabels(labels, fontsize=8.5)
-    ax.axhline(0, color=GRAY, lw=0.8)
-    ax.legend(facecolor=BG, edgecolor=GRID, labelcolor=TX, fontsize=8,
-              loc='upper right')
-    _style(ax, title, ylab=ylab)
-
-
-def chart_trendline():
-    r = json.load(open(f'{LINES}/trendline_result.json'))
-    t = pd.read_csv(f'{LINES}/trendline_trades.csv')
+def chart_trendline(D):
+    tl = D['trendline']
     fig, axes = plt.subplots(1, 2, figsize=(11, 3.6))
     fig.patch.set_facecolor(BG)
 
-    two_bars(axes[0],
-             ['趨勢線突破\n（他的四準則）', '對照組\n（突破 60 日新高）'],
-             [r['stats']['avg'], r['control']['avg']],
-             [r['stats']['excess'], r['control']['excess']],
-             f'平均每筆報酬：兩組扣掉市場後都轉負（n={r["stats"]["n"]:,} / '
-             f'{r["control"]["n"]:,}）')
+    labs = [f'趨勢線突破\n（去重 {tl["dedup"]["n"]:,} 筆）',
+            f'突破 60 日新高\n（去重 {tl["control"]["n"]:,} 筆）']
+    raw = [tl['dedup']['avg'], tl['control']['avg']]
+    exc = [tl['dedup']['excess'], tl['control']['excess']]
+    x = np.arange(2)
+    w = 0.36
+    b1 = axes[0].bar(x - w / 2, np.array(raw) * 100, w, label='原始報酬', color=BLUE, alpha=.85)
+    b2 = axes[0].bar(x + w / 2, np.array(exc) * 100, w, label='扣掉市場後', color=DN, alpha=.85)
+    for bars in (b1, b2):
+        for r in bars:
+            h = r.get_height()
+            axes[0].text(r.get_x() + r.get_width() / 2, h + (0.02 if h >= 0 else -0.09),
+                         f'{h:+.2f}%', ha='center', color=TX, fontsize=9)
+    axes[0].set_xticks(x)
+    axes[0].set_xticklabels(labs, fontsize=8.5)
+    axes[0].axhline(0, color=GRAY, lw=.8)
+    axes[0].legend(facecolor=BG, edgecolor=GRID, labelcolor=TX, fontsize=8, loc='upper right')
+    _style(axes[0], '平均每筆報酬：兩組扣掉市場後都轉負', ylab='%')
 
-    # 右：逐年超額
-    yr = pd.DataFrame(r['by_year'])
-    axes[1].bar(yr['year'], yr['ex'] * 100,
-                color=[UP if v > 0 else DN for v in yr['ex']], alpha=0.85, width=0.72)
-    axes[1].axhline(0, color=GRAY, lw=0.8)
-    _style(axes[1], f'逐年超額報酬：{r["years_pos"]}/{r["years_n"]} 年為正',
-           ylab='超額 %')
-    axes[1].set_xticks(list(yr['year'])[::2])
+    by = pd.DataFrame(tl['by_year'])
+    axes[1].bar(by['year'], by['ex'] * 100,
+                color=[UP if v > 0 else DN for v in by['ex']], alpha=.85, width=.72)
+    axes[1].axhline(0, color=GRAY, lw=.8)
+    _style(axes[1], f'逐年超額：{tl["years_pos"]}/{tl["years_n"]} 年為正', ylab='超額 %')
+    axes[1].set_xticks(list(by['year'])[::2])
     axes[1].tick_params(axis='x', labelsize=8)
 
     fig.tight_layout()
     return save(fig, 'tl_ab.png')
 
 
-def chart_channel():
-    r = json.load(open(f'{PATT}/channel_panic_result.json'))
-    c = pd.read_csv(f'{PATT}/channel_trades.csv')
+def chart_channel(D, A):
+    ch = D['channel']
     fig, axes = plt.subplots(1, 2, figsize=(11, 3.6))
     fig.patch.set_facecolor(BG)
 
-    two_bars(axes[0],
-             ['平行通道\n（低量回下軌）', '對照組\n（回站 20 日均線）'],
-             [r['channel']['avg'], r['channel_control']['avg']],
-             [r['channel']['excess'], r['channel_control']['excess']],
-             f'平均每筆報酬（n={r["channel"]["n"]:,} / '
-             f'{r["channel_control"]["n"]:,}）')
+    # 左：真正的消融——通道 vs 均線安慰劑 vs 隨機
+    names = ['A 觸及通道下軌',
+             'B 觸及 20 日均線\n（安慰劑）',
+             'C 隨機同日']
+    keys = ['channel', 'ma20', 'random']
+    exc = [A[k]['dedup']['excess'] for k in keys]
+    tst = [A[k]['dedup']['t'] for k in keys]
+    cols = [DN, GOLD, GRAY]
+    bars = axes[0].bar(names, np.array(exc) * 100, color=cols, alpha=.85, width=.6)
+    for i, (r, t_) in enumerate(zip(bars, tst)):
+        h = r.get_height()
+        axes[0].text(i, h - 0.028, f'{h:+.2f}%\nt={t_:+.1f}', ha='center',
+                     color=TX, fontsize=8.5, va='top')
+    axes[0].axhline(0, color=GRAY, lw=.8)
+    axes[0].set_ylim(min(exc) * 100 * 1.35, 0.05)
+    axes[0].tick_params(axis='x', labelsize=8.5)
+    _style(axes[0], '消融：通道幾何與均線支撐幾乎相同', ylab='超額 %')
 
-    # 右：出場原因分布
-    vc = c['reason'].value_counts()
-    names = {'ma20': '跌破 20 日均線', 'stop': '停損 3%',
-             'target': '到達上軌', 'time': '期滿'}
-    labs = [names.get(k, k) for k in vc.index]
-    axes[1].barh(labs, vc.values / len(c) * 100,
-                 color=[BLUE, DN, UP, GRAY][:len(vc)], alpha=0.85)
-    for i, v in enumerate(vc.values / len(c) * 100):
-        axes[1].text(v + 0.8, i, f'{v:.1f}%', va='center', color=TX, fontsize=9)
-    _style(axes[1], '出場原因：只有 6% 真的走到上軌', xlab='佔比 %')
+    # 右：出場原因
+    rs = ch['dedup']['reasons']
+    names2 = {'ma20': '跌破 20 日均線', 'stop': '停損 3%',
+              'target': '到達通道上軌', 'time': '期滿'}
+    items = sorted(rs.items(), key=lambda kv: -kv[1])
+    labs = [names2.get(k, k) for k, _ in items]
+    vals = [v * 100 for _, v in items]
+    cols2 = [names2.get(k) == '到達通道上軌' and UP or (k == 'stop' and DN or BLUE)
+             for k, _ in items]
+    axes[1].barh(labs, vals, color=cols2, alpha=.85)
+    for i, v in enumerate(vals):
+        axes[1].text(v + 1, i, f'{v:.1f}%', va='center', color=TX, fontsize=9)
+    _style(axes[1], f'出場原因：只有 {rs.get("target",0)*100:.1f}% 走到上軌', xlab='佔比 %')
 
     fig.tight_layout()
     return save(fig, 'ch_ab.png')
 
 
-def chart_panic():
-    r = json.load(open(f'{PATT}/channel_panic_result.json'))['panic']
-    hold = r['hold']
-    base = r['base']
+def chart_panic(P):
+    hold, base = P['hold'], P['base']
     hs = sorted(int(k) for k in hold)
     fig, ax = plt.subplots(figsize=(8.2, 3.7))
     fig.patch.set_facecolor(BG)
-
     x = np.arange(len(hs))
-    w = 0.36
-    v_p = [hold[str(h)]['mean'] * 100 for h in hs]
-    v_b = [base[str(h)] * 100 for h in hs]
-    b1 = ax.bar(x - w / 2, v_p, w, label='恐慌日隔天買進', color=DN, alpha=0.85)
-    b2 = ax.bar(x + w / 2, v_b, w, label='隨便哪天買進（無條件）',
-                color=GRAY, alpha=0.85)
+    w = .36
+    vp = [hold[str(h)]['mean'] * 100 for h in hs]
+    vb = [base[str(h)] * 100 for h in hs]
+    b1 = ax.bar(x - w / 2, vp, w, label='恐慌日隔天買進', color=DN, alpha=.85)
+    b2 = ax.bar(x + w / 2, vb, w, label='隨便哪天買進（無條件）', color=GRAY, alpha=.85)
     for bars in (b1, b2):
-        for rr in bars:
-            h = rr.get_height()
-            ax.text(rr.get_x() + rr.get_width() / 2, h + (0.08 if h >= 0 else -0.2),
+        for r in bars:
+            h = r.get_height()
+            ax.text(r.get_x() + r.get_width() / 2, h + (.08 if h >= 0 else -.2),
                     f'{h:+.2f}%', ha='center', color=TX, fontsize=8.5)
     ax.set_xticks(x)
     ax.set_xticklabels([f'持有 {h} 日' for h in hs], fontsize=9)
-    ax.axhline(0, color=GRAY, lw=0.8)
+    ax.axhline(0, color=GRAY, lw=.8)
     ax.legend(facecolor=BG, edgecolor=GRID, labelcolor=TX, fontsize=8.5)
-    _style(ax, f'恐慌日買進：四個持有期全部不如「隨便哪天買」'
-               f'（共 {r["events"]} 天）', ylab='報酬 %')
+    _style(ax, f'恐慌日買進：四個持有期全部不如「隨便哪天買」（{P["events"]} 天）',
+           ylab='報酬 %')
     fig.tight_layout()
     return save(fig, 'pn_hold.png')
 
 
 def main():
-    f1 = chart_trendline()
-    f2 = chart_channel()
-    f3 = chart_panic()
+    D = json.load(open(os.path.join(OUT, 'n6_final.json')))
+    A = json.load(open(ABL))
+    P = json.load(open(os.path.join(OUT, 'panic_keep.json')))
 
-    tl = json.load(open(f'{LINES}/trendline_result.json'))
-    cp = json.load(open(f'{PATT}/channel_panic_result.json'))
-    tl_t = pd.read_csv(f'{LINES}/trendline_trades.csv')
+    f1 = chart_trendline(D)
+    f2 = chart_channel(D, A)
+    f3 = chart_panic(P)
 
-    res = dict(
-        trendline=dict(
-            n=tl['stats']['n'], win=tl['stats']['win'],
-            avg=tl['stats']['avg'], excess=tl['stats']['excess'],
-            excess_t=tl['stats']['excess_t'],
-            trimmed=tl['stats']['trimmed'],
-            stop_rate=tl['stats']['stop_rate'], hold=tl['stats']['hold'],
-            ctrl_n=tl['control']['n'], ctrl_win=tl['control']['win'],
-            ctrl_avg=tl['control']['avg'], ctrl_excess=tl['control']['excess'],
-            ctrl_excess_t=tl['control']['excess_t'],
-            years_pos=tl['years_pos'], years_n=tl['years_n'],
-            touch_med=float(tl_t['touches'].median()),
-            span_med=float(tl_t['span'].median()),
-        ),
-        channel=dict(
-            n=cp['channel']['n'], win=cp['channel']['win'],
-            avg=cp['channel']['avg'], excess=cp['channel']['excess'],
-            excess_t=cp['channel']['excess_t'],
-            trimmed=cp['channel']['trimmed'],
-            hold=cp['channel']['hold'],
-            ctrl_n=cp['channel_control']['n'],
-            ctrl_win=cp['channel_control']['win'],
-            ctrl_avg=cp['channel_control']['avg'],
-            ctrl_excess=cp['channel_control']['excess'],
-            ctrl_excess_t=cp['channel_control']['excess_t'],
-        ),
-        panic=dict(events=cp['panic']['events'], hold=cp['panic']['hold'],
-                   base=cp['panic']['base']),
-        charts=dict(tl=f1, ch=f2, pn=f3),
-    )
-    json.dump(res, open(f'{OUT}/new6_cards.json', 'w'),
+    res = dict(trendline=D['trendline'], channel=D['channel'],
+               ablation={k: v['dedup'] for k, v in A.items()},
+               panic=P, charts=dict(tl=f1, ch=f2, pn=f3))
+    json.dump(res, open(os.path.join(OUT, 'new6_cards.json'), 'w'),
               ensure_ascii=False, indent=1)
+
     print('已寫 out/new6_cards.json')
-    print(f"  趨勢線 n={res['trendline']['n']:,} 超額 {res['trendline']['excess']*100:+.2f}% "
-          f"t={res['trendline']['excess_t']:+.2f}")
-    print(f"  通道   n={res['channel']['n']:,} 超額 {res['channel']['excess']*100:+.2f}% "
-          f"t={res['channel']['excess_t']:+.2f}")
-    print(f"  恐慌   {res['panic']['events']} 天")
+    tl, ch = D['trendline'], D['channel']
+    print(f'  趨勢線 去重 n={tl["dedup"]["n"]:,} 超額 {tl["dedup"]["excess"]*100:+.3f}% t={tl["dedup"]["t"]:+.2f}')
+    print(f'  通道   去重 n={ch["dedup"]["n"]:,} 超額 {ch["dedup"]["excess"]*100:+.3f}% t={ch["dedup"]["t"]:+.2f}')
+    for k in ('channel', 'ma20', 'random'):
+        a = A[k]['dedup']
+        print(f'  消融 {k:8s} n={a["n"]:>7,} 超額 {a["excess"]*100:+.3f}% t={a["t"]:+.2f}')
 
 
 if __name__ == '__main__':
