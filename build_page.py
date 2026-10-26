@@ -23,26 +23,35 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.20.0'
-VERSION_NOTES = ('**修正圖表標籤，並補上基準的自我檢驗。**\n'
-                 '一、標籤錯誤：圖例原寫「等權市場（買進持有）」，但實際算的是「每日重平衡等權組合」。\n'
-                 '實測三種口徑：每日重平衡年化 18.81%、每月重平衡 16.38%、'
-                 '而真正的買進持有**算不出來**——616 檔裡只有 51 檔在起始日有報價，'
-                 '其中沒有一檔存續到最後一日。標籤已改為「每日重平衡」。\n'
-                 '二、新增自我檢驗：**隨機亂買股票的超額報酬，數學上必須恰好為零。** '
-                 '實測 19,969 筆隨機進場，超額 −0.110%（t=−1.79）。'
-                 '這個偏差接近一個標準誤（單股短期報酬離散度約 15%，'
-                 '平均值的標準誤約 0.1%），t 值被重疊區間低估，屬抽樣噪音。'
-                 '**但它的分量 0.1 個百分點，仍大於趨勢線的 +0.034% 與通道的 +0.058%**，'
-                 '這正是「量不出來」的具體含義：效應比量尺自己的誤差還小。\n'
-                 '三、另一次獨立重跑（19,969 筆隨機抽樣版）驗證了已上線的數字：'
-                 '趨勢線 +0.034%（t=+1.05）、通道 +0.060%（t=+3.52）、'
-                 '20 日新高 −0.138%、通道對照 −0.068%，與 1.19.0 相差在 0.002pp 內。')
-VERSION_PREV = ('v1.19.0 修正超額報酬基準算法（波動拖累導致的系統性偏誤），'
-                '同一批交易換基準就換正負號，結論改為「量不出來」。')
-VERSION_PREV = ('v1.14.1 修正詳情頁作者名寫死 bug：detail_tpl.py 模板裡的作者標籤一直是硬寫的'
-                '「邢不行」，而替換清單從未提供 __AUTHOR__ 佔位符。'
-                '影響 16 個詳情頁，全部顯示成錯誤的作者。')
+VERSION = '1.21.0'
+VERSION_NOTES = ('**新增出場系列五張卡（J Law）——這個系列的題型與前三張不同。**\n'
+                 '前三張問「進場後賺不賺」，需要市場基準；而基準一換結論就變號。'
+                 '這五張問「同一批持股，出現訊號後是否比沒出現更差」——**純相對比較，不需基準**，'
+                 '所以不受上輪基準爭議的影響。對照組是同期的上升趨勢日（20 日 +0.93%）。\n'
+                 '一、見頂（D）：抛物線中出現不尋常下跌 2,929 次，'
+                 '之後 20 日 +8.03%，高於基準 7.10pp。但這是存活者偏差造成的假象：'
+                 '訊號後跌逾 20% 的機率 11.0%（基準 1.5%，八倍），而崩盤下市者不在母體。'
+                 '唯一方向站得住的是「波幅擴張」訊號（+0.40%，低於基準 0.53pp）。\n'
+                 '二、延伸（B）：他說「延伸不是罪過」，實測 20,941 個延伸日，'
+                 '之後 20 日 +2.50%，高於基準 1.56pp（t=+3.90）。'
+                 '**五支裡唯一支持的一支**，但勝率 53.2% 低於基準、尾部風險四倍。\n'
+                 '三、轉弱（D）：「回檔 30~36% 仍算前半段」的 403 次樣本，'
+                 '之後 20 日中位 −6.22%、上漲機率僅 37.4%、跌逾 20% 機率 25.0%——'
+                 '全測試最差的一組，與他的說法相反。\n'
+                 '四、阻力位（D）：「VCP 收窄到阻力該抱、V 形急漲該賣」，'
+                 '實測 VCP +1.05%、V 形 +5.19%，差值 −4.23%，'
+                 '信賴區間 [−6.35, −2.17] 不含零，**與他的說法剛好相反**。'
+                 '但 VCP 佔樣本 95%，且「整固品質」無法程式化。\n'
+                 '五、大市拖累（C）：670 個大盤跌逾 1% 的日子，'
+                 '強勢股之後 20 日 +1.39%、弱勢股 +2.94%，弱勢股多賺 1.55pp（t=−2.05）。'
+                 '「強勢股會被拖累」成立，「拖累後較快恢復」不成立。\n'
+                 '★ 本輪最重要的其實是一個方法修正：'
+                 '第一輪把個股報酬減去同日橫斷面平均再比兩組，'
+                 't 值膨脹到 −75 這種不可能的量級——因為同一天強勢與弱勢股的去均值報酬'
+                 '加權後必然為零，差異有一部分是算術上被強制的。'
+                 '改成「每個交易日只算一個觀測值」後，t 值回到合理量級。')
+VERSION_PREV = ('v1.20.0 修正圖表標籤（「買進持有」實際上是每日重平衡），'
+                '並補上隨機進場必須為零的自我檢驗。')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
 
 
@@ -295,6 +304,13 @@ def main():
         _n6 = json.load(open(_n6_path))
         for key, fname in _n6.get('charts', {}).items():
             imgs['n6_' + key] = png_uri(fname)
+
+    # 出場系列五張的圖，key 已帶 n7_ 前綴
+    _ex_path = os.path.join(OUT, 'exit_all.json')
+    if os.path.exists(_ex_path):
+        _ex = json.load(open(_ex_path))
+        for key, fname in _ex.get('charts', {}).items():
+            imgs['n7_' + key] = png_uri(fname)
 
     # --- comparison charts: one strategy + the same three benchmarks ---
     # spec comes from prep_series.py, already aligned and rebased to 1.0
@@ -597,6 +613,13 @@ def build_cards(res, em, yr, CARDS_SERIES):
         _new = new6_cards.build() + _new
     except Exception as e:
         print(f'new6_cards 載入失敗：{type(e).__name__}: {e}')
+
+    # 出場系列五張：見頂、延伸、轉弱、阻力位、大市拖累
+    try:
+        import exit_cards
+        _new = exit_cards.build() + _new
+    except Exception as e:
+        print(f'exit_cards 載入失敗：{type(e).__name__}: {e}')
 
     _t1_json = os.path.join(OUT, 'tier1.json')
     if os.path.exists(_t1_json):
