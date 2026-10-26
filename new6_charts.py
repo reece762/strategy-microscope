@@ -163,22 +163,65 @@ def chart_panic(P):
     return save(fig, 'pn_hold.png')
 
 
+def chart_trend_nav(D, C, AB):
+    """左：年化淨值曲線；右：觸及數 vs 超額報酬（兩種出場規則）。"""
+    fig, axes = plt.subplots(1, 2, figsize=(11.2, 3.7))
+    fig.patch.set_facecolor(BG)
+
+    # ---- 左：淨值
+    for key, col, lab in (('trend_ma20', DN, '趨勢線策略'), ('market', BLUE, '等權市場買進持有')):
+        c = C[key]['curve']
+        x = pd.to_datetime(c['dates'])
+        axes[0].plot(x, c['nav'], color=col, lw=1.6,
+                     label=f"{lab}  年化 {C[key]['ann']*100:.1f}%")
+    axes[0].set_yscale('log')
+    axes[0].legend(facecolor=BG, edgecolor=GRID, labelcolor=TX, fontsize=7.5, loc='upper left')
+    _style(axes[0], '同樣的錢放著不動：策略年化 9.5% vs 市場 18.8%', ylab='淨值（對數）')
+
+    # ---- 右：觸及數效應，兩種出場規則
+    ks = ['3', '4', '5', '6+']
+    f20 = [C['touch_fixed20'][k]['excess'] * 100 for k in ks]
+    ma = [C['touch_ma20'][k]['excess'] * 100 for k in ks]
+    x = np.arange(len(ks))
+    w = .36
+    axes[1].bar(x - w / 2, f20, w, label='固定持有 20 日', color=GOLD, alpha=.9)
+    axes[1].bar(x + w / 2, ma, w, label='跌破 MA20 出場', color=BLUE, alpha=.9)
+    for i, (a, b) in enumerate(zip(f20, ma)):
+        axes[1].text(i - w / 2, a - .015, f'{a:+.2f}', ha='center', va='top',
+                     color=TX, fontsize=7.5)
+        axes[1].text(i + w / 2, b - .015, f'{b:+.2f}', ha='center', va='top',
+                     color=TX, fontsize=7.5)
+    axes[1].set_xticks(x)
+    axes[1].set_xticklabels([f'{k} 點' for k in ks], fontsize=9)
+    axes[1].axhline(0, color=GRAY, lw=.8)
+    axes[1].legend(facecolor=BG, edgecolor=GRID, labelcolor=TX, fontsize=7.5, loc='lower left')
+    _style(axes[1], '觸及越多越差？（黃色成立、藍色不成立）', ylab='超額 %')
+
+    fig.tight_layout()
+    return save(fig, 'tl_nav.png')
+
+
 def main():
     D = json.load(open(os.path.join(OUT, 'n6_final.json')))
     A = json.load(open(ABL))
     P = json.load(open(os.path.join(OUT, 'panic_keep.json')))
+    C = json.load(open(os.path.join(OUT, 'trend_calendar.json')))
+    AB = json.load(open(os.path.join(OUT, 'trend_ablation.json')))
 
     f1 = chart_trendline(D)
     f2 = chart_channel(D, A)
     f3 = chart_panic(P)
+    f4 = chart_trend_nav(D, C, AB)
 
     res = dict(trendline=D['trendline'], channel=D['channel'],
                ablation={k: v['dedup'] for k, v in A.items()},
-               panic=P, charts=dict(tl=f1, ch=f2, pn=f3))
+               panic=P, calendar=C, trend_ab=AB,
+               charts=dict(tl=f1, ch=f2, pn=f3, tl2=f4))
     json.dump(res, open(os.path.join(OUT, 'new6_cards.json'), 'w'),
               ensure_ascii=False, indent=1)
 
     print('已寫 out/new6_cards.json')
+    print(f"  年化 策略 {C['trend_ma20']['ann']*100:.2f}% vs 市場 {C['market']['ann']*100:.2f}%")
     tl, ch = D['trendline'], D['channel']
     print(f'  趨勢線 去重 n={tl["dedup"]["n"]:,} 超額 {tl["dedup"]["excess"]*100:+.3f}% t={tl["dedup"]["t"]:+.2f}')
     print(f'  通道   去重 n={ch["dedup"]["n"]:,} 超額 {ch["dedup"]["excess"]*100:+.3f}% t={ch["dedup"]["t"]:+.2f}')
