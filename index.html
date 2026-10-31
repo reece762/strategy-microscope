@@ -131,6 +131,7 @@ footer a:hover{color:var(--acc)}
   <div class="chip" data-facet="author" data-val="RTA 交易之路">RTA 交易之路 (2)</div>
   <div class="chip" data-facet="author" data-val="Everything Money（Paul & Seth）">Everything Money（Paul & Seth） (1)</div>
   <div class="chip" data-facet="author" data-val="Phil Town（Rule #1）">Phil Town（Rule #1） (1)</div>
+  <div class="chip" data-facet="author" data-val="SEC 13F">SEC 13F (1)</div>
   <div class="chip" data-facet="author" data-val="WorldQuant Alpha101">WorldQuant Alpha101 (1)</div>
   <div class="chip" data-facet="author" data-val="中文圈頻道調查">中文圈頻道調查 (1)</div>
   <div class="chip" data-facet="author" data-val="兩套方法交叉比對">兩套方法交叉比對 (1)</div>
@@ -139,7 +140,7 @@ footer a:hover{color:var(--acc)}
   <div class="chip" data-facet="author" data-val="春哥美股投資 Spring Invest">春哥美股投資 Spring Invest (1)</div>
   <span class="fsep"></span>
   <span class="flabel">市場</span>
-  <div class="chip" data-facet="market" data-val="us">美股 (55)</div>
+  <div class="chip" data-facet="market" data-val="us">美股 (56)</div>
   <div class="chip" data-facet="market" data-val="crypto">加密貨幣 (13)</div>
   <span class="fsep"></span>
   <span class="flabel">結果</span>
@@ -147,7 +148,7 @@ footer a:hover{color:var(--acc)}
   <div class="chip" data-facet="grade" data-val="fail">未通過 (C/D)</div>
   <span class="fsep"></span>
   <span class="flabel">性質</span>
-  <div class="chip" data-facet="kind" data-val="backtest">可回測 (54)</div>
+  <div class="chip" data-facet="kind" data-val="backtest">可回測 (55)</div>
   <div class="chip" data-facet="kind" data-val="mindset">心法／觀念 (7)</div>
   <div class="chip" data-facet="kind" data-val="unportable">無法移植 (8)</div>
   <div class="chip reset" id="freset">清除篩選</div>
@@ -155,14 +156,26 @@ footer a:hover{color:var(--acc)}
 <div class="fcount" id="fcount"></div>
 
 <div class="stats">
-  <div class="stat"><div class="v">71</div><div class="k">已分析的策略</div></div>
-  <div class="stat"><div class="v">56</div><div class="k">規則完整重跑</div></div>
-  <div class="stat"><div class="v">17</div><div class="k">通過（A/B 級）</div></div>
+  <div class="stat"><div class="v">72</div><div class="k">已分析的策略</div></div>
+  <div class="stat"><div class="v">57</div><div class="k">規則完整重跑</div></div>
+  <div class="stat"><div class="v">18</div><div class="k">通過（A/B 級）</div></div>
   <div class="stat"><div class="v">39</div><div class="k">未通過（C/D 級）</div></div>
   <div class="stat"><div class="v">15</div><div class="k">無法回測</div></div>
 </div>
 
 <div class="grid">
+
+<article class="card" data-market="us" data-grade="B" data-author="SEC 13F" data-kind="backtest" id="inst-13f">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">SEC 13F</span><span class="tag">機構行為</span></div>
+    <span class="grade" style="--gc:#58a6ff">B</span>
+  </header>
+  <h2 class="ctitle">追蹤大戶持倉（13F）：整體沒用，「主動型經理人的買賣家數」有一點訊號</h2>
+  <p class="clead">13F 每季揭露所有大型機構的美股持股，但資料晚 45 天、且被指數基金淹沒。把 51 季、405 支美股攤開來測：全部機構的「加碼家數減減碼家數」等於零；只看持倉少於 200 檔的主動型經理人，每季多空 +1.68%（t=3.71）；用 2013–2019 選門檻、2020–2026 驗證，仍有 +1.96%（t=2.60）。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">+1.68%/季</div><div class="ml">主動型多空差距</div></div><div class="metric"><div class="mv">3.71</div><div class="ml">t 值</div></div><div class="metric"><div class="mv">+1.96%/季</div><div class="ml">樣本外 2020–2026</div></div><div class="metric"><div class="mv">+1.25%/季</div><div class="ml">扣成本後</div></div></div>
+  <a class="more" href="d_inst-13f.html">詳細資料 →</a>
+</article>
 
 <article class="card" data-market="crypto" data-grade="D" data-author="RTA 交易之路" data-kind="backtest" id="rta-ma120">
   <header class="chead">
@@ -1023,7 +1036,7 @@ Binance 公開封存（BTC/USDT 2017–2026）。<br>
 成本假設：美股每趟 1 bp，加密每趟 5 bp。全部信號只用前一交易日收盤，無前視。
 比較基準含「同曝險、不擇時」的固定槓桿買進持有，以避免把「少持倉」誤讀成「會擇時」。<br>
 逐字稿經 BibiGPT 取得。本頁為歷史資料檢驗，不構成投資建議。<br>
-<span class="ver">版本 1.25.0 · 建置於 2026-10-27 22:18:44+0800 · <a href="changelog.html">版本紀錄</a></span>
+<span class="ver">版本 1.26.0 · 建置於 2026-10-31 16:38:33+0800 · <a href="changelog.html">版本紀錄</a></span>
 </footer>
 </div>
 

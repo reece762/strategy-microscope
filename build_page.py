@@ -23,46 +23,15 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.25.0'
-VERSION_NOTES = ('**新增兩套價值型選股方法、三張卡（英文頻道）。**\n'
-                 '一、Phil Town《Rule #1》Big Five（C）：他要求過去十年五項平均皆≥10%——'
-                 'ROIC、營收成長、EPS 成長、股東權益成長、自由現金流成長；'
-                 '另有負債測試「長期負債÷自由現金流≤3 年」。'
-                 '實測：7 個年度、平均選 3.4 檔、共 24 個選中觀測；'
-                 '組合 +17.06% vs 全體 +19.88%、隨機 +19.93% ⇒ **超額 −2.87pp，'
-                 '7 年只贏 2 年，t=−0.34**。逐年超額標準差 22.59pp，為平均的八倍。'
-                 '**五條單獨測僅 ROIC 為正（+1.19pp，13 年贏 7 年）；EPS 成長為負（−0.27pp）。**\n'
-                 '二、Everything Money 8 支柱（C）：八條門檻皆取自原影片（5 年 PE<22.5、'
-                 '5 年 ROIC>9%、營收成長、淨利成長、股數未增、負債÷現金流<5、'
-                 '現金流成長、市值÷現金流<20）。'
-                 '實測：12 個年度、平均選 35 檔；組合 +21.81% vs 全體 +17.28%、隨機 +17.32% '
-                 '⇒ 超額 +4.49pp（贏 8/12，t=+0.99）。'
-                 '**但優勢高度集中：2014 年只選 2 檔卻超額 +51.9pp；'
-                 '剔除該年後 11 年平均只剩 +0.18pp（t=+0.11），'
-                 '只算選出≥10 檔的 10 年為 +1.18pp（t=+0.83）。'
-                 '8 次勝利中 6 次超額小於 1pp。判定：不構成穩健優勢。**\n'
-                 '三、ROIC 跨方法交叉比對（B）：**本批唯一正面發現。**'
-                 '兩頻道 ROIC 算法不同（Phil Town 用營業利益÷投入資本；'
-                 'Everything Money 用營業現金流÷（負債＋權益）），'
-                 '但各自單獨測均為正且勝率過半——+1.19pp（7/13）與 +1.13pp（9/14）。'
-                 '**與前批「10 條篩選器只有營收成長有效、本益比無效」方向一致：'
-                 '基本面品質指標有效，估值指標無效。**'
-                 '但幅度僅約 1.1pp、勝率略優於半數，'
-                 '應理解為「最不像噪音的一條」而非穩健超額來源。\n'
-                 '★ 資料限制（兩套方法共有）：XBRL 僅 16 種標籤，'
-                 '無資本支出科目 ⇒ 自由現金流以營業現金流代替（OCF>FCF，使負債與市值倍數偏寬鬆）；'
-                 '無所得稅科目 ⇒ ROIC 為稅前值，約為稅後 1.27 倍，'
-                 '「ROIC≥10%」實質只要求稅後約 7.9%；無流動資產／負債科目。\n'
-                 '★ 樣本限制：Phil Town 要求十年平均，資料僅夠支撐 2019 年起，'
-                 '故僅 7 個有效年份，且全落在 2019-2025 大牛市——'
-                 '價值型選股在此期間結構性不利，此結論不能推翻方法本身。\n'
-                 '★ 本輪修掉一個實質錯誤：XBRL 有兩種事實型態，'
-                 '第一版只處理「期間值」（有 period_start 的營收、淨利等），'
-                 '卻把「時點值」（股東權益、總資產、長期負債、流通股數，**完全沒有 period_start**）'
-                 '也用同一套「期間 300~430 天」條件去篩，導致它們全被剔除，'
-                 '兩套方法首次執行結果為「可用 0 筆」。'
-                 '實測 AAPL：股東權益 264 筆、總資產 146 筆、長期負債 90 筆、流通股數 144 筆，'
-                 '**無一筆有期間**。改為「時點值取 form=10-K」後，可用觀測 3,337 個。')
+VERSION = '1.26.0'
+VERSION_NOTES = ('**新增一張卡：13F 機構持倉追蹤（B）。**\n'
+                 '資料：SEC 13F 季度完整資料集 2013Q2–2026Q1，51 個可比較季度、405 支美股；\n'
+                 '時點：季末 +45 天進場、持有 63 個交易日、扣大盤。\n'
+                 '結果：全部機構的增減家數比每季 +0.43%（t=0.94）→ 沒有訊號；\n'
+                 '主動型經理人（≤200 檔、≥1 億美元）每季 +1.68%（t=3.71，38/51 季為正）；\n'
+                 '九種門檻全部為正、六種 t>2.5；樣本外 2020–2026 為 +1.96%（t=2.60，21/25 季為正）；\n'
+                 '走查法每年重選門檻平均 +1.61%/季（t=3.68）；扣換手成本後約 +1.25%/季。\n'
+                 '限制：存活者偏差、只含中大型股、只有多頭、無產業中性。')
 VERSION_PREV = ('v1.24.0 新增英文頻道兩張卡（10 條選股篩選器）；'
                 '並修掉「資料不足被算成通過 0 條」與「閏年 span 差一天」兩個實質錯誤。')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
@@ -352,6 +321,13 @@ def main():
         _val = json.load(open(_val_path))
         for key, fname in _val.get('charts', {}).items():
             imgs['n11_' + key] = png_uri(fname)
+
+    # 第五批：13F 機構持倉（一張卡）
+    _inst_path = os.path.join(OUT, 'inst_all.json')
+    if os.path.exists(_inst_path):
+        _inst = json.load(open(_inst_path))
+        for key, fname in _inst.get('charts', {}).items():
+            imgs['n12_' + key] = png_uri(fname)
 
     # --- comparison charts: one strategy + the same three benchmarks ---
     # spec comes from prep_series.py, already aligned and rebased to 1.0
@@ -738,6 +714,13 @@ def build_cards(res, em, yr, CARDS_SERIES):
         _new = rta_cards.build() + _new
     except Exception as e:
         print(f'rta_cards 載入失敗：{type(e).__name__}: {e}')
+
+    # 13F 機構持倉：51 季、9 種門檻、樣本內外切分（一張卡）
+    try:
+        import inst_cards
+        _new = inst_cards.build() + _new
+    except Exception as e:
+        print(f'inst_cards 載入失敗：{type(e).__name__}: {e}')
 
     cards = _new + cards
 
