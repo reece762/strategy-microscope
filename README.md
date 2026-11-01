@@ -117,3 +117,7 @@ python build_page.py    # 產生 13 個 HTML
 - SPY / QQQ 日線：公開歷史行情
 - BTC / ETH 日線：Binance 官方公開封存 `data.binance.vision`
 - 原始影片逐字稿：經 BibiGPT 取得（逐字稿本身為第三方內容，未納入本專案）
+
+## 卡片製作標準
+
+新增或修改卡片前，先讀 **[CARD_STANDARD.md](CARD_STANDARD.md)**：建置產物不可手改、卡片模組化、版本與驗證流程、標籤與圖表規則。所有 agent 一律照這份標準走，確保格式與品質一致。
