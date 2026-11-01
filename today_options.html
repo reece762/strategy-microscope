@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-11-01 · 期權選合約研究卡片</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--tx:#e6edf3;--tx2:#9aa7b4;--tx3:#6e7681;--acc:#58a6ff;--red:#f85149;--grn:#3fb950;--yel:#d29922}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK TC",sans-serif}
+header{border-bottom:1px solid var(--line);padding:18px clamp(20px,3vw,56px);position:sticky;top:0;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);z-index:9}
+header h1{margin:0;font-size:17px;letter-spacing:.3px}
+header p{margin:4px 0 0;color:var(--tx3);font-size:12px}
+main{padding:26px clamp(20px,3vw,56px) 70px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px}
+.card h2{margin:0;font-size:15px;display:flex;align-items:center;gap:8px}
+.tag{font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--tx3)}
+.tag.hot{color:var(--red);border-color:#5c2b2b}
+.tag.ok{color:var(--grn);border-color:#204a2b}
+.tag.mid{color:var(--yel);border-color:#4a3d1a}
+.kpi{display:flex;gap:16px;flex-wrap:wrap}
+.kpi div{min-width:88px}
+.kpi b{display:block;font-size:19px;letter-spacing:.2px}
+.kpi span{font-size:11.5px;color:var(--tx3)}
+ul{margin:0;padding-left:18px;color:var(--tx2)}
+li{margin:2px 0}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:var(--tx2);word-break:break-word}
+.note{font-size:12px;color:var(--tx3);border-top:1px dashed var(--line);padding-top:8px}
+.foot{color:var(--tx3);font-size:12px;margin-top:28px}
+a{color:var(--acc);text-decoration:none}
+</style>
+</head>
+<body>
+<header>
+  <h1>期權「選合約」研究 · 2026-11-01</h1>
+  <p>223 支影片逐字稿整理、英文篩選門檻、CBOE 免費鏈實測、AOA 144 萬筆成交反推</p>
+</header>
+<main>
+
+<div class="grid">
+
+  <div class="card">
+    <h2>① 規則全集 <span class="tag ok">已完成</span></h2>
+    <div class="kpi">
+      <div><b>223</b><span>支影片</span></div>
+      <div><b>258</b><span>條編號規則</span></div>
+      <div><b>87%</b><span>帶明確數字</span></div>
+    </div>
+    <ul>
+      <li>賣方 Delta <b>0.15–0.35</b>；strangle／鐵鷹單邊 <b>15–20Δ</b></li>
+      <li>賣方 DTE <b>30–60 天</b>；<b>21 DTE</b> 無條件平倉</li>
+      <li>IVR <b>&gt;50%</b> 才賣；買方 <b>&lt;15%</b> 才進</li>
+      <li>50% 止盈、<b>200%</b> 止損；單筆保證金 <b>1–3%</b></li>
+    </ul>
+    <div class="note">衝突已標記：買方平值 vs 深 ITM、IVR 硬門檻 vs 低 IV 常態——差別在持有期。</div>
+  </div>
+
+  <div class="card">
+    <h2>② 英文門檻篩選 <span class="tag ok">已套用</span></h2>
+    <div class="kpi">
+      <div><b>448</b><span>支快照</span></div>
+      <div><b>11</b><span>嚴格過關</span></div>
+      <div><b>21</b><span>寬鬆過關</span></div>
+    </div>
+    <div class="mono">INTC · AMZN · TSLA · GOOGL · ORCL · MU · META · MRVL · NBIS · AVGO · AMD</div>
+    <ul>
+      <li>條件：ADV ≥2,000 萬股、IV 30–100%、價差 ≤10%、15% OTM put bid ≥$0.50</li>
+      <li>RSI&gt;70 這條會讓結果歸零（目前無一支超過 70）</li>
+      <li>市值 ≥$3B 未套用（缺市值資料）</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>③ IVR × 流動性交集 <span class="tag hot">關鍵發現</span></h2>
+    <div class="kpi">
+      <div><b>101</b><span>HV 前 20%</span></div>
+      <div><b>8</b><span>流動性合格</span></div>
+      <div><b>1.8%</b><span>佔全體</span></div>
+    </div>
+    <div class="mono">NOW · JNJ · BA · GOOGL · INTC · PANW · ORCL · LOGI</div>
+    <div class="note">高波動＋流動性好是例外不是常態。順序應是：先過流動性，再挑 IV；不要為了高 IV 去碰 T／VZ／TXT（價差 20%+）。</div>
+  </div>
+
+  <div class="card">
+    <h2>④ CBOE 免費鏈實測 <span class="tag mid">一天快照</span></h2>
+    <div class="kpi">
+      <div><b>448</b><span>支成功</span></div>
+      <div><b>465,616</b><span>個合約</span></div>
+      <div><b>13%</b><span>中位價差</span></div>
+    </div>
+    <ul>
+      <li>每支都有 IV、Greeks、OI、買賣價——欄位不缺</li>
+      <li>但只有當日快照，不能回測歷史</li>
+      <li>中位 OI≥100 佔比僅 13%：一半標的流動性很差</li>
+    </ul>
+    <div class="note">每日 07:20 自動快照，累積成時間序列。</div>
+  </div>
+
+  <div class="card">
+    <h2>⑤ 每日資料累積 <span class="tag ok">已排程</span></h2>
+    <ul>
+      <li><b>07:20</b>：CBOE 逐合约快照（448 支）→ <span class="mono">chains/YYYYMMDD/</span></li>
+      <li><b>09:10</b>：掃描器策略層快照（162 支，DTE 21–65）→ <span class="mono">backups/results.dte21-65.YYYYMMDD.csv</span></li>
+      <li>已累積：09-22、11-01（09-23 因覆寫遺失，腳本已修）</li>
+      <li>約 20 個交易日可測 21 DTE 與 200% 止損；3 個月可測 IVR 與財報</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>⑥ AOA 案例：紀錄是真的 <span class="tag ok">已驗證</span></h2>
+    <div class="kpi">
+      <div><b>1,444,583</b><span>筆成交</span></div>
+      <div><b>100%</b><span>價位落於日內區間</span></div>
+      <div><b>78.2%</b><span>回合勝率</span></div>
+    </div>
+    <ul>
+      <li>2018-03-05 → 2021-12-31，execid 全唯一</li>
+      <li>XBTUSD 94.1 萬筆；錢包累計 3,537 XBt</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>⑦ AOA：他的 alpha 在執行 <span class="tag hot">核心結論</span></h2>
+    <div class="kpi">
+      <div><b>6.6 分</b><span>中位持倉</span></div>
+      <div><b>517 筆</b><span>每日成交</span></div>
+      <div><b>75%</b><span>maker 成交</span></div>
+    </div>
+    <ul>
+      <li>買單前 5 分鐘中位 −0.25%；賣單前 +0.28%</li>
+      <li>72% 買量出現在主動賣壓占優的分鐘</li>
+      <li>用 1 分鐘 K 線＋taker 費率復現：<b>年化 −100%</b></li>
+      <li>用 maker 費率：結果不現實（假設掛單必成交）</li>
+    </ul>
+    <div class="note">他是短線均值回歸的流動性提供者，不是靠箱體規則；影片講的是風控，不是 alpha。</div>
+  </div>
+
+  <div class="card">
+    <h2>⑧ 下一步 <span class="tag mid">待資料</span></h2>
+    <ul>
+      <li>累積 20 個交易日 → 測 21 DTE 平倉 vs 持有到期</li>
+      <li>累積 3 個月 → 測 IVR 門檻與財報 IV crush</li>
+      <li>若要復現 AOA：需要逐筆與委託簿資料，K 線不足</li>
+      <li>選標的門檻已可用；缺的是「IVR 高 × 流動性差」的取捨規則</li>
+    </ul>
+  </div>
+
+</div>
+
+<p class="foot">分析工具，非投資建議。資料來源：CBOE 延遲報價、Futu OpenD 掃描器、YouTube 逐字稿、使用者提供之 AOA 成交檔。</p>
+</main>
+</body>
+</html>
