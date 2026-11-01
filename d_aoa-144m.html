@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AOA 的 144 萬筆成交紀錄：紀錄是真的，但 alpha 在執行、不在規則 · 詳細資料</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--tx:#e6edf3;--tx2:#9aa7b4;--tx3:#6e7681;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK TC",sans-serif}
+.wrap{max-width:none;width:100%;margin:0;padding:28px clamp(20px,3vw,64px) 70px}
+.prose{max-width:1180px;margin:0 auto}
+.back{display:inline-block;color:var(--tx3);text-decoration:none;font-size:13px;margin-bottom:22px}
+.back:hover{color:var(--acc)}
+.back.bottom{margin:32px 0 0;display:block;border-top:1px solid var(--line);padding-top:18px}
+.tags{display:flex;gap:7px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.tag{font-size:11px;color:var(--tx3);border:1px solid var(--line);border-radius:5px;padding:2px 8px}
+.tag.vid{font-family:ui-monospace,monospace}
+.grade{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:800;font-size:12px;color:var(--gc);background:color-mix(in srgb,var(--gc) 15%,transparent);border:1px solid color-mix(in srgb,var(--gc) 45%,transparent)}
+h1{margin:0 0 12px;font-size:23px;line-height:1.45;letter-spacing:.2px}
+.lead{color:var(--tx2);margin:0 0 20px;font-size:14px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin-bottom:22px}
+.metric{text-align:center}
+.mv{font-size:17px;font-weight:700}
+.ml{font-size:11px;color:var(--tx3);margin-top:2px}
+.body p{margin:0 0 14px;font-size:14.2px;color:#c9d1d9}
+.body b{color:#fff;font-weight:600}
+.body h3{margin:22px 0 8px;font-size:15px;color:#fff}
+.body ul{margin:0 0 14px;padding-left:20px;color:#c9d1d9;font-size:14px}
+.body li{margin:4px 0}
+.verdict{margin-top:20px;background:#1a2230;border-left:3px solid var(--acc);padding:12px 14px;border-radius:0 7px 7px 0;font-size:13.5px;color:#c9d1d9}
+.verdict b{color:var(--acc)}
+.evid{margin-top:10px;font-size:12px;color:var(--tx3);line-height:1.7}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 16px}
+th{text-align:left;color:var(--tx3);font-weight:500;font-size:11.5px;padding:7px 9px;border-bottom:1px solid var(--line)}
+td{padding:8px 9px;border-bottom:1px solid #21262d;color:#c9d1d9}
+td.num{font-family:ui-monospace,monospace;text-align:right}
+@media(max-width:760px){.metrics{grid-template-columns:repeat(2,1fr)}}
+</style></head>
+<body><div class="wrap"><div class="prose">
+<a class="back" href="index.html">← 回到策略列表</a>
+<div class="tags"><span class="tag">期權研究</span><span class="tag">交易紀錄反推</span>
+<span class="tag vid">AOA / 워뇨띠</span>
+<span class="grade" style="--gc:#58a6ff">B</span></div>
+<h1>AOA 的 144 萬筆成交紀錄：紀錄是真的，但 alpha 在執行、不在規則</h1>
+<p class="lead">取得 워뇨띠（BitMEX 帳號 AOA）公開的 1,444,583 筆成交檔，先驗證紀錄自洽，再重建他的實際行為，最後把影片裡的「箱體、5% 停損、1/3 倉位」機械化回測。結論：紀錄沒問題，但那些規則不是他賺錢的原因——他的 alpha 是亞秒級的 maker 成交與庫存調整。</p>
+
+<div class="metrics">
+<div class="metric"><div class="mv">1,444,583</div><div class="ml">筆成交（execid 全唯一）</div></div>
+<div class="metric"><div class="mv">78.2%</div><div class="ml">回合勝率</div></div>
+<div class="metric"><div class="mv">6.6 分鐘</div><div class="ml">持倉中位數</div></div>
+<div class="metric"><div class="mv">75%</div><div class="ml">maker 成交占比</div></div>
+</div>
+
+<div class="body">
+<h3>一、紀錄本身：自洽，不是編的</h3>
+<p>檔案是 113MB 的 zip，解開後 601MB：4 個 execution CSV、1 個 wallet CSV、1 封韓文信。合計 <b>1,444,583 列</b>，<code>execid</code> 全部唯一、沒有重複；時間範圍 <b>2018-03-05 至 2021-12-31</b>。交易對以 XBTUSD（94.1 萬筆）與 ETHUSD（32.8 萬筆）為主，另有 XRP、LTC、DOT、DOGE、BCH 等。</p>
+<p>把 94.1 萬筆 XBTUSD 成交逐筆對到 BitMEX 日線的當日高低區間：<b>100% 落在區間內</b>（容忍 0.1%），只有 1 筆在 2018-05-22 比日線低點低 16 美元，屬日線高低點的邊界誤差。這表示紀錄的價位與市場資料自洽。</p>
+
+<h3>二、他實際怎麼做：不是箱體波段，是日內 scalping</h3>
+<ul>
+<li>完整回合（flat→flat）<b>829 次</b>，勝率 <b>78.2%</b>。</li>
+<li>持倉時間中位數 <b>0.11 小時（6.6 分鐘）</b>；p25 1.8 分、p75 24.6 分、p90 1.5 小時。</li>
+<li>活躍交易日 1,031 天，每日成交中位數 <b>517 筆</b>，最高 12,259 筆。</li>
+<li>單筆最大名目部位 <b>8,520 萬美元</b>；單筆成交金額中位數 4,228 美元。</li>
+<li>錢包累計已實現 <b>3,537 XBt</b>，期間提領 2,832 XBt——量級與韓國媒體說的「947 億韓元」相符，但與影片聲稱的「2.4 億美元」有落差。</li>
+</ul>
+
+<h3>三、把影片的規則套上去：0 筆交易</h3>
+<p>依影片規則機械化：30 日箱體、收盤接近下沿 1%、收紅、量 &gt; 20 日均量進場；停損 3%／5%；目標 5% 總資金；槓桿 1–2 倍。結果 <b>0 筆交易</b>——不是程式錯，是規則在日線上互相矛盾：接近 30 日低點的 77 天裡，<b>沒有任何一天是收紅的</b>，所以「跌到下沿、等幾根 K 線守住、收紅才買」永遠不會同時成立。放寬條件後也只有 3–4 筆、全部虧損。</p>
+<p>改用 1 分鐘 K 線＋taker 費率復現他的均值回歸訊號（−25 bps 進場、+10 bps 出場、−50 bps 停損）：<b>年化 −100%</b>。換成 maker 費率，結果好到不現實——因為它假設每筆掛單都成交、沒有排隊與逆向選擇成本。</p>
+
+<h3>四、反推：他的動作是「接主動單」</h3>
+<p>用 2021 上半年 208,897 筆 XBTUSD 成交對照 1 分鐘 K 線：</p>
+<ul>
+<li>買單前 5 分鐘報酬中位數 <b>−0.25%</b>；只有 23.9% 的買單是在上漲後成交。</li>
+<li>賣單前 5 分鐘報酬中位數 <b>+0.28%</b>；79.8% 的賣單是在上漲後成交。</li>
+<li>兩筆成交間隔中位數 <b>0.0 秒</b>（p90 0.3 秒），75% 是 maker 成交。</li>
+<li><b>72.4% 的買量</b>出現在「主動賣方占優」的分鐘（這種分鐘只占 48.7%）；買量與主動賣壓相關係數 +0.35。</li>
+</ul>
+<p>這是短線均值回歸的流動性提供者：別人恐慌砍倉時他在下面接，別人追價時他在上面出。他看到的是成交明細與委託簿，不是「別人的下單身分」；BitMEX 不揭露交易者。</p>
+
+<h3>五、限制</h3>
+<p>只完整分析了 XBTUSD；ETH 與其他幣種因合約型態（永續／期貨、反向／線性）不同，損益換算不可靠，未列入。回合損益未扣資金費率與手續費（會讓實際數字更低）。要真正複製他的執行，需要逐筆與委託簿快照，K 線不足。</p>
+</div>
+
+<div class="verdict"><b>判定：B（紀錄自洽，但無法用規則複製）。</b> 144 萬筆紀錄是真的、價位與市場一致；然而他的報酬來自亞秒級 maker 執行與庫存管理，不是影片說的箱體或 5% 停損。對散戶的可行結論只有風控那層（倉位上限、槓桿上限、認錯），不是進出場規則。</div>
+<div class="evid">資料來源：使用者提供的 Google Drive 原始檔（aoa-execution-*.csv、aoa-wallet-*.csv）；BitMEX XBTUSD 日線 2016–2023；Binance BTCUSDT 永續 1 分鐘 K 線 2021H1。逐字稿由本機 Whisper 轉錄。分析工具，非投資建議。</div>
+
+<a class="back bottom" href="index.html">← 回到策略列表</a>
+</div></div></body></html>

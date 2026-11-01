@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>期權「選合約」：223 支影片、258 條規則，最後能交易的名單只剩 11 支 · 詳細資料</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--tx:#e6edf3;--tx2:#9aa7b4;--tx3:#6e7681;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK TC",sans-serif}
+.wrap{max-width:none;width:100%;margin:0;padding:28px clamp(20px,3vw,64px) 70px}
+.prose{max-width:1180px;margin:0 auto}
+.back{display:inline-block;color:var(--tx3);text-decoration:none;font-size:13px;margin-bottom:22px}
+.back:hover{color:var(--acc)}
+.back.bottom{margin:32px 0 0;display:block;border-top:1px solid var(--line);padding-top:18px}
+.tags{display:flex;gap:7px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.tag{font-size:11px;color:var(--tx3);border:1px solid var(--line);border-radius:5px;padding:2px 8px}
+.tag.vid{font-family:ui-monospace,monospace}
+.grade{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:800;font-size:12px;color:var(--gc);background:color-mix(in srgb,var(--gc) 15%,transparent);border:1px solid color-mix(in srgb,var(--gc) 45%,transparent)}
+h1{margin:0 0 12px;font-size:23px;line-height:1.45;letter-spacing:.2px}
+.lead{color:var(--tx2);margin:0 0 20px;font-size:14px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin-bottom:22px}
+.metric{text-align:center}
+.mv{font-size:17px;font-weight:700}
+.ml{font-size:11px;color:var(--tx3);margin-top:2px}
+.body p{margin:0 0 14px;font-size:14.2px;color:#c9d1d9}
+.body b{color:#fff;font-weight:600}
+.body h3{margin:22px 0 8px;font-size:15px;color:#fff}
+.body ul{margin:0 0 14px;padding-left:20px;color:#c9d1d9;font-size:14px}
+.body li{margin:4px 0}
+.verdict{margin-top:20px;background:#1a2230;border-left:3px solid var(--acc);padding:12px 14px;border-radius:0 7px 7px 0;font-size:13.5px;color:#c9d1d9}
+.verdict b{color:var(--acc)}
+.evid{margin-top:10px;font-size:12px;color:var(--tx3);line-height:1.7}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 16px}
+th{text-align:left;color:var(--tx3);font-weight:500;font-size:11.5px;padding:7px 9px;border-bottom:1px solid var(--line)}
+td{padding:8px 9px;border-bottom:1px solid #21262d;color:#c9d1d9}
+td.num{font-family:ui-monospace,monospace;text-align:right}
+@media(max-width:760px){.metrics{grid-template-columns:repeat(2,1fr)}}
+</style></head>
+<body><div class="wrap"><div class="prose">
+<a class="back" href="index.html">← 回到策略列表</a>
+<div class="tags"><span class="tag">期權研究</span><span class="tag">選合約</span>
+<span class="tag vid">223 支影片</span>
+<span class="grade" style="--gc:#58a6ff">B</span></div>
+<h1>期權「選合約」：223 支影片、258 條規則，最後能交易的名單只剩 11 支</h1>
+<p class="lead">把中文圈 223 支期權影片的逐字稿整理成 258 條編號規則（87% 帶明確數字），再用 CBOE 448 支逐合约快照與英文頻道的篩選門檻實測。結果：規則可用，但「同時符合流動性與 IV 條件」的標的只有 11 支；若再加「波動前 20%」，448 支裡只剩 8 支。</p>
+
+<div class="metrics">
+<div class="metric"><div class="mv">258 條</div><div class="ml">編號規則（87% 帶數字）</div></div>
+<div class="metric"><div class="mv">11 支</div><div class="ml">嚴格篩選過關</div></div>
+<div class="metric"><div class="mv">8 / 448</div><div class="ml">高 IV 且流動性合格</div></div>
+<div class="metric"><div class="mv">13.0%</div><div class="ml">CBOE 中位價差</div></div>
+</div>
+
+<div class="body">
+<h3>一、規則全集：五個數字決定一切</h3>
+<p>223 支影片扣掉重複與純觀念，可抽取的規則共 <b>258 條</b>（B1–B258），其中 87% 有明確數字。真正會改變交易決策的是這五個：</p>
+<ul>
+<li><b>賣方 Delta 0.15–0.35</b>（慣用 16–30Δ）；strangle／鐵鷹單邊 <b>15–20Δ</b>；買方 <b>Δ0.6–0.7 起</b>。</li>
+<li><b>賣方 DTE 30–60 天</b>，45 天進場，<b>21 DTE 無條件平倉</b>；買方 30–45 天，避開 14 天內。</li>
+<li><b>IVR &gt;50% 才賣</b>（&gt;75% 好、100% 最好）；買方相反，IVR &lt;15% 才進。</li>
+<li><b>50% 止盈、200% 止損</b>（出場價＝權利金×3）。</li>
+<li><b>單筆保證金 1–3%</b>，期權總倉 ≤20%。</li>
+</ul>
+
+<h3>二、必須標記的衝突</h3>
+<table>
+<thead><tr><th>項目</th><th>一方</th><th>另一方</th><th>取捨</th></tr></thead>
+<tbody>
+<tr><td>買方行權價</td><td>短線買平值</td><td>買深度價內 Δ0.7</td><td>按持有期分：日內用平值，波段用 Δ0.6–0.7</td></tr>
+<tr><td>IVR 硬門檻</td><td>&lt;50% 完全不交易</td><td>低 IV 是常態（63% 日子低於均值）仍可賣</td><td>低 IVR 降倉位與 Delta，不要停止交易</td></tr>
+<tr><td>賣方 DTE 下限</td><td>30–60 天</td><td>10–45 天</td><td>30 天為界；短於 30 天接受 Gamma 風險</td></tr>
+<tr><td>止損</td><td>放寬到 200%</td><td>裸賣必須加止損</td><td>一定要有上限，200% 是「不要設太緊」</td></tr>
+</tbody>
+</table>
+
+<h3>三、英文門檻與實篩結果</h3>
+<p>英文頻道補上了中文圈缺的絕對門檻：tastylive 的日均量 <b>≥500 萬股</b>（實務 2,000 萬–1 億）、Barchart 的 <b>市值 ≥30 億、IV 30–100%、IVR ≥30、DTE 45、Delta ≤−30</b>、The Smart Option Seller 的 <b>POP 85–100%、bid ≥$0.50、價外 15%</b>。</p>
+<p>套用到 CBOE 448 支（逐合约 bid/ask、OI、IV）：<b>嚴格過關 11 支</b>——INTC、AMZN、TSLA、GOOGL、ORCL、MU、META、MRVL、NBIS、AVGO、AMD；寬鬆（ADV ≥500 萬）21 支，多出 MSTR、NOW、QCOM、TXN、CRM、ACN、UNH、STX、IBM、PANW。</p>
+
+<h3>四、高 IV × 流動性的交集</h3>
+<p>把所有影片的兩句話放在一起——「IVR 高才賣」與「流動性差不要碰」——會得到一個很少被討論的結果：HV 前 20% 的 <b>101 支</b>裡，只有 <b>8 支</b>流動性合格（中位價差 ≤10%、OI ≥25%）：NOW、JNJ、BA、GOOGL、INTC、PANW、ORCL、LOGI，佔全體 <b>1.8%</b>。其餘 93 支不是價差 12–24%（T、TXT、VZ），就是 OI 過度集中（LPLA 只有 3% 合約 OI≥100）。實務順序因此應該是：<b>先過流動性，再挑 IV</b>。</p>
+
+<h3>五、限制</h3>
+<p>CBOE 只有一天快照（2026-10-31/11-01），流動性門檻的穩定度未知；IVR 只有 20 支有值，交集分析改用 HV 百分位代理；所有數字都是「規則層」的檢核，<b>沒有做任何損益回測</b>——要驗證 21 DTE、200% 止損這類主張，需要 3 個月以上的每日快照。</p>
+</div>
+
+<div class="verdict"><b>判定：B（規則草案可用，尚未驗證損益）。</b> 258 條規則與 11 支名單可以當掃描器的第一層，但不能當交易訊號；「高 IV＋流動性」的 1.8% 交集是這批資料最有價值的發現。</div>
+<div class="evid">資料來源：223 支影片逐字稿（本機 Whisper 與字幕產生器）、CBOE 延遲期權鏈 448 支、Futu OpenD 掃描器快照。完整規則見 batch2_notes.md（B1–B120）、batch3_notes.md（B121–B258）。分析工具，非投資建議。</div>
+
+<a class="back bottom" href="index.html">← 回到策略列表</a>
+</div></div></body></html>
