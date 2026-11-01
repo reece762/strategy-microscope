@@ -732,7 +732,12 @@ def build_cards(res, em, yr, CARDS_SERIES):
     # 用 sorted 而非兩串相接，因為 sorted 是穩定排序，組內原序自動保留；
     # 判斷依據用 card_kind（可否回測），不是 grade != 'NA'——兩者目前結果相同，
     # 但語意不同，用 kind 才不會哪天出現「NA 但可回測」的卡片時默默排錯。
-    cards = sorted(cards, key=lambda c: 0 if card_kind(c) == 'backtest' else 1)
+    # 第三層（同組內）：有圖表的排在沒圖表的前面，不論評級。
+    #   沒有圖表的卡片（imgs 為空）一律往後排，避免「結論很強但讀者看不到證據」。
+    cards = sorted(cards, key=lambda c: (
+        0 if card_kind(c) == 'backtest' else 1,
+        0 if (c.get('imgs') or []) else 1,
+    ))
 
     # ---- render ----
     GR = {'S': ('#f0b429', 'S'), 'A': ('#3fb950', 'A'), 'B': ('#58a6ff', 'B'),
