@@ -23,15 +23,16 @@ BG = '#0d1117'
 # Bump VERSION on every change to copy, data or layout. Each build writes
 # build_meta.json plus a numbered snapshot in versions/, so any earlier build
 # can be restored by copying versions/v<N>/ back over the served files.
-VERSION = '1.26.0'
-VERSION_NOTES = ('**新增一張卡：13F 機構持倉追蹤（B）。**\n'
-                 '資料：SEC 13F 季度完整資料集 2013Q2–2026Q1，51 個可比較季度、405 支美股；\n'
-                 '時點：季末 +45 天進場、持有 63 個交易日、扣大盤。\n'
-                 '結果：全部機構的增減家數比每季 +0.43%（t=0.94）→ 沒有訊號；\n'
-                 '主動型經理人（≤200 檔、≥1 億美元）每季 +1.68%（t=3.71，38/51 季為正）；\n'
-                 '九種門檻全部為正、六種 t>2.5；樣本外 2020–2026 為 +1.96%（t=2.60，21/25 季為正）；\n'
-                 '走查法每年重選門檻平均 +1.61%/季（t=3.68）；扣換手成本後約 +1.25%/季。\n'
-                 '限制：存活者偏差、只含中大型股、只有多頭、無產業中性。')
+VERSION = '1.27.0'
+VERSION_NOTES = ('**新增一張卡：ORB 開盤區間突破（C）。**\n'
+                 '資料：Futu OpenD 1 分鐘美股 K 線，2024-11-20–2026-11-11、495 個交易日；\n'
+                 'QQQ／SPY／IWM／NVDA／AAPL 共 2,442 筆；成本 1 bp／邊。\n'
+                 '結果：主要規則每筆 −0.019R（t=−0.65）、勝率 43.4%、獲利因子 0.96；\n'
+                 '零成本也只有 +0.020R（t=0.67）；160 組參數只有 39 組為正，最佳 t=0.61；\n'
+                 '影片的波動收縮、區間寬度、趨勢濾網大多讓結果更差；突破量 >1.5 倍是唯一偏正者\n'
+                 '（+0.124R／日，t=1.36）；SMC 假突破模型零成本 +0.236R（t=2.66），但停損中位數\n'
+                 '僅 0.084%，1 bp／邊成本下轉為 −0.122R。\n'
+                 '限制：只有 24 個月、五個流動性最好的美股、無訂單流資料。')
 VERSION_PREV = ('v1.24.0 新增英文頻道兩張卡（10 條選股篩選器）；'
                 '並修掉「資料不足被算成通過 0 條」與「閏年 span 差一天」兩個實質錯誤。')
 BUILD_AT = os.environ.get('XBX_BUILD_AT') or time.strftime('%Y-%m-%d %H:%M:%S%z')
@@ -328,6 +329,11 @@ def main():
         _inst = json.load(open(_inst_path))
         for key, fname in _inst.get('charts', {}).items():
             imgs['n12_' + key] = png_uri(fname)
+
+    # ORB 開盤區間突破（一張卡）
+    for name in ['orb_grid_hist', 'orb_filters', 'orb_expansion', 'orb_equity']:
+        if os.path.exists(os.path.join(OUT, name + '.png')):
+            imgs[name] = png_uri(name + '.png')
 
     # --- comparison charts: one strategy + the same three benchmarks ---
     # spec comes from prep_series.py, already aligned and rebased to 1.0
@@ -714,6 +720,13 @@ def build_cards(res, em, yr, CARDS_SERIES):
         _new = rta_cards.build() + _new
     except Exception as e:
         print(f'rta_cards 載入失敗：{type(e).__name__}: {e}')
+
+    # ORB 開盤區間突破：5 個標的、24 個月、160 組參數（一張卡）
+    try:
+        import orb_cards
+        _new = orb_cards.build() + _new
+    except Exception as e:
+        print(f'orb_cards 載入失敗：{type(e).__name__}: {e}')
 
     # 13F 機構持倉：51 季、9 種門檻、樣本內外切分（一張卡）
     try:

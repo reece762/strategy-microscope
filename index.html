@@ -132,9 +132,8 @@ footer a:hover{color:var(--acc)}
   <div class="chip" data-facet="author" data-val="Everything Money（Paul & Seth）">Everything Money（Paul & Seth） (1)</div>
   <div class="chip" data-facet="author" data-val="Phil Town（Rule #1）">Phil Town（Rule #1） (1)</div>
   <div class="chip" data-facet="author" data-val="SEC 13F">SEC 13F (1)</div>
-  <div class="chip" data-facet="author" data-val="期權研究">期權研究 (1)</div>
-  <div class="chip" data-facet="author" data-val="AOA（워뇨띠）">AOA（워뇨띠） (1)</div>
   <div class="chip" data-facet="author" data-val="WorldQuant Alpha101">WorldQuant Alpha101 (1)</div>
+  <div class="chip" data-facet="author" data-val="不聪明钱交易">不聪明钱交易 (1)</div>
   <div class="chip" data-facet="author" data-val="中文圈頻道調查">中文圈頻道調查 (1)</div>
   <div class="chip" data-facet="author" data-val="兩套方法交叉比對">兩套方法交叉比對 (1)</div>
   <div class="chip" data-facet="author" data-val="學術文獻 PEAD">學術文獻 PEAD (1)</div>
@@ -143,14 +142,14 @@ footer a:hover{color:var(--acc)}
   <span class="fsep"></span>
   <span class="flabel">市場</span>
   <div class="chip" data-facet="market" data-val="us">美股 (57)</div>
-  <div class="chip" data-facet="market" data-val="crypto">加密貨幣 (14)</div>
+  <div class="chip" data-facet="market" data-val="crypto">加密貨幣 (13)</div>
   <span class="fsep"></span>
   <span class="flabel">結果</span>
   <div class="chip" data-facet="grade" data-val="pass">通過 (A/B)</div>
   <div class="chip" data-facet="grade" data-val="fail">未通過 (C/D)</div>
   <span class="fsep"></span>
   <span class="flabel">性質</span>
-  <div class="chip" data-facet="kind" data-val="backtest">可回測 (55)</div>
+  <div class="chip" data-facet="kind" data-val="backtest">可回測 (56)</div>
   <div class="chip" data-facet="kind" data-val="mindset">心法／觀念 (7)</div>
   <div class="chip" data-facet="kind" data-val="unportable">無法移植 (8)</div>
   <div class="chip reset" id="freset">清除篩選</div>
@@ -158,36 +157,14 @@ footer a:hover{color:var(--acc)}
 <div class="fcount" id="fcount"></div>
 
 <div class="stats">
-  <div class="stat"><div class="v">74</div><div class="k">已分析的策略</div></div>
-  <div class="stat"><div class="v">57</div><div class="k">規則完整重跑</div></div>
-  <div class="stat"><div class="v">20</div><div class="k">通過（A/B 級）</div></div>
-  <div class="stat"><div class="v">39</div><div class="k">未通過（C/D 級）</div></div>
+  <div class="stat"><div class="v">73</div><div class="k">已分析的策略</div></div>
+  <div class="stat"><div class="v">58</div><div class="k">規則完整重跑</div></div>
+  <div class="stat"><div class="v">18</div><div class="k">通過（A/B 級）</div></div>
+  <div class="stat"><div class="v">40</div><div class="k">未通過（C/D 級）</div></div>
   <div class="stat"><div class="v">15</div><div class="k">無法回測</div></div>
 </div>
 
 <div class="grid">
-
-<article class="card" data-market="us" data-grade="B" data-author="期權研究" data-kind="backtest" id="opt-rules">
-  <header class="chead">
-    <div class="ctags"><span class="tag author">期權研究</span><span class="tag">選合約</span><span class="tag">223 支影片</span></div>
-    <span class="grade" style="--gc:#58a6ff">B</span>
-  </header>
-  <h2 class="ctitle">期權「選合約」：223 支影片、258 條規則，最後能交易的名單只剩 11 支</h2>
-  <p class="clead">把中文圈 223 支期權影片逐字稿整理成 258 條規則（87% 帶數字）：賣方 Delta 0.15–0.35、DTE 30–60 天、21 DTE 平倉、IVR &gt;50% 才賣、50% 止盈、200% 止損。再用 CBOE 448 支逐合约快照與英文頻道門檻實篩：同時符合「流動性＋IV 30–100%＋15% OTM put bid ≥$0.50」的只有 <b>11 支</b>；若再加上「波動前 20%」，448 支裡只剩 <b>8 支</b>。</p>
-  <div class="metrics"><div class="metric"><div class="mv">258 條</div><div class="ml">規則（87% 帶數字）</div></div><div class="metric"><div class="mv">11 支</div><div class="ml">嚴格篩選過關</div></div><div class="metric"><div class="mv">8 / 448</div><div class="ml">高 IV 且流動性合格</div></div><div class="metric"><div class="mv">13%</div><div class="ml">CBOE 中位價差</div></div></div>
-  <a class="more" href="d_opt-rules.html">詳細資料 →</a>
-</article>
-
-<article class="card" data-market="crypto" data-grade="B" data-author="AOA（워뇨띠）" data-kind="backtest" id="aoa-144m">
-  <header class="chead">
-    <div class="ctags"><span class="tag author">AOA（워뇨띠）</span><span class="tag">交易紀錄反推</span><span class="tag">加密貨幣</span></div>
-    <span class="grade" style="--gc:#58a6ff">B</span>
-  </header>
-  <h2 class="ctitle">AOA 的 144 萬筆成交紀錄：紀錄是真的，但 alpha 在執行、不在規則</h2>
-  <p class="clead">取得 워뇨띠（AOA）公開的 BitMEX 成交檔：1,444,583 筆、execid 全唯一、2018-03 至 2021-12，XBTUSD 成交價 100% 落在當日高低區間內。行為重建顯示他是<b>短線均值回歸的流動性提供者</b>：回合勝率 78.2%、持倉中位 <b>6.6 分鐘</b>、75% maker、買單前 5 分鐘中位 −0.25%。把影片的箱體規則機械化套上日線：<b>0 筆交易</b>；用 1 分鐘 K 線＋taker 費率復現：<b>年化 −100%</b>。</p>
-  <div class="metrics"><div class="metric"><div class="mv">1,444,583</div><div class="ml">筆成交</div></div><div class="metric"><div class="mv">78.2%</div><div class="ml">回合勝率</div></div><div class="metric"><div class="mv">6.6 分鐘</div><div class="ml">持倉中位數</div></div><div class="metric"><div class="mv">75%</div><div class="ml">maker 成交</div></div></div>
-  <a class="more" href="d_aoa-144m.html">詳細資料 →</a>
-</article>
 
 <article class="card" data-market="us" data-grade="B" data-author="SEC 13F" data-kind="backtest" id="inst-13f">
   <header class="chead">
@@ -199,6 +176,18 @@ footer a:hover{color:var(--acc)}
   
   <div class="metrics"><div class="metric"><div class="mv">+1.68%/季</div><div class="ml">主動型多空差距</div></div><div class="metric"><div class="mv">3.71</div><div class="ml">t 值</div></div><div class="metric"><div class="mv">+1.96%/季</div><div class="ml">樣本外 2020–2026</div></div><div class="metric"><div class="mv">+1.25%/季</div><div class="ml">扣成本後</div></div></div>
   <a class="more" href="d_inst-13f.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="us" data-grade="C" data-author="不聪明钱交易" data-kind="backtest" id="orb-opening-range">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">不聪明钱交易</span><span class="tag">日內策略</span><span class="tag vid">BV1b74i6DE2V</span></div>
+    <span class="grade" style="--gc:#d29922">C</span>
+  </header>
+  <h2 class="ctitle">ORB 開盤區間突破：160 種參數、兩年五個標的，扣成本後優勢是零</h2>
+  <p class="clead">把影片的機械規則（開盤 5／15／30／60 分鐘區間、收盤突破進場、區間另一端停損、1–3R 目標）放到 QQQ、SPY、IWM、NVDA、AAPL 的 1 分鐘 K 線：2024-11 至 2026-11 共 495 個交易日、2,442 筆交易，每筆平均 <b>−0.019R</b>（t = −0.65）；160 種參數組合只有 39 組為正，最好的一組 t 值也只有 0.61。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">−0.019R</div><div class="ml">每筆平均</div></div><div class="metric"><div class="mv">−0.65</div><div class="ml">t 值</div></div><div class="metric"><div class="mv">43.4%／0.96</div><div class="ml">勝率／獲利因子</div></div><div class="metric"><div class="mv">+0.023R</div><div class="ml">160 組最佳</div></div></div>
+  <a class="more" href="d_orb-opening-range.html">詳細資料 →</a>
 </article>
 
 <article class="card" data-market="crypto" data-grade="D" data-author="RTA 交易之路" data-kind="backtest" id="rta-ma120">
@@ -247,66 +236,6 @@ footer a:hover{color:var(--acc)}
   
   <div class="metrics"><div class="metric"><div class="mv">35.7%</div><div class="ml">九方圖價位 觸及率</div></div><div class="metric"><div class="mv">35.6%</div><div class="ml">鄰近價位 觸及率</div></div><div class="metric"><div class="mv">+0.12 個百分點</div><div class="ml">兩者差距</div></div></div>
   <a class="more" href="d_lao-gann.html">詳細資料 →</a>
-</article>
-
-<article class="card" data-market="crypto" data-grade="D" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-eight">
-  <header class="chead">
-    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">綜合檢驗</span><span class="tag vid">1WpTDM8NM5g</span><span class="tag vid">2d9XlERn6kg</span><span class="tag vid">6VY2qDzpNbk</span><span class="tag vid">7bTMSZT-eiQ</span></div>
-    <span class="grade" style="--gc:#f85149">D</span>
-  </header>
-  <h2 class="ctitle">八門付費課程、33 條規則：沒有一條贏過「什麼都不做」</h2>
-  <p class="clead">他公開了十門課的目錄（道氏與 123 法則、波浪、和諧形態、斐波那契與江恩、盤口訂單流、價格行為、威科夫、VCP 杯柄、周易、心法）。我把前八門裡<b>能寫成程式</b>的 33 條規則全部回測，結果是<b>沒有任何一條在扣掉手續費後，平均報酬能顯著大於零</b>；而且所有策略的風險調整後報酬（夏普，數值越高代表每單位波動換到的報酬越多）<b>全部低於同期單純買進持有比特幣</b>。</p>
-  
-  <div class="metrics"><div class="metric"><div class="mv">33 條</div><div class="ml">檢驗規則數</div></div><div class="metric"><div class="mv">0 條</div><div class="ml">扣成本後顯著為正</div></div><div class="metric"><div class="mv">0 條</div><div class="ml">贏過買進持有</div></div></div>
-  <a class="more" href="d_tia-eight.html">詳細資料 →</a>
-</article>
-
-<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-funding">
-  <header class="chead">
-    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">擇時</span><span class="tag vid">dHkDnDxYlts</span><span class="tag vid">sODb361o-HY</span></div>
-    <span class="grade" style="--gc:#d29922">C</span>
-  </header>
-  <h2 class="ctitle">他的「資金費率原則」：2022 年真的救命，2026 年已經失效</h2>
-  <p class="clead">他稱資金費率是「<b>最重要的原則，不能違背</b>」：費率極負代表散戶擁擠做空，所以偏多、不要做空。我把它寫成規則（費率為負時做多，否則空手），用 2020–2026 的日線與 1 小時資料重跑。<b>結果是：它在 2022 空頭年確實有效（+8% 對上比特幣 −64%），但 2026 年已經轉為負報酬。</b></p>
-  
-  <div class="metrics"><div class="metric"><div class="mv">+8.0%</div><div class="ml">2022 年（比特幣 −64%）</div></div><div class="metric"><div class="mv">−9.0%</div><div class="ml">2026 年（比特幣 −6%）</div></div><div class="metric"><div class="mv">−1.4%</div><div class="ml">剔除最好 10 天後</div></div></div>
-  <a class="more" href="d_tia-funding.html">詳細資料 →</a>
-</article>
-
-<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-gap">
-  <header class="chead">
-    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">缺口</span><span class="tag vid">ab5GUxw2GBs</span></div>
-    <span class="grade" style="--gc:#d29922">C</span>
-  </header>
-  <h2 class="ctitle">「缺口一定會補」是真的（95%），但照著做會虧錢</h2>
-  <p class="clead">缺口（週末休市造成的價格跳空）是他最常講的現象之一。我先驗證現象本身：<b>1,953 個缺口裡，30 天內補回的比例是 95%</b>——這是真的。但把它當成交易訊號（開盤進場、目標是前一日收盤價）在扣成本後，<b>平均是負的</b>，週末缺口更差。</p>
-  
-  <div class="metrics"><div class="metric"><div class="mv">95%</div><div class="ml">30 日內補回率</div></div><div class="metric"><div class="mv">−0.05% ~ −0.11%</div><div class="ml">逆勢操作平均報酬</div></div><div class="metric"><div class="mv">−0.32% ~ −0.46%</div><div class="ml">週末缺口逆勢操作</div></div></div>
-  <a class="more" href="d_tia-gap.html">詳細資料 →</a>
-</article>
-
-<article class="card" data-market="crypto" data-grade="D" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-fib">
-  <header class="chead">
-    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">斐波那契</span><span class="tag vid">jyvMaEVCxe0</span><span class="tag vid">gBaURrIGoLs</span></div>
-    <span class="grade" style="--gc:#f85149">D</span>
-  </header>
-  <h2 class="ctitle">0.618 回撤有支撐？我的第一版結論是錯的，錯在我用了未來資訊</h2>
-  <p class="clead">他課程裡反覆教 0.618 回撤（斐波那契數列裡的一個比例）是強支撐，跌破就止損。我第一次測出「撐住比例 65.7%」，看起來支持他的說法。<b>但那個數字是錯的——我用了當時還不知道的資訊。</b> 修正之後，優勢完全消失。</p>
-  
-  <div class="metrics"><div class="metric"><div class="mv">65.7%</div><div class="ml">第一版（有前視偏誤）</div></div><div class="metric"><div class="mv">54.3%</div><div class="ml">修正後</div></div><div class="metric"><div class="mv">p = 0.90</div><div class="ml">與基準的差檢定</div></div></div>
-  <a class="more" href="d_tia-fib.html">詳細資料 →</a>
-</article>
-
-<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-news">
-  <header class="chead">
-    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">事件交易</span><span class="tag vid">E1BFjbYS0_o</span><span class="tag vid">7bTMSZT-eiQ</span></div>
-    <span class="grade" style="--gc:#d29922">C</span>
-  </header>
-  <h2 class="ctitle">「利好出盡」：他給的四個跌幅數字，三個不是單日跌幅</h2>
-  <p class="clead">他的逃頂課給了四個實證案例：XRP 電報群約定 −55%、Doge Day −66%、Coinbase 上市比特幣 −27.6%、馬斯克上節目 Doge −44%。我逐日核對——<b>這四個數字幾乎都不是「當天跌多少」，而是「當天高點到之後谷底」的峰到谷跌幅</b>。</p>
-  
-  <div class="metrics"><div class="metric"><div class="mv">−28.8% / −55.0%</div><div class="ml">XRP 單日 / 峰到谷</div></div><div class="metric"><div class="mv">−25.4% / −62.4%</div><div class="ml">Doge Day 單日 / 峰到谷</div></div><div class="metric"><div class="mv">−1.0%（不顯著）</div><div class="ml">Coinbase 上市日 比特幣</div></div></div>
-  <a class="more" href="d_tia-news.html">詳細資料 →</a>
 </article>
 
 <article class="card" data-market="us" data-grade="D" data-author="阿尔法量化价格行为" data-kind="backtest" id="al-pa-bug">
@@ -849,6 +778,126 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_calendar.html">詳細資料 →</a>
 </article>
 
+<article class="card" data-market="crypto" data-grade="D" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-eight">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">綜合檢驗</span><span class="tag vid">1WpTDM8NM5g</span><span class="tag vid">2d9XlERn6kg</span><span class="tag vid">6VY2qDzpNbk</span><span class="tag vid">7bTMSZT-eiQ</span></div>
+    <span class="grade" style="--gc:#f85149">D</span>
+  </header>
+  <h2 class="ctitle">八門付費課程、33 條規則：沒有一條贏過「什麼都不做」</h2>
+  <p class="clead">他公開了十門課的目錄（道氏與 123 法則、波浪、和諧形態、斐波那契與江恩、盤口訂單流、價格行為、威科夫、VCP 杯柄、周易、心法）。我把前八門裡<b>能寫成程式</b>的 33 條規則全部回測，結果是<b>沒有任何一條在扣掉手續費後，平均報酬能顯著大於零</b>；而且所有策略的風險調整後報酬（夏普，數值越高代表每單位波動換到的報酬越多）<b>全部低於同期單純買進持有比特幣</b>。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">33 條</div><div class="ml">檢驗規則數</div></div><div class="metric"><div class="mv">0 條</div><div class="ml">扣成本後顯著為正</div></div><div class="metric"><div class="mv">0 條</div><div class="ml">贏過買進持有</div></div></div>
+  <a class="more" href="d_tia-eight.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-funding">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">擇時</span><span class="tag vid">dHkDnDxYlts</span><span class="tag vid">sODb361o-HY</span></div>
+    <span class="grade" style="--gc:#d29922">C</span>
+  </header>
+  <h2 class="ctitle">他的「資金費率原則」：2022 年真的救命，2026 年已經失效</h2>
+  <p class="clead">他稱資金費率是「<b>最重要的原則，不能違背</b>」：費率極負代表散戶擁擠做空，所以偏多、不要做空。我把它寫成規則（費率為負時做多，否則空手），用 2020–2026 的日線與 1 小時資料重跑。<b>結果是：它在 2022 空頭年確實有效（+8% 對上比特幣 −64%），但 2026 年已經轉為負報酬。</b></p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">+8.0%</div><div class="ml">2022 年（比特幣 −64%）</div></div><div class="metric"><div class="mv">−9.0%</div><div class="ml">2026 年（比特幣 −6%）</div></div><div class="metric"><div class="mv">−1.4%</div><div class="ml">剔除最好 10 天後</div></div></div>
+  <a class="more" href="d_tia-funding.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-gap">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">缺口</span><span class="tag vid">ab5GUxw2GBs</span></div>
+    <span class="grade" style="--gc:#d29922">C</span>
+  </header>
+  <h2 class="ctitle">「缺口一定會補」是真的（95%），但照著做會虧錢</h2>
+  <p class="clead">缺口（週末休市造成的價格跳空）是他最常講的現象之一。我先驗證現象本身：<b>1,953 個缺口裡，30 天內補回的比例是 95%</b>——這是真的。但把它當成交易訊號（開盤進場、目標是前一日收盤價）在扣成本後，<b>平均是負的</b>，週末缺口更差。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">95%</div><div class="ml">30 日內補回率</div></div><div class="metric"><div class="mv">−0.05% ~ −0.11%</div><div class="ml">逆勢操作平均報酬</div></div><div class="metric"><div class="mv">−0.32% ~ −0.46%</div><div class="ml">週末缺口逆勢操作</div></div></div>
+  <a class="more" href="d_tia-gap.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="crypto" data-grade="D" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-fib">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">斐波那契</span><span class="tag vid">jyvMaEVCxe0</span><span class="tag vid">gBaURrIGoLs</span></div>
+    <span class="grade" style="--gc:#f85149">D</span>
+  </header>
+  <h2 class="ctitle">0.618 回撤有支撐？我的第一版結論是錯的，錯在我用了未來資訊</h2>
+  <p class="clead">他課程裡反覆教 0.618 回撤（斐波那契數列裡的一個比例）是強支撐，跌破就止損。我第一次測出「撐住比例 65.7%」，看起來支持他的說法。<b>但那個數字是錯的——我用了當時還不知道的資訊。</b> 修正之後，優勢完全消失。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">65.7%</div><div class="ml">第一版（有前視偏誤）</div></div><div class="metric"><div class="mv">54.3%</div><div class="ml">修正後</div></div><div class="metric"><div class="mv">p = 0.90</div><div class="ml">與基準的差檢定</div></div></div>
+  <a class="more" href="d_tia-fib.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="crypto" data-grade="C" data-author="提阿非羅大人 TiaBTC" data-kind="backtest" id="tia-news">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">提阿非羅大人 TiaBTC</span><span class="tag">事件交易</span><span class="tag vid">E1BFjbYS0_o</span><span class="tag vid">7bTMSZT-eiQ</span></div>
+    <span class="grade" style="--gc:#d29922">C</span>
+  </header>
+  <h2 class="ctitle">「利好出盡」：他給的四個跌幅數字，三個不是單日跌幅</h2>
+  <p class="clead">他的逃頂課給了四個實證案例：XRP 電報群約定 −55%、Doge Day −66%、Coinbase 上市比特幣 −27.6%、馬斯克上節目 Doge −44%。我逐日核對——<b>這四個數字幾乎都不是「當天跌多少」，而是「當天高點到之後谷底」的峰到谷跌幅</b>。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">−28.8% / −55.0%</div><div class="ml">XRP 單日 / 峰到谷</div></div><div class="metric"><div class="mv">−25.4% / −62.4%</div><div class="ml">Doge Day 單日 / 峰到谷</div></div><div class="metric"><div class="mv">−1.0%（不顯著）</div><div class="ml">Coinbase 上市日 比特幣</div></div></div>
+  <a class="more" href="d_tia-news.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="us" data-grade="B" data-author="兩套方法交叉比對" data-kind="chart" id="n11-roic">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">兩套方法交叉比對</span><span class="tag">選股</span><span class="tag vid">n1FAWFOq_bs</span><span class="tag vid">1u6qvel9XnM</span></div>
+    <span class="grade" style="--gc:#58a6ff">B</span>
+  </header>
+  <h2 class="ctitle">兩套方法唯一共同有效的：ROIC</h2>
+  <p class="clead">Phil Town 與 Everything Money 是兩個不同的頻道、不同的投資風格，算法也不一樣——前者用「營業利益 ÷ 投入資本」，後者用「現金流 ÷（負債＋權益）」。但把它們的條件各自拆開單獨測，<b>唯一在兩邊都為正、而且勝過基準年數都過半的，就是 ROIC</b>：Phil Town 版 +1.19 個百分點（7/13 年）、Everything Money 版 +1.13 個百分點（9/14 年）。<b></b></p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">+1.19pp</div><div class="ml">Phil Town ROIC</div></div><div class="metric"><div class="mv">+1.13pp</div><div class="ml">Everything Money</div></div><div class="metric"><div class="mv">勝率 7/13、9/14</div><div class="ml">兩者皆過半</div></div></div>
+  <a class="more" href="d_n11-roic.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="us" data-grade="B" data-author="Bow（bowinvest）" data-kind="chart" id="n10-filters">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">Bow（bowinvest）</span><span class="tag">選股</span><span class="tag vid">Hnjv6Bes9AE</span></div>
+    <span class="grade" style="--gc:#58a6ff">B</span>
+  </header>
+  <h2 class="ctitle">拆開來看：8 條裡只有 1 條真正有用</h2>
+  <p class="clead">把 10 條篩選器拆成單獨使用，看哪一條真正有貢獻。<b>「營收 5 年 CAGR>20%」是唯一明顯有效的：超額 +5.28 個百分點，15 年裡贏基準 10 年。</b>其次是淨利成長 +1.47pp 與 PEG<2 +1.31pp。<b>而本益比那條最差：-1.67pp，15 年只贏 4 年。</b></p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">+5.28pp</div><div class="ml">營收成長超額</div></div><div class="metric"><div class="mv">10/15 年</div><div class="ml">勝過基準</div></div><div class="metric"><div class="mv">-1.67pp</div><div class="ml">本益比超額</div></div></div>
+  <a class="more" href="d_n10-filters.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="us" data-grade="NA" data-author="J Law" data-kind="mindset" id="n6-panic">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">J Law</span><span class="tag">擇時</span><span class="tag vid">xVXB5AIg9dk</span></div>
+    <span class="grade" style="--gc:#6e7681">—</span>
+  </header>
+  <h2 class="ctitle">「市場最恐慌時進場」：他描述的那種恐慌，實測是負的</h2>
+  <p class="clead">這支影片標題寫「當資金瘋狂逃亡，我們卻在同一天進場」，但它是<b>訪談</b>（feat. 真倉大賽雙冠軍 Martin Luk），不是教學。整支逐字稿裡沒有一條可照做的進場規則。我把他描述的情境形式化來測：<b>單日暴跌那版是負的；只有「深度回檔」版本勉強有點東西，但撐不過對數報酬檢定。</b></p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">33</div><div class="ml">恐慌日數</div></div><div class="metric"><div class="mv">-2.09%</div><div class="ml">持有 20 日</div></div><div class="metric"><div class="mv">+1.53%</div><div class="ml">同期無條件</div></div></div>
+  <a class="more" href="d_n6-panic.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="us" data-grade="NA" data-author="中文圈頻道調查" data-kind="mindset" id="n5-chsurvey">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">中文圈頻道調查</span><span class="tag">方法調查</span></div>
+    <span class="grade" style="--gc:#6e7681">—</span>
+  </header>
+  <h2 class="ctitle">17 個中文美股頻道：只有 3 個提出可檢驗的選股規則</h2>
+  <p class="clead">我抓了 17 個以「美股選股策略」為方向的中文頻道、240 支影片的描述、12 支完整逐字稿。<b>結果是：只有 3 個頻道真的提出可檢驗的選股規則，其餘 14 個是新聞、宏觀敘事、個股評論或喊單。</b>而且訂閱數與「有沒有規則」呈反向關係——最大的頻道規則最少。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">17 個</div><div class="ml">調查頻道</div></div><div class="metric"><div class="mv">3 個</div><div class="ml">有可檢驗規則</div></div><div class="metric"><div class="mv">12 支 / 33,802 字</div><div class="ml">逐字稿</div></div></div>
+  <a class="more" href="d_n5-chsurvey.html">詳細資料 →</a>
+</article>
+
+<article class="card" data-market="us" data-grade="NA" data-author="邢不行" data-kind="unportable" id="t1-vr">
+  <header class="chead">
+    <div class="ctags"><span class="tag author">邢不行</span><span class="tag">技術指標</span><span class="tag vid">08lNIsMgylY</span></div>
+    <span class="grade" style="--gc:#6e7681">—</span>
+  </header>
+  <h2 class="ctitle">量比 2.5–5 買進：訊號太少，在美股根本測不出來</h2>
+  <p class="clead">他實測 A 股「量比 2.5–5 買進」三年虧掉 99.87%。同一條規則搬到 SPY／QQQ，十年只出現 6 與 12 次訊號——因為 ETF 的成交量結構和個股完全不同。</p>
+  
+  <div class="metrics"><div class="metric"><div class="mv">6 次</div><div class="ml">SPY 買訊次數</div></div><div class="metric"><div class="mv">12 次</div><div class="ml">QQQ 買訊次數</div></div><div class="metric"><div class="mv">+0.25%</div><div class="ml">SPY 買後 1 日</div></div></div>
+  <a class="more" href="d_t1-vr.html">詳細資料 →</a>
+</article>
+
 <article class="card" data-market="us" data-grade="NA" data-author="老魯隨筆" data-kind="mindset" id="lao-mind">
   <header class="chead">
     <div class="ctags"><span class="tag author">老魯隨筆</span><span class="tag">心法</span><span class="tag vid">vcTVsROJoG0</span><span class="tag vid">CMMdA1bWcEQ</span></div>
@@ -897,42 +946,6 @@ footer a:hover{color:var(--acc)}
   <a class="more" href="d_tia-risk.html">詳細資料 →</a>
 </article>
 
-<article class="card" data-market="us" data-grade="B" data-author="兩套方法交叉比對" data-kind="chart" id="n11-roic">
-  <header class="chead">
-    <div class="ctags"><span class="tag author">兩套方法交叉比對</span><span class="tag">選股</span><span class="tag vid">n1FAWFOq_bs</span><span class="tag vid">1u6qvel9XnM</span></div>
-    <span class="grade" style="--gc:#58a6ff">B</span>
-  </header>
-  <h2 class="ctitle">兩套方法唯一共同有效的：ROIC</h2>
-  <p class="clead">Phil Town 與 Everything Money 是兩個不同的頻道、不同的投資風格，算法也不一樣——前者用「營業利益 ÷ 投入資本」，後者用「現金流 ÷（負債＋權益）」。但把它們的條件各自拆開單獨測，<b>唯一在兩邊都為正、而且勝過基準年數都過半的，就是 ROIC</b>：Phil Town 版 +1.19 個百分點（7/13 年）、Everything Money 版 +1.13 個百分點（9/14 年）。<b></b></p>
-  
-  <div class="metrics"><div class="metric"><div class="mv">+1.19pp</div><div class="ml">Phil Town ROIC</div></div><div class="metric"><div class="mv">+1.13pp</div><div class="ml">Everything Money</div></div><div class="metric"><div class="mv">勝率 7/13、9/14</div><div class="ml">兩者皆過半</div></div></div>
-  <a class="more" href="d_n11-roic.html">詳細資料 →</a>
-</article>
-
-<article class="card" data-market="us" data-grade="B" data-author="Bow（bowinvest）" data-kind="chart" id="n10-filters">
-  <header class="chead">
-    <div class="ctags"><span class="tag author">Bow（bowinvest）</span><span class="tag">選股</span><span class="tag vid">Hnjv6Bes9AE</span></div>
-    <span class="grade" style="--gc:#58a6ff">B</span>
-  </header>
-  <h2 class="ctitle">拆開來看：8 條裡只有 1 條真正有用</h2>
-  <p class="clead">把 10 條篩選器拆成單獨使用，看哪一條真正有貢獻。<b>「營收 5 年 CAGR>20%」是唯一明顯有效的：超額 +5.28 個百分點，15 年裡贏基準 10 年。</b>其次是淨利成長 +1.47pp 與 PEG<2 +1.31pp。<b>而本益比那條最差：-1.67pp，15 年只贏 4 年。</b></p>
-  
-  <div class="metrics"><div class="metric"><div class="mv">+5.28pp</div><div class="ml">營收成長超額</div></div><div class="metric"><div class="mv">10/15 年</div><div class="ml">勝過基準</div></div><div class="metric"><div class="mv">-1.67pp</div><div class="ml">本益比超額</div></div></div>
-  <a class="more" href="d_n10-filters.html">詳細資料 →</a>
-</article>
-
-<article class="card" data-market="us" data-grade="NA" data-author="J Law" data-kind="mindset" id="n6-panic">
-  <header class="chead">
-    <div class="ctags"><span class="tag author">J Law</span><span class="tag">擇時</span><span class="tag vid">xVXB5AIg9dk</span></div>
-    <span class="grade" style="--gc:#6e7681">—</span>
-  </header>
-  <h2 class="ctitle">「市場最恐慌時進場」：他描述的那種恐慌，實測是負的</h2>
-  <p class="clead">這支影片標題寫「當資金瘋狂逃亡，我們卻在同一天進場」，但它是<b>訪談</b>（feat. 真倉大賽雙冠軍 Martin Luk），不是教學。整支逐字稿裡沒有一條可照做的進場規則。我把他描述的情境形式化來測：<b>單日暴跌那版是負的；只有「深度回檔」版本勉強有點東西，但撐不過對數報酬檢定。</b></p>
-  
-  <div class="metrics"><div class="metric"><div class="mv">33</div><div class="ml">恐慌日數</div></div><div class="metric"><div class="mv">-2.09%</div><div class="ml">持有 20 日</div></div><div class="metric"><div class="mv">+1.53%</div><div class="ml">同期無條件</div></div></div>
-  <a class="more" href="d_n6-panic.html">詳細資料 →</a>
-</article>
-
 <article class="card" data-market="us" data-grade="NA" data-author="Jack Investment" data-kind="mindset" id="n5-jack-stop">
   <header class="chead">
     <div class="ctags"><span class="tag author">Jack Investment</span><span class="tag">風險管理</span><span class="tag vid">wdwxnRfCYBE</span></div>
@@ -955,30 +968,6 @@ footer a:hover{color:var(--acc)}
   
   <div class="metrics"><div class="metric"><div class="mv">0.40（否決）</div><div class="ml">他的第一版盈虧比</div></div><div class="metric"><div class="mv">1.42（採用）</div><div class="ml">改找價位後</div></div><div class="metric"><div class="mv">50%</div><div class="ml">1:1 盈虧比的損益兩平勝率</div></div></div>
   <a class="more" href="d_n5-jack-plan.html">詳細資料 →</a>
-</article>
-
-<article class="card" data-market="us" data-grade="NA" data-author="中文圈頻道調查" data-kind="mindset" id="n5-chsurvey">
-  <header class="chead">
-    <div class="ctags"><span class="tag author">中文圈頻道調查</span><span class="tag">方法調查</span></div>
-    <span class="grade" style="--gc:#6e7681">—</span>
-  </header>
-  <h2 class="ctitle">17 個中文美股頻道：只有 3 個提出可檢驗的選股規則</h2>
-  <p class="clead">我抓了 17 個以「美股選股策略」為方向的中文頻道、240 支影片的描述、12 支完整逐字稿。<b>結果是：只有 3 個頻道真的提出可檢驗的選股規則，其餘 14 個是新聞、宏觀敘事、個股評論或喊單。</b>而且訂閱數與「有沒有規則」呈反向關係——最大的頻道規則最少。</p>
-  
-  <div class="metrics"><div class="metric"><div class="mv">17 個</div><div class="ml">調查頻道</div></div><div class="metric"><div class="mv">3 個</div><div class="ml">有可檢驗規則</div></div><div class="metric"><div class="mv">12 支 / 33,802 字</div><div class="ml">逐字稿</div></div></div>
-  <a class="more" href="d_n5-chsurvey.html">詳細資料 →</a>
-</article>
-
-<article class="card" data-market="us" data-grade="NA" data-author="邢不行" data-kind="unportable" id="t1-vr">
-  <header class="chead">
-    <div class="ctags"><span class="tag author">邢不行</span><span class="tag">技術指標</span><span class="tag vid">08lNIsMgylY</span></div>
-    <span class="grade" style="--gc:#6e7681">—</span>
-  </header>
-  <h2 class="ctitle">量比 2.5–5 買進：訊號太少，在美股根本測不出來</h2>
-  <p class="clead">他實測 A 股「量比 2.5–5 買進」三年虧掉 99.87%。同一條規則搬到 SPY／QQQ，十年只出現 6 與 12 次訊號——因為 ETF 的成交量結構和個股完全不同。</p>
-  
-  <div class="metrics"><div class="metric"><div class="mv">6 次</div><div class="ml">SPY 買訊次數</div></div><div class="metric"><div class="mv">12 次</div><div class="ml">QQQ 買訊次數</div></div><div class="metric"><div class="mv">+0.25%</div><div class="ml">SPY 買後 1 日</div></div></div>
-  <a class="more" href="d_t1-vr.html">詳細資料 →</a>
 </article>
 
 <article class="card" data-market="cn" data-grade="NA" data-author="邢不行" data-kind="unportable" id="n4-fx">
@@ -1060,7 +1049,7 @@ Binance 公開封存（BTC/USDT 2017–2026）。<br>
 成本假設：美股每趟 1 bp，加密每趟 5 bp。全部信號只用前一交易日收盤，無前視。
 比較基準含「同曝險、不擇時」的固定槓桿買進持有，以避免把「少持倉」誤讀成「會擇時」。<br>
 逐字稿經 BibiGPT 取得。本頁為歷史資料檢驗，不構成投資建議。<br>
-<span class="ver">版本 1.26.0 · 建置於 2026-10-31 16:38:33+0800 · <a href="changelog.html">版本紀錄</a></span>
+<span class="ver">版本 1.27.0 · 建置於 2026-11-12 08:02:39+0800 · <a href="changelog.html">版本紀錄</a></span>
 </footer>
 </div>
 
